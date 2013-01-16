@@ -1,11 +1,17 @@
-\documentclass[11pt]{article}
+\documentclass[11pt,a4paper]{article}
 \usepackage[parfill]{parskip}
+\usepackage{fullpage}
+\usepackage{array}
+\newcolumntype{L}{>{\centering\arraybackslash}m{3cm}}
 \title{NoteBee}
 \author{Team Gocky}
 \begin{document}
+
 \maketitle
 
-\section*{Description}
+\tableofcontents
+
+\section{Introduction}
 
 NoteBee is a code snippet oriented application that allows users to submit code 
 in a variety of programming languages. This code is categorised based on the
@@ -23,7 +29,7 @@ their own examples, and rate others. Academics may also find this of use as
 it can provide a convenient source of example code (which may or may not be
 good code, both useful in this context).
 
-\section*{Functionality}
+\section{Functionality}
 
 \begin{itemize}
 \item Code snippets have their syntax highlighted.
@@ -41,7 +47,7 @@ good code, both useful in this context).
 \section{Personas}
 
 
-\subsection{The Noob Persona}
+\subsection{The Noob Programmer}
 % CMCL went with some suggestions from
 % http://www.steptwo.com.au/papers/kmc_personas/index.html
 % eliminating the personal details and just detailing the following:
@@ -86,15 +92,31 @@ too complex/advanced for their current abilities.
 \item Being overwhelmed by large number advanced search capabilities.
 \end{itemize}
 
+\subsection{The Academic}
+\subsubsection{Goals}
+\subsubsection{Behaviours}
+\subsubsection{Likes}
+\subsubsection{Dislikes}
+
+\subsection{Experienced Programmer}
+\subsubsection{Goals}
+\subsubsection{Behaviours}
+\subsubsection{Likes}
+\subsubsection{Dislikes}
+
 \section{User Needs Matrix}
 
-\begin{tabular}{*{4}{|c}|}
+\begin{table}[h]
+\begin{tabular}{*{5}{|L}|}
 \hline
-I want to... & Overall Priority & Noob Programmer &
-    Experienced Programmer \\
+I want to... & Overall Priority & Noob Programmer 
+& Academic & Experienced Programmer\\
 \hline
-Search solution code & 2 & 3 & 0 \\
+Search solution code & 2 & 3 & 0 & 0 \\
+\hline
+Contribute quality code & 2 & 1 & 3 & 3 \\
 \hline
 \end{tabular}
+\end{table}
 
 \end{document}  
