@@ -1,0 +1,2 @@
+mkdir -p bin
+make
