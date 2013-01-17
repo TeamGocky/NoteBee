@@ -57,8 +57,9 @@ favourite/bookmarked code snippets.
 \item Links to other code snippets.
 \end{itemize}
 
-\section{Personas}
+\newpage
 
+\section{Personas}
 
 \subsection{The Noob Programmer}
 % CMCL went with some suggestions from
@@ -66,8 +67,10 @@ favourite/bookmarked code snippets.
 % eliminating the personal details and just detailing the following:
 % user’s goals, behaviours, likes and dislikes. 
 
-This person is a beginning or amateur programmer perhaps studying a
-computing course although could be a hobbyist. Their behaviour includes:
+This person is either currently studying a computing based course or is a
+hobbyist programmer looking to learn a particular language. Their programming
+ability is, at best, amateur. They are relying heavily on introductory texts
+and Internet forums.
 
 \subsubsection{Goals}
 
@@ -105,10 +108,15 @@ too complex/advanced for their current abilities.
 \item Being overwhelmed by large number advanced search capabilities.
 \end{itemize}
 
+\newpage
+
 \subsection{The Academic}
 
 This person is a University Professor, College Professor, or possibly high
-school teacher teaching a computing-based course.
+school teacher teaching a computing-based course. They contribute code for
+their research area, courses they teach, and own personal interest. They are
+also interested in the code their students produce to check on individuals
+progress and to monitor lab attendance and participation.
 
 \subsubsection{Goals}
 
@@ -121,6 +129,7 @@ programming function for use in class.
 \end{itemize}
 
 \subsubsection{Behaviours}
+
 \begin{itemize}
 \item Looking to aid the learning of students and others in their programming.
 \item Interested in submitting high quality code for re-use and to contribute
@@ -128,21 +137,44 @@ to the Open Source community.
 \end{itemize}
 
 \subsubsection{Likes}
+
 \begin{itemize}
 \item The ability to review code snippets.
 \item Being able to provide sample high-quality, working solutions.
 \end{itemize}
 
 \subsubsection{Dislikes}
+
 \begin{itemize}
 \item Poor quality code being passed off as working.
 \end{itemize}
 
+\newpage
+
 \subsection{Experienced Programmer}
+
+This person works, or used to work, in industry on medium-large commercial
+software projects. They have working knowledge of multiple programming
+languages and are well versed in different paradigms and making use of good
+software engineering concepts such as design patterns.
+
 \subsubsection{Goals}
+
+\begin{itemize}
+\item Scout out potential future job candidates.
+\end{itemize}
+
 \subsubsection{Behaviours}
+
 \subsubsection{Likes}
+
 \subsubsection{Dislikes}
+
+\begin{itemize}
+\item Poor quality code being passed off as working.
+\end{itemize}
+
+\newpage
 
 \section{User Needs Matrix}
 
@@ -150,13 +182,17 @@ to the Open Source community.
 \begin{tabular}{*{5}{|L}|}
 \hline
 I want to... & Overall Priority & Noob Programmer 
-& Academic & Experienced Programmer\\
+& The Academic & Experienced Programmer\\
 \hline
 Search solution code & \highPrio & \highPrio & \medPrio & \lowPrio \\
 \hline
-Contribute quality code & \medPrio & \lowPrio & \highPrio & \highPrio \\
+Contribute quality code & \highPrio & \lowPrio & \highPrio & \highPrio \\
 \hline
 Contribute code for review & \medPrio & \highPrio & \vLowPrio & \vLowPrio \\
+\hline
+Share snippets with friends & \lowPrio & \medPrio & \vLowPrio & \vLowPrio \\
+\hline
+View highly rated code & \medPrio & \highPrio & \medPrio & \lowPrio \\
 \hline
 \end{tabular}
 \end{table}
