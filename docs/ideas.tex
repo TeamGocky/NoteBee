@@ -1,8 +1,13 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage[parfill]{parskip}
+\usepackage[table]{xcolor}
 \usepackage{fullpage}
 \usepackage{array}
 \newcolumntype{L}{>{\centering\arraybackslash}m{3cm}}
+\newcommand{\highPrio}{\cellcolor{green}High}
+\newcommand{\medPrio}{\cellcolor{orange}Medium}
+\newcommand{\lowPrio}{\cellcolor{yellow}Low}
+\newcommand{\vLowPrio}{\cellcolor{yellow!50}Very Low}
 \title{NoteBee}
 \author{Team Gocky}
 \begin{document}
@@ -145,9 +150,11 @@ to the Open Source community.
 I want to... & Overall Priority & Noob Programmer 
 & Academic & Experienced Programmer\\
 \hline
-Search solution code & 2 & 3 & 2 & 1 \\
+Search solution code & \highPrio & \highPrio & \medPrio & \lowPrio \\
 \hline
-Contribute quality code & 2 & 1 & 3 & 3 \\
+Contribute quality code & \medPrio & \lowPrio & \highPrio & \highPrio \\
+\hline
+Contribute code for review & \medPrio & \highPrio & \vLowPrio & \vLowPrio \\
 \hline
 \end{tabular}
 \end{table}
