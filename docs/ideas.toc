@@ -11,9 +11,9 @@
 \contentsline {subsubsection}{\numberline {3.2.2}Behaviours}{3}
 \contentsline {subsubsection}{\numberline {3.2.3}Likes}{3}
 \contentsline {subsubsection}{\numberline {3.2.4}Dislikes}{3}
-\contentsline {subsection}{\numberline {3.3}Experienced Programmer}{3}
-\contentsline {subsubsection}{\numberline {3.3.1}Goals}{3}
-\contentsline {subsubsection}{\numberline {3.3.2}Behaviours}{3}
-\contentsline {subsubsection}{\numberline {3.3.3}Likes}{3}
-\contentsline {subsubsection}{\numberline {3.3.4}Dislikes}{3}
-\contentsline {section}{\numberline {4}User Needs Matrix}{3}
+\contentsline {subsection}{\numberline {3.3}Experienced Programmer}{4}
+\contentsline {subsubsection}{\numberline {3.3.1}Goals}{4}
+\contentsline {subsubsection}{\numberline {3.3.2}Behaviours}{4}
+\contentsline {subsubsection}{\numberline {3.3.3}Likes}{4}
+\contentsline {subsubsection}{\numberline {3.3.4}Dislikes}{4}
+\contentsline {section}{\numberline {4}User Needs Matrix}{4}
