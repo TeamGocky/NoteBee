@@ -6,14 +6,19 @@
 \contentsline {subsubsection}{\numberline {3.1.2}Behaviours}{3}
 \contentsline {subsubsection}{\numberline {3.1.3}Likes}{3}
 \contentsline {subsubsection}{\numberline {3.1.4}Dislikes}{3}
-\contentsline {subsection}{\numberline {3.2}The Academic}{4}
+\contentsline {subsection}{\numberline {3.2}Intermediate Programmer}{4}
 \contentsline {subsubsection}{\numberline {3.2.1}Goals}{4}
 \contentsline {subsubsection}{\numberline {3.2.2}Behaviours}{4}
 \contentsline {subsubsection}{\numberline {3.2.3}Likes}{4}
 \contentsline {subsubsection}{\numberline {3.2.4}Dislikes}{4}
-\contentsline {subsection}{\numberline {3.3}Experienced Programmer}{5}
+\contentsline {subsection}{\numberline {3.3}The Academic}{5}
 \contentsline {subsubsection}{\numberline {3.3.1}Goals}{5}
 \contentsline {subsubsection}{\numberline {3.3.2}Behaviours}{5}
 \contentsline {subsubsection}{\numberline {3.3.3}Likes}{5}
 \contentsline {subsubsection}{\numberline {3.3.4}Dislikes}{5}
-\contentsline {section}{\numberline {4}User Needs Matrix}{6}
+\contentsline {subsection}{\numberline {3.4}Experienced Programmer}{6}
+\contentsline {subsubsection}{\numberline {3.4.1}Goals}{6}
+\contentsline {subsubsection}{\numberline {3.4.2}Behaviours}{6}
+\contentsline {subsubsection}{\numberline {3.4.3}Likes}{6}
+\contentsline {subsubsection}{\numberline {3.4.4}Dislikes}{6}
+\contentsline {section}{\numberline {4}User Needs Matrix}{7}
