@@ -1,0 +1,30 @@
+<!doctype html>
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml" class="no-js">
+<head>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static "css/template.css" %}" />
+	<title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<div class="container">
+    <header>
+		<a href=""><h1>My test site</h1></a>
+    </header>
+    <section>
+    	{% include "nav.html" %}
+        <article>
+    		{% block content %}
+            <h3>Home</h3>
+            <p>Here is some image</p>
+            <img height=400px src="{% static "imgs/test.jpg" %}" />
+            {% endblock %}
+        </article>
+    </section>
+    <footer>
+    {% block footer %}
+    <p>Thanks for visiting my site.</p>
+    {% endblock %}
+    </footer>
+</div>
+</body>
+</html>
