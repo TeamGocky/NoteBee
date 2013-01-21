@@ -50,13 +50,6 @@ their own examples, and rate others. Academics may also find this of use as
 it can provide a convenient source of example code (which may or may not be
 good code, both useful in this context).
 
-The site will operate similar to any collaborative web-based application
-where users of the site need not be registered in order to contribute
-to the site content. However, only registered users will be allowed to
-rate a snippet. Other benefits of a registered user account include
-having links to all your submitted code snippets, and
-favourite/bookmarked code snippets.
-
 \section{Functionality}
 
 \begin{itemize}
@@ -72,13 +65,76 @@ favourite/bookmarked code snippets.
 \item Links to other code snippets.
 \end{itemize}
 
+\subsection{Restrictions on Non-registered users}
+\label{sec:restrict}
+
+The site will operate similar to any collaborative web-based application
+where users of the site need not be registered in order to contribute
+to the site content. However, non-registered users will not be allowed to:
+
+\begin{itemize}
+\item Rate a snippet.
+\item Comment on a snippet.
+\end{itemize}
+Other benefits of a registered user account include having links to all
+your submitted code snippets, and favourite/bookmarked code snippets.
+
 \newpage
 
 \section{Application Design Ideas}
 
+\subsection{Wireframes}
+
 \includegraphics[width=\textwidth]{../imgs/homepageWireFrameGRHorz.png}
 
+\begin{figure}
+\label{fig:joe}
 \includegraphics[width=\textwidth]{../imgs/CCodeSnippetHorz.png}
+\caption{Joe's home screen with his code snippet}
+\end{figure}
+
+%subsection{Describe the user interface}
+% Perhaps we need more wireframes!
+
+\subsection{Design Goals}
+
+The number one design goal is to make the user interface minimalist
+such that the user is not overwhelmed by the application. As can be
+seen in the two wireframes above, the application will have a simple
+home screen both for registered and non-registered users. A finalised
+version of the home screen is shown below (Need to talk about this).
+
+\subsection{A Walkthrough: Submit a code snippet in C}
+
+A simple walkthrough for the user Joe entering his C code snippet as
+shown in Figure~\ref{fig:joe} is given below:
+
+\begin{enumerate}
+\item Joe logs in using his user details.
+\item Joe is present with the home screen.
+\item Joe selects the C programming language from the language drop-down
+menu.
+\item Joe proceeds to write his C code into the main window.
+\item Joe selects the `Data Structures' category from the category
+drop-down menu.
+\item Joe is finished creating his code snippet and clicks the `Submit'
+button.
+\item Joe logs out.
+\end{enumerate}
+
+Note that the walkthrough above is applicable to a non-registered user
+as well. For restrictions on non-registered users see
+Section~\ref{sec:restrict}.
+
+This walkthrough has highlighted a number of interactions between the
+user and the application. It is important to note the order in which
+the steps are carried out, particularly the selection of the
+programming language and the entering of the code. The order is
+important because the selection will dynamically set the syntax
+highlighting mode in the application to the language specified.
+The text that the user then enters is highlighted according to the
+language selected. This highlighting is performed on-demand. % (!)
+However, the application will not enforce this ordering on the user.
 
 \newpage
 
@@ -110,8 +166,8 @@ program.
 
 \begin{itemize}
 \item Curiosity towards others code for inspiration for their own code
-development. Looking for ideas on, "How it's done", etcetera.
-\item Impatient regarding the "slowness" of their learning, wanting to
+development. Looking for ideas on, `How it's done', etcetera.
+\item Impatient regarding the `slowness' of their learning, wanting to
 get their application up and running as soon as possible. Quick and
 dirty.
 \end{itemize}
@@ -129,7 +185,7 @@ is simple to digest.
 \begin{itemize}
 \item Being unable to find the desired code snippet, or one which is
 too complex/advanced for their current abilities.
-\item Being overwhelmed by large number advanced search capabilities.
+\item Being overwhelmed by large number of advanced search capabilities.
 \end{itemize}
 
 \newpage
@@ -156,7 +212,7 @@ themselves.
 
 \begin{itemize}
 \item Curiosity towards others code for inspiration for their own code
-development. Looking for ideas on "How it's done", etcetera.
+development. Looking for ideas on `How it's done', etcetera.
 \item Interested in how well their own code compares to expert programmers
 code.
 \end{itemize}
@@ -254,6 +310,7 @@ learning of individuals so they can become more proficient in programming.
 \item Poor quality code being passed off as working.
 \item Repeatedly being asked simple questions or seeing the same fundamental
 errors.
+\item Beginners that do not RTFM.
 \end{itemize}
 
 \newpage
