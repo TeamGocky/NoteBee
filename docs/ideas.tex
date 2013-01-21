@@ -85,12 +85,24 @@ your submitted code snippets, and favourite/bookmarked code snippets.
 
 \subsection{Wireframes}
 
-\includegraphics[width=\textwidth]{../imgs/homepageWireFrameGRHorz.png}
+Figure \ref{fig:anonsnippet} shows an anonymous snippet being posted by a
+visitor to the website who has chosen not to log in. An example of the basic
+layout and the syntax highlighting capabilities are shown in the figure.
+
+Figure \ref{fig:joe} shows a logged in user posting a snippet. The user's
+name is shown and there are also links to his profile, bookmarks, and other
+user-specific data.
 
 \begin{figure}
-\label{fig:joe}
+\includegraphics[width=\textwidth]{../imgs/homepageWireFrameGRHorz.png}
+\caption{Anonymous snippet being posted.}
+\label{fig:anonsnippet}
+\end{figure}
+
+\begin{figure}
 \includegraphics[width=\textwidth]{../imgs/CCodeSnippetHorz.png}
 \caption{Joe's home screen with his code snippet}
+\label{fig:joe}
 \end{figure}
 
 %subsection{Describe the user interface}
@@ -100,13 +112,13 @@ your submitted code snippets, and favourite/bookmarked code snippets.
 
 The number one design goal is to make the user interface minimalist
 such that the user is not overwhelmed by the application. As can be
-seen in the two wireframes above, the application will have a simple
+seen in the two wire frames above, the application will have a simple
 home screen both for registered and non-registered users. A finalised
 version of the home screen is shown below (Need to talk about this).
 
-\subsection{A Walkthrough: Submit a code snippet in C}
+\subsection{A Walk through: Submit a code snippet in C}
 
-A simple walkthrough for the user Joe entering his C code snippet as
+A simple walk through for the user Joe entering his C code snippet as
 shown in Figure~\ref{fig:joe} is given below:
 
 \begin{enumerate}
@@ -122,11 +134,11 @@ button.
 \item Joe logs out.
 \end{enumerate}
 
-Note that the walkthrough above is applicable to a non-registered user
+Note that the walk through above is applicable to a non-registered user
 as well. For restrictions on non-registered users see
 Section~\ref{sec:restrict}.
 
-This walkthrough has highlighted a number of interactions between the
+This walk through has highlighted a number of interactions between the
 user and the application. It is important to note the order in which
 the steps are carried out, particularly the selection of the
 programming language and the entering of the code. The order is
