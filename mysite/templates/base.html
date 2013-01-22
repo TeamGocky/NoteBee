@@ -3,7 +3,7 @@
 <head>
 	{% load staticfiles %}
 	<link rel="stylesheet" type="text/css" href="{% static "css/template.css" %}" />
-	<title>{% block title %}Home{% endblock %}</title>
+	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
 <div class="container">
@@ -14,9 +14,6 @@
     	{% include "nav.html" %}
         <article>
     		{% block content %}
-            <h3>Home</h3>
-            <p>Here is some image</p>
-            <img height=400px src="{% static "imgs/test.jpg" %}" />
             {% endblock %}
         </article>
     </section>
