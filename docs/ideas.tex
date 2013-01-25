@@ -95,6 +95,12 @@ Figure \ref{fig:joe} shows a logged in user posting a snippet. The user's
 name is shown and there are also links to his profile, bookmarks, and other
 user-specific data.
 
+Figure \ref{fig:LoggedInViewJane} shows a user called Jane logged in and viewing
+a snippet posted by an anonymous user. There is rating and comments section
+with a text box for Jane to add in her own comment if she wishes. The page
+scrolls as the comments are not necessarily immediately available above the
+fold.
+
 \begin{figure}
 \includegraphics[width=\textwidth]{../imgs/homepageWireFrameGRHorz.png}
 \caption{Anonymous snippet being posted.}
@@ -105,6 +111,12 @@ user-specific data.
 \includegraphics[width=\textwidth]{../imgs/CCodeSnippetHorz.png}
 \caption{Joe's home screen with his code snippet}
 \label{fig:joe}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{../imgs/LoggedInViewSnippetHorz.png}
+\caption{Jane viewing a posted snippet.}
+\label{fig:LoggedInViewJane}
 \end{figure}
 
 \subsection{Design Goals}
@@ -292,33 +304,25 @@ errors.
 \begin{table}[h]
 \begin{tabular}{*{6}{|L}|}
 \hline
-I want to... & Overall Priority & Barry & Bill
-& Jane\\
+I want to... & Overall Priority & Barry & Bill & Jane\\
 \hline
-Search solution code & \highPrio & \highPrio & \medPrio 
-& \lowPrio \\
+Search solution code & \highPrio & \highPrio & \medPrio & \lowPrio \\
 \hline
-Download code snippet & \highPrio & \highPrio & \medPrio
-& \lowPrio \\
+Download code snippet & \highPrio & \highPrio & \medPrio& \lowPrio \\
 \hline
-Contribute quality code & \highPrio & \lowPrio & \highPrio & 
-\highPrio \\
+Contribute quality code & \highPrio & \lowPrio & \highPrio & \highPrio \\
 \hline
 Rate a code snippet & \highPrio & \lowPrio & \highPrio & \medPrio \\
 \hline
-Comment on a snippet & \highPrio & \medPrio & \highPrio & 
-\lowPrio \\
+Comment on a snippet & \highPrio & \medPrio & \highPrio & \lowPrio \\
 \hline
 Bookmark a snippet & \medPrio & \medPrio & \highPrio & \medPrio \\
 \hline
-Submit code for review & \medPrio & \highPrio & \vLowPrio &
-\vLowPrio \\
+Submit code for review & \medPrio & \highPrio & \vLowPrio &\vLowPrio \\
 \hline
-Share code externally & \lowPrio & \medPrio & \vLowPrio &
-\vLowPrio \\
+Share code externally & \lowPrio & \medPrio & \vLowPrio &\vLowPrio \\
 \hline
-View highly rated code & \medPrio & \highPrio & \medPrio &
-\lowPrio \\
+View highly rated code & \medPrio & \highPrio & \medPrio &\lowPrio \\
 \hline
 View code hit count & \lowPrio & \lowPrio & \vLowPrio & \vLowPrio \\
 \hline
