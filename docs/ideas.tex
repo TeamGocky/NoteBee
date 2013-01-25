@@ -4,7 +4,7 @@
 \usepackage[table]{xcolor}
 \usepackage{fullpage}
 \usepackage{array}
-\newcolumntype{L}{>{\centering\arraybackslash}m{0.14\textwidth}}
+\newcolumntype{L}{>{\centering\arraybackslash}m{0.18\textwidth}}
 \newcommand{\highPrio}{\cellcolor{green}High}
 \newcommand{\medPrio}{\cellcolor{orange}Medium}
 \newcommand{\lowPrio}{\cellcolor{yellow}Low}
@@ -54,10 +54,8 @@ good code, both useful in this context).
 
 The site will operate similar to any collaborative web-based application
 where users of the site need not be registered in order to contribute
-to the site content.
-The funcationality is detailed in the lists below. Next to each feature
-is a parenthesised list of the user personas that are interested in
-performing the task(s) afforded by the feature.
+to the site content. The functionality is detailed in the lists below.
+
 The following functionality is available to both registered and
 non-registered users:
 
@@ -72,7 +70,8 @@ function.
 \item Links to other code snippets.
 \end{itemize}
 
-The following functionality is avaliable to only registered users:
+The following functionality is only available to registered users:
+\label{sec:restrict}
 
 \begin{itemize}
 \item User can comment on the code snippets, e.g. reviewing the
@@ -108,16 +107,12 @@ user-specific data.
 \label{fig:joe}
 \end{figure}
 
-%subsection{Describe the user interface}
-% Perhaps we need more wireframes!
-
 \subsection{Design Goals}
 
 The number one design goal is to make the user interface minimalist
 such that the user is not overwhelmed by the application. As can be
-seen in the two wire frames above, the application will have a simple
-home screen both for registered and non-registered users. A finalised
-version of the home screen is shown below (Need to talk about this).
+seen in the wire frames described above, the application will have a simple
+home screen both for registered and non-registered users.
 
 \subsection{A Walk through: Submit a code snippet in C}
 
@@ -156,15 +151,11 @@ However, the application will not enforce this ordering on the user.
 \section{Personas}
 
 \subsection{Barry: The Noob Programmer}
-\label{sec:barry}
-% CMCL went with some suggestions from
-% http://www.steptwo.com.au/papers/kmc_personas/index.html
-% eliminating the personal details and just detailing the following:
-% user’s goals, behaviours, likes and dislikes. 
+\label{sec:barry} 
 
 Barry is sixteen, studying a computing based course and is looking to
 learn a particular language. Barry's programming ability is, at best,
-amateur. He relys heavily on introductory texts and Internet forums
+amateur. He relies heavily on introductory texts and Internet forums
 since his school does not provide learning materials for the language
 of interest.
 
@@ -192,12 +183,8 @@ dirty.
 \subsubsection{Likes}
 
 \begin{itemize}
-\item Syntax-highlighted environments that help his noobish brain
-comphrehend what is going on.
-% We should just insult our personas continuously:
-%\item Dubious scripts that he downloads and runs immediately in the
-%hope that it will work without even scanning it for viruses because he
-%is a noob.
+\item Syntax-highlighted environments that help his inexperienced brain
+comprehend what is going on.
 \item When code works out of the box.
 \item Easy-to-read code, using simple constructs and ideas so that it
 is simple to digest.
@@ -262,12 +249,12 @@ to the Open Source community.
 
 \newpage
 
-\subsection{Experienced Programmer}
+\subsection{Jane: Experienced Programmer}
 
-This person works, or used to work, in industry on medium-large commercial
-software projects. They have working knowledge of multiple programming
-languages and are well versed in different paradigms and making use of good
-software engineering concepts such as design patterns.
+Jane works in industry on medium-large commercial software projects. She has 
+working knowledge of multiple programming languages and is well versed in 
+different paradigms and making use of good software engineering concepts such as 
+design patterns.
 
 \subsubsection{Goals}
 
@@ -295,7 +282,7 @@ learning of individuals so they can become more proficient in programming.
 \item Poor quality code being passed off as working.
 \item Repeatedly being asked simple questions or seeing the same fundamental
 errors.
-\item Beginners that do not RTFM.
+\item Beginners that do not `R.T.F.M.'.
 \end{itemize}
 
 \newpage
@@ -306,7 +293,7 @@ errors.
 \begin{tabular}{*{6}{|L}|}
 \hline
 I want to... & Overall Priority & Barry & Bill
-& Experienced Programmer\\
+& Jane\\
 \hline
 Search solution code & \highPrio & \highPrio & \medPrio 
 & \lowPrio \\
