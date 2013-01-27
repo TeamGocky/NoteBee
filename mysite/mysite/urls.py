@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     (r'^books/', include('mysite.books.urls')),
     (r'^time/$', current_datetime),
     (r'^time/plus/(\d{1,2})/$', hours_ahead),
+    (r'^html/headers/$', display_meta),
 )
