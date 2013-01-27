@@ -30,3 +30,10 @@ def search(request):
         books = Book.objects.filter(title__icontains=q)
         return render_to_response('search_results.html',
             {'books': books, 'query': q})
+
+def book_details(request, identifier):
+    try:
+        book = Book.objects.get(id=identifier)
+    except DoesNotExist:
+        book = None
+    return render_to_response('book_details.html', {'book' : book})
