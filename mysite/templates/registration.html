@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}User Registration{% endblock %}
+{% block content %}
+{% if registered %}
+        <p>Hello, {{ user.username }}</p>
+{% else %}
+        rango says: register here!
+        <FORM id="user_form" method="post" action="/books/register/">
+                {% csrf_token %}
+                {{ uform.as_p }}
+                {{ pform.as_p }}
+                <INPUT type="submit" name="submit" value="submit" />
+        </FORM>
+{% endif %}
+{% endblock %}
