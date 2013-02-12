@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.template import RequestContext
 from django.shortcuts import render_to_response
 from mysite.books.models import *
 
@@ -37,3 +38,27 @@ def book_details(request, identifier):
     except DoesNotExist:
         book = None
     return render_to_response('book_details.html', {'book' : book})
+    
+def register(request):
+        context = RequestContext(request)
+        registered = False
+        user = None
+        if request.method == 'POST':
+            uform = UserForm(data = request.POST)
+            pform = UserProfileForm(data = request.POST)
+            if uform.is_valid() and pform.is_valid():
+                user = uform.save()
+                profile = pform.save(commit = False)
+                profile.user = user
+                profile.save()
+                registered = True
+            else:
+                print uform.errors, pform.errors
+        else:
+            uform = UserForm()
+            pform = UserProfileForm()
+            
+        return render_to_response('registration.html',
+                                  {'uform': uform, 'pform': pform,
+                                   'registered': registered,
+                                   'user' : user}, context)

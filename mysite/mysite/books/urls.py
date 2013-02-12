@@ -7,5 +7,5 @@ urlpatterns = patterns('',
     (r'^search-form/$', search_form),
     (r'^search/$', search),
     (r'^book-details/(?P<identifier>\d+)/$', book_details),
-    url(r'^register/$', views.register, name='registration'),
+    url(r'^register/$', register, name='registration'),
 )

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.forms import ModelForm
+from django import forms
 
 class Publisher(models.Model):
 	name = models.CharField(max_length=30)
@@ -62,3 +62,4 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
         class Meta:
                 model = UserProfile
+                fields = ["website", "picture"]
