@@ -1,0 +1,26 @@
+<!doctype html>
+<head>
+	{% load staticfiles %}
+    <script src="{% static "js/lib/codemirror.js" %}"></script>
+    <link rel="stylesheet" href="{% static "js/lib/codemirror.css" %}">
+    {% if modes %}
+        {% for mode in modes %}
+            <script src="{% static "js"%}/mode/{{ mode }}.js">
+            </script>
+        {% endfor %}
+    {% endif %}
+	<title>CodeMirror</title>
+</head>
+<body>
+    <script>
+        var myCodeMirror = CodeMirror(document.body, {
+          mode: "text/x-csrc"
+        });
+    </script>
+    {% if modes %}
+        {% for mode in modes %}
+            <p>{{ mode }}</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

@@ -11,5 +11,6 @@ urlpatterns = patterns('',
     (r'^time/$', current_datetime),
     (r'^time/plus/(\d{1,2})/$', hours_ahead),
     (r'^html/headers/$', display_meta),
+    (r'^codemirror/$', codemirror),
     url(r'^registration/', include('registration.urls')),
 )

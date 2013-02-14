@@ -32,3 +32,8 @@ def display_meta(request):
         return render_to_response('html_headers.html',
 				  {'headers' : values},
 			       context_instance=RequestContext(request))
+def codemirror(request):
+    context = RequestContext(request)
+    modes = ["clike/clike"]
+    return render_to_response('codemirror.html', {'modes' : modes},
+			      context_instance=context)
