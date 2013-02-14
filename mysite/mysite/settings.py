@@ -15,7 +15,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/users/level3/1002524m/projects/NoteBee/mysite/sqlite3.db',                    # Or path to database file if using sqlite3.
+        'NAME': os.getcwd() + '/sqlite3.db',    # Or path to database file if using sqlite3.
         'USER': 'mysite',                      # Not used with sqlite3.
         'PASSWORD': 'mysite',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -100,6 +100,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'mysite.urls'
 
+LOGIN_URL = "/books/login"
+
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -150,3 +152,5 @@ LOGGING = {
         },
     }
 }
+
+AUTH_PROFILE_MODULE = 'books.UserProfile'

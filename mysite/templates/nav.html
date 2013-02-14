@@ -8,5 +8,10 @@
                 <li><a href="/html/headers/">Display HTML Headers</a></li>
                 <li><a href="/registration/register">Register</a></li>
                 <li><a href="/books/register/">Register (Books app)</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="/books/logout/">Logout (Books app)</a></li>
+                {% else %}
+                    <li><a href="/books/login/">Login (Books app)</a></li>
+                {% endif %}
             </ul>
         </nav>

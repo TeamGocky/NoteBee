@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}User Login{% endblock %}
+{% block content %}
+<h3>Login</h3>
+{% if msg %}
+        <p>{{ msg }}</p>
+{% endif %}
+<form id="login_form" method="post" action="/books/login/">
+    {% csrf_token %}
+    Username:
+    <input type="input" name="username" value="" size="30"/><br/>
+    Password:
+    <input type="password" name="password" value="" size="30"/><br/>
+    <input type="submit" name="submit" value="submit" />
+</form>
+{% endblock %}
