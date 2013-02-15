@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block head_includes %}
+    {% load staticfiles %}
     <script src="{% static "js/lib/codemirror.js" %}"></script>
     <link rel="stylesheet" href="{% static "js/lib/codemirror.css" %}">
     {% if modes %}
