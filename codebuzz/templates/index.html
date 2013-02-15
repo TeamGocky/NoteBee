@@ -2,23 +2,23 @@
 {% block head_includes %}
     {% load staticfiles %}
     <script src="{% static "js/lib/codemirror.js" %}"></script>
-    <link rel="stylesheet" href="{% static "js/lib/codemirror.css" %}">
     {% if modes %}
         {% for mode in modes %}
-            <script src="{% static "js"%}/mode/{{ mode }}.js">
-            </script>
+            <script src="{% static "js"%}/mode/{{ mode }}.js"></script>
         {% endfor %}
     {% endif %}
 {% endblock %}
+{% block sideBar %}
+	<p>Most Recent Snippets</p>
+	<p>Top Snippets<p>
+{% endblock %}
 {% block body %}
-    <script>
-        var myCodeMirror = CodeMirror(document.body, {
-          mode: "text/x-csrc"
-        });
-    </script>
     {% if modes %}
         {% for mode in modes %}
             <p>{{ mode }}</p>
         {% endfor %}
     {% endif %}
+{% endblock %}
+{% block footer %}
+	<p>Team Gocky - CodeBuzz</p>
 {% endblock %}
