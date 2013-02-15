@@ -13,6 +13,21 @@
 	<p>Top Snippets<p>
 {% endblock %}
 {% block body %}
+    <textarea id="editor">
+#include <stdio.h>
+
+int main(void)
+{
+    printf("Hello, World!\n");
+    return 0;
+}
+    </textarea>
+    <script>
+        var editor = document.getElementById("editor");
+        var myCodeMirror = CodeMirror.fromTextArea(editor, {
+            mode: "text/x-csrc",
+        });
+    </script>
     {% if modes %}
         {% for mode in modes %}
             <p>{{ mode }}</p>
