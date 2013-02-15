@@ -1,12 +1,31 @@
 <!doctype html>
 <head>
 	{% load staticfiles %}
-    {% block head_includes %}
-    {% endblock %}
-    <title>{% block title %}CodeMirror{% endblock %}</title>
+	<link rel="stylesheet" href="{% static "css/template.css" %}" />
+	<link rel="stylesheet" href="{% static "js/lib/codemirror.css" %}" />
+	{% block head_includes %}
+	{% endblock %}
+	<title>{% block title %}CodeBuzz{% endblock %}</title>
 </head>
 <body>
-    {% block body %}
-    {% endblock %}
+	<div class="container">
+	    <div class="header">
+			<a href=""><h1>CodeBuzz</h1></a>
+		</div>
+		<div class="section">
+			<div class="nav">
+				{% block sideBar %}
+				{% endblock %}
+			</div>
+
+			<div class="article">
+				{% block body %}
+				{% endblock %}
+			</div>
+		</div>
+		<div class="footer">
+			<p>Footer</p>
+		</div>
+	</div>
 </body>
 </html>
