@@ -13,10 +13,12 @@
 	<p>Top Snippets<p>
 {% endblock %}
 {% block body %}
-
     {% if modes %}
         {% for mode in modes %}
             <p>{{ mode }}</p>
         {% endfor %}
     {% endif %}
+{% endblock %}
+{% block footer %}
+	<p>Team Gocky - CodeBuzz</p>
 {% endblock %}

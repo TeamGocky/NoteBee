@@ -16,7 +16,7 @@
   	   		<a href=""><div class="navigationButton">Random Snippet</div></a>
   	   		<a href=""><div class="navigationButton">Browse Snippets</div></a>
 			<div class="login">
-				<a>Search: <input type="text" name="search"></a>
+				<a>Search: <input type="text" name="search" size="12"></a>
 				<input type="submit" value="Search"></input>
 			</div>
 			{% if loggedIn %}
@@ -26,8 +26,8 @@
 			<a href=""><div class="navigationButton">Logout</div></a>
 			{% else %}
 			<div class="login">
-				<a>Username: <input type="text" name="username"></a>
-				<a>Password: <input type="text" name="password"></a>
+				<a>Username: <input type="text" name="username" size="12"></a>
+				<a>Password: <input type="text" name="password" size="12"></a>
 				<input type="submit" value="Submit"></input>
 			</div>
 			{% endif %}
@@ -38,14 +38,14 @@
 				{% block sideBar %}
 				{% endblock %}
 			</div>
-
 			<div class="article">
 				{% block body %}
 				{% endblock %}
 			</div>
 		</div>
 		<div class="footer">
-			<p>Footer</p>
+			{% block footer %}
+			{% endblock %}
 		</div>
 	</div>
 </body>
