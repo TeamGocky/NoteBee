@@ -27,6 +27,8 @@ class Snippet(models.Model):
                              on_delete=models.SET_NULL)
     rating = models.FloatField()
     votes = models.IntegerField()
+    # Number of times viewed (only count registered users)
+    hits = models.IntegerField()
     body = models.TextField()
     
     def __unicode__(self):
@@ -43,3 +45,11 @@ class Comment(models.Model):
     
     def __unicode__(self):
         return self.message
+
+class Bookmark(models.Model):
+    """Represents a user's bookmarking of a code snippet."""
+    user = models.ForeignKey(User)
+    snippet = models.ForeignKey(Snippet)
+
+    def __unicode__(self):
+        return self.snippet.name
