@@ -19,17 +19,17 @@
 				<a>Search: <input type="text" name="search" size="12"></a>
 				<input type="submit" value="Search"></input>
 			</div>
-			{% if loggedIn %}
-			<div class="login">
-				<a>Welcome back, {{ username }}.</a>
-			</div>
-			<a href=""><div class="navigationButton">Logout</div></a>
+			{% if user.is_authenticated %}
+                <div class="login">
+                    <a>Welcome back, {{ user.username }}.</a>
+                </div>
+                <a href=""><div class="navigationButton">Logout</div></a>
 			{% else %}
-			<div class="login">
-				<a>Username: <input type="text" name="username" size="12"></a>
-				<a>Password: <input type="text" name="password" size="12"></a>
-				<input type="submit" value="Submit"></input>
-			</div>
+                <div class="login">
+                    <a>Username: <input type="text" name="username" size="12"></a>
+                    <a>Password: <input type="password" name="password" size="12"></a>
+                    <input type="submit" value="Submit"></input>
+                </div>
 			{% endif %}
 			<br />
 		</div>
