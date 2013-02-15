@@ -25,7 +25,8 @@ class Snippet(models.Model):
     # Allow NULL user corresponding to Anon.
     user = models.ForeignKey(User, blank=True, null=True,
                              on_delete=models.SET_NULL)
-    rating = models.IntegerField(choices=ratings)
+    rating = models.FloatField()
+    votes = models.IntegerField()
     body = models.TextField()
     
     def __unicode__(self):
