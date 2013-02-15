@@ -4,8 +4,7 @@
     <script src="{% static "js/lib/codemirror.js" %}"></script>
     {% if modes %}
         {% for mode in modes %}
-            <script src="{% static "js"%}/mode/{{ mode }}.js">
-            </script>
+            <script src="{% static "js"%}/mode/{{ mode }}.js"></script>
         {% endfor %}
     {% endif %}
 {% endblock %}
@@ -14,11 +13,7 @@
 	<p>Top Snippets<p>
 {% endblock %}
 {% block body %}
-    <script>
-        var myCodeMirror = CodeMirror(document.body, {
-          mode: "text/x-csrc"
-        });
-    </script>
+
     {% if modes %}
         {% for mode in modes %}
             <p>{{ mode }}</p>

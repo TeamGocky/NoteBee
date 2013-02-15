@@ -22,7 +22,7 @@ h2, h3, h4, h5, p, a, a:hover, li, h3 > a {
     color: rgb(102, 102, 102);
     font-family: sans-serif;
 }
-a {
+a, p > .navigationButton {
     color: rgb(51, 51, 51);
 }
 h1 {
@@ -30,14 +30,14 @@ h1 {
     color: rgb(102, 102, 102);
     font-family: sans-serif;
 }
-p, a, a:hover, ul, ol {
+p, a, a:hover, ul, ol, p > .navigationButton {
     line-height: 1.5;
     text-decoration: none;
 }
 p, ul, ol, a {
     font-size: 0.75em;
 }
-li > ol, li > ul, li > p, p > a, li > a, h3 > a {
+li > ol, li > ul, li > p, p > a, li > a, h3 > a, p > .navigationButton {
     font-size: 1em;
 }
 .container {
@@ -78,4 +78,31 @@ li > ol, li > ul, li > p, p > a, li > a, h3 > a {
     height: 2em;
     text-align: center;
 }
-
+.navigationButton {
+	float:left;
+}
+.login {
+	display: inline-block;
+	height: 2em;
+	padding-right:1em;
+	padding-left:1em;
+	padding-top:0.5em;
+	margin-right:1em;
+	margin-top:-1.5em;
+	float:right;
+}
+.navigationButton, .rightHandHeader {
+	display: inline-block;
+	box-shadow: 0 0 2px rgba(0,0,0,.5);
+	height: 2em;
+	border-radius: 0.5em;
+	padding-right:1em;
+	padding-left:1em;
+	padding-top:0.5em;
+	margin-right:1em;
+	margin-top:-1.5em;
+	background:#FFF;
+}
+.rightHandHeader {
+	float:right;
+}
