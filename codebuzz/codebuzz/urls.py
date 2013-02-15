@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     url(r'^$', include("codesnippet.urls"), name="codebuzz_root"),
     url(r'^codesnippet/', include("codesnippet.urls")),
     url(r'^registration/', include("registration.urls")),
+    url(r'^accounts/', include("accounts.urls")),
     # Examples:
     # url(r'^$', 'codebuzz.views.home', name='home'),
     # url(r'^codebuzz/', include('codebuzz.foo.urls')),

@@ -23,13 +23,10 @@
                 <div class="login">
                     <a>Welcome back, {{ user.username }}.</a>
                 </div>
-                <a href=""><div class="navigationButton">Logout</div></a>
+                <a href="/accounts/logout"><div class="navigationButton">Logout</div></a>
 			{% else %}
-                <div class="login">
-                    <a>Username: <input type="text" name="username" size="12"></a>
-                    <a>Password: <input type="password" name="password" size="12"></a>
-                    <input type="submit" value="Submit"></input>
-                </div>
+                <a href="/registration"><div class="navigationButton">Sign up</div></a>
+                <a href="/accounts/login"><div class="navigationButton">Login</div></a>
 			{% endif %}
 			<br />
 		</div>
