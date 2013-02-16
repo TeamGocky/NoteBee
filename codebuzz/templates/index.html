@@ -10,15 +10,13 @@
 {% endblock %}
 {% block body %}
 	<h4>Post a code snippet</h4>
-    <textarea id="editor">
-#include <stdio.h>
-
-int main(void)
-{
-    printf("Hello, World!\n");
-    return 0;
-}
-    </textarea>
+    {% if form %}
+        <form method="post" action="/codesnippet/">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" name="submit" value="submit"/>
+        </form>
+    {% endif %}
 	<h4>Information here</h4>
     <script>
         var editor = document.getElementById("editor");
@@ -26,9 +24,4 @@ int main(void)
             mode: "text/x-csrc",
         });
     </script>
-    {% if modes %}
-        {% for mode in modes %}
-            <p>{{ mode }}</p>
-        {% endfor %}
-    {% endif %}
 {% endblock %}

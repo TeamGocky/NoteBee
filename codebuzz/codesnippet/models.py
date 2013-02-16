@@ -53,3 +53,4 @@ class Bookmark(models.Model):
 
     def __unicode__(self):
         return self.snippet.name
+
