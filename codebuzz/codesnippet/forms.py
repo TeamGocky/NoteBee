@@ -2,8 +2,12 @@ from django import forms
 from codesnippet.models import Snippet
 
 class SnippetForm(forms.ModelForm):
-    body_attrs = {"id" : "editor", "class" : "CodeMirror"}
-    body = forms.CharField(widget=forms.Textarea(attrs=body_attrs))
     class Meta:
         model = Snippet
         fields = ["name", "body", "language", "category"]
+        body_attrs = {"id" : "editor", "class" : "CodeMirror"}
+        lang_attrs = {"onchange" : "selectLang()"}
+        widgets = {
+            "body" : forms.Textarea(attrs=body_attrs),
+            "language" : forms.Select(attrs=lang_attrs),
+        }

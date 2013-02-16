@@ -20,8 +20,9 @@
 	<h4>Information here</h4>
     <script>
         var editor = document.getElementById("editor");
-        var myCodeMirror = CodeMirror.fromTextArea(editor, {
-            mode: "text/x-csrc",
-        });
+        var myCodeMirror = CodeMirror.fromTextArea(editor);
+        function selectLang() {
+            myCodeMirror.setOption("mode", "text/x-csrc");
+        }
     </script>
 {% endblock %}
