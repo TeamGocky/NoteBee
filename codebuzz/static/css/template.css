@@ -42,7 +42,7 @@ li > ol, li > ul, li > p, p > a, li > a, h3 > a, p > .navigationButton {
 }
 .container {
     margin: 2em auto;
-    min-width: 18em;
+    min-width: 65em;
     width: 95%;
     -webkit-box-shadow: 0 0 20px rgba(0,0,0,.5);
     -moz-box-shadow: 0 0 20px rgba(0,0,0,.5);
