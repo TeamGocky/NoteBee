@@ -6,7 +6,7 @@ class SnippetForm(forms.ModelForm):
         model = Snippet
         fields = ["name", "body", "language", "category"]
         body_attrs = {"id" : "editor", "class" : "CodeMirror"}
-        lang_attrs = {"onchange" : "selectLang()"}
+        lang_attrs = {"id" : "languages", "onchange" : "selectLang()"}
         widgets = {
             "body" : forms.Textarea(attrs=body_attrs),
             "language" : forms.Select(attrs=lang_attrs),

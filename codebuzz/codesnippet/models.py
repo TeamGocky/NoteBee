@@ -12,6 +12,7 @@ class Category(models.Model):
 class Language(models.Model):
     """The languages support by the application."""
     name = models.CharField(max_length=20)
+    mode = models.CharField(primary_key=True, max_length=40)
     
     def __unicode__(self):
         return self.name
