@@ -21,10 +21,13 @@
 			</div>
 			{% if user.is_authenticated %}
 			<div class="login">
-				<a>Welcome back, {{ user.username }}.</a>
+				<p class="loggedIn">Welcome back, {{ user.username }}.</p>
 			</div>
 			<a href="/accounts/logout"><div class="navigationButton">Logout</div></a>
 			{% else %}
+			<div class="login">
+				<p class="loggedIn">Welcome to CodeBuzz.</p>
+			</div>
 			<a href="/registration"><div class="navigationButton">Sign up</div></a>
 			<a href="/accounts/login"><div class="navigationButton">Login</div></a>
 			{% endif %}

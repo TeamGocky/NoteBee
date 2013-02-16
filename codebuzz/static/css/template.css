@@ -108,3 +108,6 @@ li > ol, li > ul, li > p, p > a, li > a, h3 > a, p > .navigationButton {
 .rightHandHeader {
 	float:right;
 }
+.loggedIn {
+	margin-top:0.25em;
+}
