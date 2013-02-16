@@ -16,23 +16,39 @@
   	   		<a href=""><div class="navigationButton">Random Snippet</div></a>
   	   		<a href=""><div class="navigationButton">Browse Snippets</div></a>
 			<div class="login">
-				<a>Search: <input type="text" name="search" size="12"></a>
+				<a>Search: <input type="text" name="search"></a>
 				<input type="submit" value="Search"></input>
 			</div>
 			{% if user.is_authenticated %}
-                <div class="login">
-                    <a>Welcome back, {{ user.username }}.</a>
-                </div>
-                <a href="/accounts/logout"><div class="navigationButton">Logout</div></a>
+			<div class="login">
+				<a>Welcome back, {{ user.username }}.</a>
+			</div>
+			<a href="/accounts/logout"><div class="navigationButton">Logout</div></a>
 			{% else %}
-                <a href="/registration"><div class="navigationButton">Sign up</div></a>
-                <a href="/accounts/login"><div class="navigationButton">Login</div></a>
+			<a href="/registration"><div class="navigationButton">Sign up</div></a>
+			<a href="/accounts/login"><div class="navigationButton">Login</div></a>
 			{% endif %}
 			<br />
 		</div>
 		<div class="section">
 			<div class="nav">
 				{% block sideBar %}
+				<h5 class="navigation">Most Recent Snippets</h5>
+				<ol>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+				</ol>
+				<h5 class="navigation">Top Snippets</h5>
+				<ol>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+					<li><a href="">Snippet</a></li>
+				</ol>
 				{% endblock %}
 			</div>
 			<div class="article">
@@ -42,6 +58,7 @@
 		</div>
 		<div class="footer">
 			{% block footer %}
+			<p>Team Gocky - CodeBuzz</p>
 			{% endblock %}
 		</div>
 	</div>

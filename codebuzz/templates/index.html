@@ -8,11 +8,8 @@
         {% endfor %}
     {% endif %}
 {% endblock %}
-{% block sideBar %}
-	<p>Most Recent Snippets</p>
-	<p>Top Snippets<p>
-{% endblock %}
 {% block body %}
+	<h4>Post a code snippet</h4>
     <textarea id="editor">
 #include <stdio.h>
 
@@ -22,6 +19,7 @@ int main(void)
     return 0;
 }
     </textarea>
+	<h4>Information here</h4>
     <script>
         var editor = document.getElementById("editor");
         var myCodeMirror = CodeMirror.fromTextArea(editor, {
@@ -33,7 +31,4 @@ int main(void)
             <p>{{ mode }}</p>
         {% endfor %}
     {% endif %}
-{% endblock %}
-{% block footer %}
-	<p>Team Gocky - CodeBuzz</p>
 {% endblock %}
