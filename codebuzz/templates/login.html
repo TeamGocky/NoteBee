@@ -7,9 +7,9 @@
         <h3>User Login</h3>
         <form action="" method="post">
             {% csrf_token %}
-            <a>Username: <input type="text" name="username" size="12"></a>
-            <a>Password: <input type="password" name="password" size="12"></a>
-            <input type="submit" name="submit" value="submit"/>
+            <p>Username: <input type="text" name="username"></p>
+			<p>Password: <input type="password" name="password"></p>
+            <input type="submit" name="login" value="Login"/>
         </form>
     {% endif %}
 {% endblock %}
