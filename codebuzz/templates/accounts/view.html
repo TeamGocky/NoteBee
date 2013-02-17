@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% block title %}CodeBuzz - View Profile{% endblock %}
 {% block body %}
-    {% if user %}
-        <p><label for="name">Name:</label>{{ user.username }}</p>
+    {% if userView %}
+        <h3><label for="name">Profile for </label>{{ userView.username }}</h3>
     {% elif errors %}
-        <p>Errors:</p>
+        <h5>Errors:</h5>
         <ul>
             {% for err in errors %}
-                <li>{{ err }}</li>
+                <li class="error">{{ err }}</li>
             {% endfor %}
         </ul>
     {% endif %}

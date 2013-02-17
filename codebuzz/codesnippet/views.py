@@ -43,3 +43,13 @@ def view_random_snippet(request):
         except ObjectDoesNotExist:
             continue
     return view_snippet(request, rid)
+
+"""Dummy view just so I could see what my page looked like."""
+def view_top_snippets(request):
+	context = RequestContext(request)
+	return render_to_response("codesnippet/top_snippets.html", context)
+
+"""Dummy view just so I could see what my page looked like."""
+def browser_snippets(request):
+	context = RequestContext(request)
+	return render_to_response("codesnippet/browse_snippets.html", context)

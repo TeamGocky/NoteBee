@@ -39,7 +39,7 @@ def user_view(request, uid):
         user = User.objects.get(id=uid)
     except ObjectDoesNotExist:
         errors.append("User does not exist.")
-    return render_to_response("accounts/view.html", {"user" : user,
+    return render_to_response("accounts/view.html", {"userView" : user,
                                                      "errors" : errors},
                               context)
         

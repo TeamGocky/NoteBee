@@ -4,6 +4,7 @@
     {% if user.is_authenticated %}
         <p>Welcome, {{ user.username }}</p>
     {% else %}
+        <h3>User Registration</h3>
         {% if form %}
             <form action="" method="post">
                 {% csrf_token %}

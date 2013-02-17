@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block head_includes %}
     {% load staticfiles %}
-    <script src="{% static "js/lib/codemirror.js" %}"></script>
+    <script src="{% static "js"%}/lib/codemirror.js"></script>
     <script src="{% static "js"%}/mode/codemirror-compressed.js"></script>
 {% endblock %}
 {% block body %}
 	{% if user.is_authenticated %}
-		<h4>Welcome back {{ user.username }}, please post a code snippet.</h4>
+		<h3>Welcome back {{ user.username }}, please post a code snippet.</h3>
 	{% else %}
-		<h4>Welcome to CodeBuzz, please post a code snippet.</h4>
+		<h3>Welcome to CodeBuzz, please post a code snippet.</h3>
 	{% endif %}
     {% if form %}
         <form method="post" action="/codesnippet/">
