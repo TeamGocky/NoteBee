@@ -29,10 +29,6 @@
                 mode: "{{ snippet.language.mode }}",
 				readOnly: true,
             });
-            function selectLang() {
-                var mode = langOpts.options[langOpts.selectedIndex].value;
-                myCodeMirror.setOption("mode", mode);
-            }
         </script>
     {% endif %}
 {% endblock %}
