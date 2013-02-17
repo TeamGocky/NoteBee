@@ -111,3 +111,6 @@ li > ol, li > ul, li > p, p > a, li > a, h3 > a, p > .navigationButton {
 .loggedIn {
 	margin-top:0.25em;
 }
+.CodeMirror {
+	border: 1px solid;
+}

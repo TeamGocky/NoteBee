@@ -22,9 +22,10 @@
         </form>
     {% endif %}
     <script>
-        var editor = document.getElementById("editor");
         var langOpts = document.getElementById("languages");
-        var myCodeMirror = CodeMirror.fromTextArea(editor);
+		var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("editor"), {
+    		lineNumbers: true
+  		});
         function selectLang() {
             var mode = langOpts.options[langOpts.selectedIndex].value;
             myCodeMirror.setOption("mode", mode);
