@@ -46,8 +46,10 @@ def view_random_snippet(request):
 
 """Dummy view just so I could see what my page looked like."""
 def view_top_snippets(request):
-	return render_to_response("codesnippet/top_snippets.html")
+	context = RequestContext(request)
+	return render_to_response("codesnippet/top_snippets.html", context)
 
 """Dummy view just so I could see what my page looked like."""
 def browser_snippets(request):
-	return render_to_response("codesnippet/browse_snippets.html")
+	context = RequestContext(request)
+	return render_to_response("codesnippet/browse_snippets.html", context)
