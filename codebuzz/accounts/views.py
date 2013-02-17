@@ -20,7 +20,7 @@ def user_login(request):
                 msg = "Your account is disabled."
         else:
             msg = "Invalid username or password"
-        return render_to_response("login.html", {"msg" : msg})
+        return render_to_response("login.html", {"msg" : msg}, context)
     else:
         return render_to_response("login.html", {}, context)
 
