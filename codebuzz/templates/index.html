@@ -9,7 +9,11 @@
     {% endif %}
 {% endblock %}
 {% block body %}
-	<h4>Post a code snippet</h4>
+	{% if user.is_authenticated %}
+		<h4>Welcome back {{ user.username }}, please post a code snippet.</h4>
+	{% else %}
+		<h4>Welcome to CodeBuzz, please post a code snippet.</h4>
+	{% endif %}
     {% if form %}
         <form method="post" action="/codesnippet/">
             {% csrf_token %}
