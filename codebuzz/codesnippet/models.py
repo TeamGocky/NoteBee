@@ -34,6 +34,11 @@ class Snippet(models.Model):
     
     def __unicode__(self):
         return self.name
+
+    def attrs(self):
+        for field in self._meta.fields:
+            if field.name != "id":
+                yield field.name, getattr(self, field.name)
     
     class Meta:
         ordering = ["name"]

@@ -6,11 +6,18 @@
 {% endblock %}
 {% block body %}
     {% if snippet %}
-        <p><label for="name">Name:</label>{{ snippet.name }}</p>
-        <p><label for="body">Body:</label><textarea id="editor">{{ snippet.body }}</textarea></p>
-        <p><label for="rating">Rating:</label>{{ snippet.rating }}</p>
-        <p><label for="lang">Language:</label>{{ snippet.language }}</p>
-        <p><label for="cat">Category:</label>{{ snippet.category }}</p>
+        {% for name, value in snippet.attrs %}
+            <p>
+                <label for="{{ name }}">{{ name.capitalize }}:</label>
+                {% if name == "body" %}
+                    <textarea id="editor">{{ snippet.body }}</textarea>
+                {% elif name == "user" and not value %}
+                    Anonymous
+                {% else %}
+                    {{ value }}
+                {% endif %}
+            </p>
+        {% endfor %}
         <script>
             var editor = document.getElementById("editor");
             var langOpts = document.getElementById("languages");

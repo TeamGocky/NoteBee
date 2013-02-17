@@ -28,7 +28,8 @@ def view_snippet(request, sid):
     """View the snippet with id = sid argument."""
     context = RequestContext(request)
     snippet = Snippet.objects.get(id=sid)
-    return render_to_response("view_snippet.html", {"snippet" : snippet},
+    return render_to_response("codesnippet/view_snippet.html",
+                              {"snippet" : snippet},
                               context)
 
 def view_random_snippet(request):
