@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
-    {% if user %}
-        <p><label for="name">Name: </label>{{ user.username }}</p>
+    {% if userView %}
+        <p><label for="name">Name: </label>{{ userView.username }}</p>
     {% elif errors %}
         <p>Errors:</p>
         <ul>
