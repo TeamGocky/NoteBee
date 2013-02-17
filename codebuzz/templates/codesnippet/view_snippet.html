@@ -1,5 +1,11 @@
 {% extends "base.html" %}
-{% block title %}CodeBuzz - View Snippet{% endblock %}
+{% block title %}CodeBuzz - {{ snippet.name.capitalize }} by
+	{% if snippet.user %}
+		{{ snippet.user }}
+	{% else %}
+		Anonymous
+	{% endif %}
+{% endblock %}
 {% block head_includes %}
     {% load staticfiles %}
     <script src="{% static "js/lib/codemirror.js" %}"></script>
@@ -7,6 +13,13 @@
 {% endblock %}
 {% block body %}
     {% if snippet %}
+		<h3>{{ snippet.name.capitalize }} by
+		{% if snippet.user %}
+			{{ snippet.user }}
+		{% else %}
+			Anonymous
+		{% endif %}
+		</h3>
         {% for name, value in snippet.attrs %}
             <p>
                 <label for="{{ name }}">{{ name.capitalize }}:</label>
