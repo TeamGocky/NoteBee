@@ -2,7 +2,7 @@
 {% block title %}CodeBuzz - View Profile{% endblock %}
 {% block body %}
     {% if userView %}
-        <h5><label for="name">Profile for </label>{{ userView.username }}</h5>
+        <h3><label for="name">Profile for </label>{{ userView.username }}</h3>
     {% elif errors %}
         <h5>Errors:</h5>
         <ul>
