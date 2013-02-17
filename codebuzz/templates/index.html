@@ -2,11 +2,7 @@
 {% block head_includes %}
     {% load staticfiles %}
     <script src="{% static "js/lib/codemirror.js" %}"></script>
-    {% if modes %}
-        {% for mode in modes %}
-            <script src="{% static "js"%}/mode/{{ mode }}.js"></script>
-        {% endfor %}
-    {% endif %}
+    <script src="{% static "js"%}/mode/codemirror-compressed.js"></script>
 {% endblock %}
 {% block body %}
 	{% if user.is_authenticated %}
