@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block title %}CodeBuzz - {{ snippet.name.capitalize }} by
-	{% if snippet.user %}
-		{{ snippet.user }}
-	{% else %}
-		Anonymous
-	{% endif %}
+    {% if snippet.user %}
+        {{ snippet.user }}
+    {% else %}
+        Anonymous
+    {% endif %}
 {% endblock %}
 {% block head_includes %}
     {% load staticfiles %}
