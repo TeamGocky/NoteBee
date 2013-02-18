@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}CodeBuzz - {{ snippet.name.capitalize }} by
+	{% if snippet.user %}
+		{{ snippet.user }}
+	{% else %}
+		Anonymous
+	{% endif %}
+{% endblock %}
+{% block head_includes %}
+    {% load staticfiles %}
+    <script src="{% static "js/lib/codemirror.js" %}"></script>
+    <script src="{% static "js"%}/mode/codemirror-compressed.js"></script>
+{% endblock %}
+{% block body %}
+    {% if snippet %}
+		<h3>{{ snippet.name.capitalize }} by
+		{% if snippet.user %}
+			{{ snippet.user }}
+		{% else %}
+			Anonymous
+		{% endif %}
+		</h3>
+        {% for name, value in snippet.attrs %}
+            <p>
+                <label for="{{ name }}">{{ name.capitalize }}:</label>
+                {% if name == "body" %}
+                    <textarea id="editor">{{ snippet.body }}</textarea>
+                {% elif name == "user" and not value %}
+                    Anonymous
+                {% else %}
+                    {{ value }}
+                {% endif %}
+            </p>
+        {% endfor %}
+        <script>
+            var editor = document.getElementById("editor");
+            var langOpts = document.getElementById("languages");
+            var myCodeMirror = CodeMirror.fromTextArea(editor, {
+                autofocus: true,
+                indentUnit: 4,
+                lineNumbers: true,
+                lineWrapping: true,
+                mode: "{{ snippet.language.mode }}",
+				readOnly: true,
+            });
+        </script>
+    {% endif %}
+{% endblock %}

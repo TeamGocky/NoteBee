@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}CodeBuzz - User Registration{% endblock %}
+{% block body %}
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}</p>
+    {% else %}
+        <h3>User Registration</h3>
+        {% if form %}
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" name="submit" value="Register"/>
+            </form>
+        {% endif %}
+    {% endif %}
+{% endblock %}
