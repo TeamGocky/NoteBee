@@ -26,7 +26,6 @@ class Snippet(models.Model):
     # Allow NULL user corresponding to Anon.
     user = models.ForeignKey(User, blank=True, null=True,
                              on_delete=models.SET_NULL)
-    rating = models.FloatField(default=0.0)
     votes = models.IntegerField(default=0)
     # Number of times viewed (only count registered users)
     hits = models.IntegerField(default=0)
@@ -42,6 +41,12 @@ class Snippet(models.Model):
     
     class Meta:
         ordering = ["name"]
+
+class SnippetRating(models.Model):
+    """Records a rating of a snippet by a user."""
+    user = models.ForeignKey(User)
+    snippet = models.ForeignKey(Snippet)
+    rating = models.FloatField(default=0.0)
 
 class Comment(models.Model):
     """User comments on code snippets."""

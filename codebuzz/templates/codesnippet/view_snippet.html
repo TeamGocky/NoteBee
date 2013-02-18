@@ -32,6 +32,7 @@
                 {% endif %}
             </p>
         {% endfor %}
+	    <p><label for="rating">Rating:</label>{{ rating }}</p>
         <script>
             var editor = document.getElementById("editor");
             var langOpts = document.getElementById("languages");
@@ -44,5 +45,12 @@
 				readOnly: true,
             });
         </script>
+    {% elif errors %}
+        <h5>Errors:</h5>
+        <ul>
+            {% for err in errors %}
+                <li class="error">{{ err }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
 {% endblock %}
