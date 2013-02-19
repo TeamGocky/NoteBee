@@ -8,5 +8,5 @@ urlpatterns = patterns('',
     url(r'^random/$', view_random_snippet, name="random"),
     url(r'^top/$', view_top_snippets, name="top"),
     url(r'^browse/$', browser_snippets, name="browse"),
-
+    url(r'^rating/(?P<sid>\d+)/$', submit_rating, name="rating"),
 )

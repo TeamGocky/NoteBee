@@ -32,7 +32,14 @@
                 {% endif %}
             </p>
         {% endfor %}
-	    <p><label for="rating">Rating:</label>{{ rating }}</p>
+	    <p>
+            <label for="rating">Rating:</label>{{ rating }}
+            <form id="rating_form" method="post"
+                  action="/codesnippet/rating/{{ snippet.id }}/">
+                {% csrf_token %}
+                {{ rating_form.rating }}
+            </form>
+        </p>
         <script>
             var editor = document.getElementById("editor");
             var langOpts = document.getElementById("languages");
@@ -44,6 +51,11 @@
                 mode: "{{ snippet.language.mode }}",
 				readOnly: true,
             });
+            
+            // on change event for the rating posting
+            function submitRating() {
+                document.getElementById("rating_form").submit();
+            }
         </script>
     {% elif errors %}
         <h5>Errors:</h5>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+    CodeBuzz - Submitted Rating
+{% endblock %}
+{% block head_includes %}
+    {% load staticfiles %}
+    <script src="{% static "js/lib/codemirror.js" %}"></script>
+    <script src="{% static "js"%}/mode/codemirror-compressed.js"></script>
+{% endblock %}
+{% block body %}
+    {% if msg %}
+	    <p>{{ msg }}</p>
+    {% endif %}
+{% endblock %}

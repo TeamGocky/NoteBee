@@ -19,7 +19,6 @@ class Language(models.Model):
 
 class Snippet(models.Model):
     """Model to represent a code snippet."""
-    ratings = [(x, x) for x in xrange(1, 6)]
     name = models.CharField(max_length=200)
     category = models.ForeignKey(Category)
     language = models.ForeignKey(Language)
@@ -44,6 +43,7 @@ class Snippet(models.Model):
 
 class SnippetRating(models.Model):
     """Records a rating of a snippet by a user."""
+    RATINGS = [(x, x) for x in xrange(1, 6)]
     user = models.ForeignKey(User)
     snippet = models.ForeignKey(Snippet)
     rating = models.FloatField(default=0.0)

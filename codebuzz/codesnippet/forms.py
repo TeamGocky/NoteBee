@@ -1,5 +1,5 @@
 from django import forms
-from codesnippet.models import Snippet
+from codesnippet.models import Snippet, SnippetRating
 
 class SnippetForm(forms.ModelForm):
     class Meta:
@@ -11,3 +11,11 @@ class SnippetForm(forms.ModelForm):
             "body" : forms.Textarea(attrs=body_attrs),
             "language" : forms.Select(attrs=lang_attrs),
         }
+
+class SnippetRatingForm(forms.ModelForm):
+    rating_attrs = {"onchange" : "submitRating()"}
+    rating = forms.ChoiceField(widget=forms.Select(attrs=rating_attrs),
+                               choices=SnippetRating.RATINGS)
+    class Meta:
+        model = SnippetRating
+        fields = ["rating"]
