@@ -48,15 +48,13 @@ def view_snippet(request, sid):
 
 def view_random_snippet(request):
     """Select a random snippet for the database to view."""
-    while True:
-        try:
-            rid = randint(1, Snippet.objects.latest("id").id)
-            # Try and get the snippet (will raise exception if not there).
-            snippet = Snippet.objects.get(id=rid)
-            break
-        except ObjectDoesNotExist:
-            continue
-    return view_snippet(request, rid)
+    snippets = Snippet.objects.all()
+    if len(snippets) == 0:
+        return view_snippet(request, -1)
+    else:
+        index = randint(0, len(snippets)-1)
+        snippet = snippets[index]
+        return view_snippet(request, snippet.id)
 
 """Dummy view just so I could see what my page looked like."""
 def view_top_snippets(request):
