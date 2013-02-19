@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from codesnippet.models import Bookmark, Snippet
 
 def user_login(request):
     context = RequestContext(request)
@@ -34,12 +35,22 @@ def user_view(request, uid):
     """View the user with id = the uid argument."""
     context = RequestContext(request)
     errors = []
-    user = None
+    userView = None
+    bookmarks = None
+    snippets = None
     try:
-        user = User.objects.get(id=uid)
+        userView = User.objects.get(id=uid)
     except ObjectDoesNotExist:
         errors.append("User does not exist.")
-    return render_to_response("accounts/view.html", {"userView" : user,
-                                                     "errors" : errors},
-                              context)
-        
+    if userView is not None:
+        try:
+            bookmarks = Bookmark.objects.filter(user=userView)
+        except ObjectDoesNotExist:
+            errors.append("User has no bookmarks.")
+        try:
+            snippets = Snippet.objects.filter(user=userView)
+        except ObjectDoesNotExist:
+            errors.append("User has no bookmarks.")
+    return render_to_response("accounts/view.html",
+            {"userView" : userView, "errors" : errors,
+             "bookmarks" : bookmarks, "snippets" : snippets}, context)

@@ -11,4 +11,34 @@
             {% endfor %}
         </ul>
     {% endif %}
+<!-- Bookmark-related code -->
+	{% if user %}
+		{% ifequal user.username userView.username %}
+            <p>Your bookmarks</p>
+        {% else %}
+            <p>{{ userView.username }}'s bookmarks</p>
+        {% endifequal %}
+    {% endif %}
+    {% if bookmarks %}
+        <ul>
+            {% for bookmark in bookmarks %}
+                <li>{{ bookmark.snippet.name }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+<!-- Snippet-related code -->
+	{% if user %}
+		{% ifequal user.username userView.username %}
+            <p>Your snippets</p>
+        {% else %}
+            <p>{{ userView.username }}'s snippets</p>
+        {% endifequal %}
+    {% endif %}
+    {% if snippets %}
+        <ul>
+            {% for snippet in snippets %}
+                <li><a href="/codesnippet/view/{{ snippet.id }}">{{ snippet.name }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
