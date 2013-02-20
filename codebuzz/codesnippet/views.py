@@ -9,6 +9,9 @@ from django.template import RequestContext
 from codesnippet.forms import SnippetForm, SnippetRatingForm
 from codesnippet.models import Snippet, SnippetRating
 
+def getLatestSnippets():
+    return Snippet.objects.all().order_by("-id")[:5]
+
 def index(request):
     """Homepage for codesnippet application."""
     context = RequestContext(request)
@@ -26,7 +29,8 @@ def index(request):
             print form.errors
     else:
         form = SnippetForm()
-    return render_to_response('index.html', {"form" : form}, context)
+    return render_to_response('index.html', {"form" : form,
+                               "latestSnippets" : getLatestSnippets()}, context)
 
 def get_rating(request, snippet):
     """Retrieve the rating of the snippet by request user.
@@ -43,6 +47,8 @@ def get_rating(request, snippet):
                                                 user=request.user)
         except ObjectDoesNotExist:
             return None
+    if initial is None:
+        return None
     return initial.rating
 
 def view_snippet(request, sid, errors=[]):
@@ -65,12 +71,14 @@ def view_snippet(request, sid, errors=[]):
                               {"snippet" : snippet,
                                "rating" : total_rating,
                                "rating_form" : rform,
-                               "errors" : errors},
+                               "errors" : errors,
+                               "latestSnippets" : getLatestSnippets()},
                               context)
     except ObjectDoesNotExist:
         errors += ["Snippet does not exist"]
         return render_to_response("codesnippet/view_snippet.html",
-                                  {"errors" : errors},
+                                  {"errors" : errors,
+                               "latestSnippets" : getLatestSnippets()},
                                   context)
 
 @login_required
@@ -119,9 +127,11 @@ def view_random_snippet(request):
 def view_top_snippets(request):
     """Dummy view just so I could see what my page looked like."""
     context = RequestContext(request)
-    return render_to_response("codesnippet/top_snippets.html", context)
+    return render_to_response("codesnippet/top_snippets.html",{
+                               "latestSnippets" : getLatestSnippets()}, context)
 
 def browser_snippets(request):
     """Dummy view just so I could see what my page looked like."""
     context = RequestContext(request)
-    return render_to_response("codesnippet/browse_snippets.html", context)
+    return render_to_response("codesnippet/browse_snippets.html", {
+                               "latestSnippets" : getLatestSnippets()}, context)

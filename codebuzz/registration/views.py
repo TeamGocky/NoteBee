@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from codesnippet.views import getLatestSnippets
 
 def register(request):
     # Context necessary for csrf token in form.
@@ -12,7 +13,9 @@ def register(request):
         if form.is_valid():
             user = form.save()
             msg = "Successfully registered, please login."
-            return render_to_response("register.html", {"msg" : msg}, context)
+            return render_to_response("register.html", {"msg" : msg,
+                "latestSnippets" : getLatestSnippets()}, context)
     else:
         form = UserCreationForm()
-    return render_to_response("register.html", {"form" : form}, context)
+    return render_to_response("register.html", {"form" : form,
+                "latestSnippets" : getLatestSnippets()}, context)

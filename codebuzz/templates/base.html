@@ -32,13 +32,13 @@
 			<div class="nav">
 				{% block sideBar %}
                     <h5 class="navigation">Most Recent Snippets</h5>
+                    {% if latestSnippets %}
                     <ol>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
+                        {% for snippet in latestSnippets %}
+                            <li><a href="/codesnippet/view/{{ snippet.id }}">{{ snippet.name }}</a></li>
+                        {% endfor %}
                     </ol>
+                    {% endif %}
                     <h5 class="navigation">Top Snippets</h5>
                     <ol>
                         <li><a href="">Snippet</a></li>

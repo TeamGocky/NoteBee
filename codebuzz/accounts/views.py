@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from codesnippet.models import Bookmark, Snippet
+from codesnippet.views import getLatestSnippets
 
 def user_login(request):
     context = RequestContext(request)
@@ -21,9 +22,11 @@ def user_login(request):
                 msg = "Your account is disabled."
         else:
             msg = "Invalid username or password"
-        return render_to_response("login.html", {"msg" : msg}, context)
+        return render_to_response("login.html", {"msg" : msg,
+                    "latestSnippets" : getLatestSnippets()}, context)
     else:
-        return render_to_response("login.html", {}, context)
+        return render_to_response("login.html",
+                    {"latestSnippets" : getLatestSnippets()}, context)
 
 @login_required
 def user_logout(request):
@@ -53,4 +56,5 @@ def user_view(request, uid):
             errors.append("User has no bookmarks.")
     return render_to_response("accounts/view.html",
             {"userView" : userView, "errors" : errors,
-             "bookmarks" : bookmarks, "snippets" : snippets}, context)
+             "bookmarks" : bookmarks, "snippets" : snippets,
+             "latestSnippets" : getLatestSnippets()}, context)
