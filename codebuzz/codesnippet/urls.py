@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^browse/$', browser_snippets, name="browse"),
     url(r'^rating/(?P<sid>\d+)/$', submit_rating, name="rating"),
     url(r'^search/$', search_snippet, name="search"),
+    url(r'^advanced_search/$', advanced_search, name="advanced"),
 )

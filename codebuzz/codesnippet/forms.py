@@ -19,3 +19,8 @@ class SnippetRatingForm(forms.ModelForm):
     class Meta:
         model = SnippetRating
         fields = ["rating"]
+
+class SnippetSearchForm(SnippetForm):
+    class Meta:
+        model = Snippet
+        fields = ["name", "language", "category"]

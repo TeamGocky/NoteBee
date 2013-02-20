@@ -6,7 +6,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from codesnippet.forms import SnippetForm, SnippetRatingForm
+from codesnippet.forms import SnippetForm, SnippetRatingForm,\
+                              SnippetSearchForm
 from codesnippet.models import Snippet, SnippetRating
 
 def getLatestSnippets():
@@ -141,6 +142,32 @@ def search_snippet(request):
                                    "query" : query,
                                    "errors" : errors},
                                   context)
+def advanced_search(request):
+    """Advanced searching of a snippet (by category and language)."""
+    context = RequestContext(request)
+    snippets = None
+    query = None
+    errors = []
+    if request.method == "POST":
+        form = SnippetSearchForm(data = request.POST)
+        if form.is_valid():
+            s = form.save(commit=False)
+            snippets = Snippet.objects.filter(name__contains=s.name,
+                                              category=s.category,
+                                              language=s.language)
+            return render_to_response("codesnippet/search_snippet.html",
+                                  {"snippets" : snippets,
+                                   "latestSnippets" : getLatestSnippets(),
+                                   "query" : s.name,
+                                   "errors" : errors},
+                                  context)
+    else:
+        form = SnippetSearchForm()
+    return render_to_response("codesnippet/advanced_search.html",
+                              {"form" : form,
+                               "latestSnippets" : getLatestSnippets(),
+                               "errors" : errors},
+                              context)
 
 def view_top_snippets(request):
     """Dummy view just so I could see what my page looked like."""
