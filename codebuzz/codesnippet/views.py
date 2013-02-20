@@ -159,6 +159,8 @@ def advanced_search(request):
                                   {"snippets" : snippets,
                                    "latestSnippets" : getLatestSnippets(),
                                    "query" : s.name,
+                                   "category" : s.category,
+                                   "language" : s.language,
                                    "errors" : errors},
                                   context)
     else:

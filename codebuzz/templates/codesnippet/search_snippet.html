@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-    CodeBuzz - Search results
+    CodeBuzz - Search Results
 {% endblock %}
 {% block head_includes %}
     {% load staticfiles %}
@@ -8,6 +8,7 @@
     <script src="{% static "js"%}/mode/codemirror-compressed.js"></script>
 {% endblock %}
 {% block body %}
+    <h3>Search Results</h3>
     {% if errors %}
         <h5>Errors:</h5>
         <ul>
@@ -17,7 +18,13 @@
         </ul>
     {% endif %}
     {% if snippets %}
-        <h5>Snippets for '{{ query }}':</h5>
+        <h5>Snippets matching '{{ query }}'
+            {% if category %}
+                in category '{{ category }}'
+            {% endif %}
+            {% if language %}
+                in {{ language }}
+            {% endif %}:</h5>
         <ul>
             {% for snippet in snippets %}
                 <li><a href="/codesnippet/view/{{ snippet.id }}/">{{ snippet.name }}</a></li>
