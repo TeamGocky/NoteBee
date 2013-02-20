@@ -9,4 +9,5 @@ urlpatterns = patterns('',
     url(r'^top/$', view_top_snippets, name="top"),
     url(r'^browse/$', browser_snippets, name="browse"),
     url(r'^rating/(?P<sid>\d+)/$', submit_rating, name="rating"),
+    url(r'^search/$', search_snippet, name="search"),
 )

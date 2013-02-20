@@ -16,8 +16,11 @@
   	   		<a href="/codesnippet/random"><div class="navigationButton">Random Snippet</div></a>
   	   		<a href="/codesnippet/browse"><div class="navigationButton">Browse Snippets</div></a>
 			<div class="login">
-				<input type="text" name="search"/>
-				<input type="submit" value="Search"/>
+			    <form method="post" action="/codesnippet/search/">
+			        {% csrf_token %}
+				    <input type="text" name="query"/>
+				    <input type="submit" value="Search"/>
+				</form>
 			</div>
 			{% if user.is_authenticated %}
                 <a href="/accounts/logout"><div class="navigationButton">Logout</div></a>

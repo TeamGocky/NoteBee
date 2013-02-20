@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+    CodeBuzz - Search results
+{% endblock %}
+{% block head_includes %}
+    {% load staticfiles %}
+    <script src="{% static "js/lib/codemirror.js" %}"></script>
+    <script src="{% static "js"%}/mode/codemirror-compressed.js"></script>
+{% endblock %}
+{% block body %}
+    {% if errors %}
+        <h5>Errors:</h5>
+        <ul>
+            {% for err in errors %}
+                <li class="error">{{ err }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if snippets %}
+        <h5>Snippets for '{{ query }}':</h5>
+        <ul>
+            {% for snippet in snippets %}
+                <li><a href="/codesnippet/view/{{ snippet.id }}/">{{ snippet.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% elif query %}
+        <h5>No snippets matching query '{{ query }}'.</h5>
+    {% endif %}
+{% endblock %}

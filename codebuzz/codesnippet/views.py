@@ -124,6 +124,24 @@ def view_random_snippet(request):
         snippet = snippets[index]
         return view_snippet(request, snippet.id)
 
+def search_snippet(request):
+    """Search results for the query."""
+    context = RequestContext(request)
+    snippets = None
+    query = None
+    errors = []
+    if request.method == "POST":
+        query = request.POST["query"]
+        snippets = Snippet.objects.filter(name__contains=query)
+    else:
+        errors += ["No search term provided."]
+    return render_to_response("codesnippet/search_snippet.html",
+                                  {"snippets" : snippets,
+                                   "latestSnippets" : getLatestSnippets(),
+                                   "query" : query,
+                                   "errors" : errors},
+                                  context)
+
 def view_top_snippets(request):
     """Dummy view just so I could see what my page looked like."""
     context = RequestContext(request)
