@@ -1,5 +1,6 @@
 from django import forms
-from codesnippet.models import Snippet, SnippetRating
+from codesnippet.models import Category, Comment, Language, Snippet,\
+                               SnippetRating
 
 class SnippetForm(forms.ModelForm):
     class Meta:
@@ -20,7 +21,16 @@ class SnippetRatingForm(forms.ModelForm):
         model = SnippetRating
         fields = ["rating"]
 
-class SnippetSearchForm(SnippetForm):
+class SnippetSearchForm(forms.Form):
+    name = forms.CharField(max_length=200)
+    blank_is_all = "Leave blank to specify all {}."
+    language = forms.ModelMultipleChoiceField(queryset=Language.objects.all(),
+                                              required=False,
+                             help_text=blank_is_all.format("languages"))
+    category = forms.ModelMultipleChoiceField(queryset=Category.objects.all(),
+                                              required=False,
+                             help_text=blank_is_all.format("categories"))
+
+class CommentForm(forms.ModelForm):
     class Meta:
-        model = Snippet
-        fields = ["name", "language", "category"]
+        model = Comment

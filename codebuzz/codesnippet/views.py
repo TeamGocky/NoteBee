@@ -8,7 +8,8 @@ from django.template import RequestContext
 
 from codesnippet.forms import SnippetForm, SnippetRatingForm,\
                               SnippetSearchForm
-from codesnippet.models import Snippet, SnippetRating
+from codesnippet.models import Category, Language, Snippet,\
+                               SnippetRating
 
 def getLatestSnippets():
     return Snippet.objects.all().order_by("-id")[:5]
@@ -151,16 +152,20 @@ def advanced_search(request):
     if request.method == "POST":
         form = SnippetSearchForm(data = request.POST)
         if form.is_valid():
-            s = form.save(commit=False)
-            snippets = Snippet.objects.filter(name__contains=s.name,
-                                              category=s.category,
-                                              language=s.language)
+            name = form.cleaned_data["name"]
+            languages = form.cleaned_data["language"]
+            categories = form.cleaned_data["category"]
+            if len(languages) == 0:
+                languages = Language.objects.all()
+            if len(categories) == 0:
+                categories = Category.objects.all()
+            snippets = Snippet.objects.filter(name__contains=name,
+                                              category__in=categories,
+                                              language__in=languages)
             return render_to_response("codesnippet/search_snippet.html",
                                   {"snippets" : snippets,
                                    "latestSnippets" : getLatestSnippets(),
-                                   "query" : s.name,
-                                   "category" : s.category,
-                                   "language" : s.language,
+                                   "query" : name,
                                    "errors" : errors},
                                   context)
     else:

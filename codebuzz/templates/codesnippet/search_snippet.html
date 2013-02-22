@@ -18,16 +18,13 @@
         </ul>
     {% endif %}
     {% if snippets %}
-        <h5>Snippets matching '{{ query }}'
-            {% if category %}
-                in category '{{ category }}'
-            {% endif %}
-            {% if language %}
-                in {{ language }}
-            {% endif %}:</h5>
+        <h5>Snippets matching '{{ query }}':</h5>
         <ul>
             {% for snippet in snippets %}
-                <li><a href="/codesnippet/view/{{ snippet.id }}/">{{ snippet.name }}</a></li>
+                <li>
+                    <a href="/codesnippet/view/{{ snippet.id }}/">{{ snippet.name }}</a>,
+                    Category: {{ snippet.category }}, Language: {{ snippet.language }}
+                </li>
             {% endfor %}
         </ul>
     {% elif query %}
