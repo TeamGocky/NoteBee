@@ -24,7 +24,7 @@ class SnippetRatingForm(forms.ModelForm):
 class SnippetSearchForm(forms.Form):
     name = forms.CharField(max_length=200)
     blank_is_all = "Leave blank to specify all {}."
-    language = forms.ModelMultipleChoiceField(queryset=Language.objects.all(),
+    language = forms.ModelMultipleChoiceField(queryset=Language.objects.order_by('name'),
                                               required=False,
                              help_text=blank_is_all.format("languages"))
     category = forms.ModelMultipleChoiceField(queryset=Category.objects.all(),
