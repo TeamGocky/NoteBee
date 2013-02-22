@@ -3,6 +3,7 @@ from codesnippet.models import Category, Comment, Language, Snippet,\
                                SnippetRating
 
 class SnippetForm(forms.ModelForm):
+    language = forms.ModelChoiceField(queryset=Language.objects.order_by('name'))
     class Meta:
         model = Snippet
         fields = ["name", "body", "language", "category"]
