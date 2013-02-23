@@ -27,7 +27,7 @@ class SnippetSearchForm(forms.Form):
     language = forms.ModelMultipleChoiceField(queryset=Language.objects.order_by('name'),
                                               required=False,
                              help_text=blank_is_all.format("languages"))
-    category = forms.ModelMultipleChoiceField(queryset=Category.objects.all(),
+    category = forms.ModelMultipleChoiceField(queryset=Category.objects.order_by('name'),
                                               required=False,
                              help_text=blank_is_all.format("categories"))
 
