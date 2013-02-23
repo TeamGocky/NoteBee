@@ -1,34 +1,34 @@
 {% extends "base.html" %}
 {% block head_includes %}
-    {% load staticfiles %}
-    <script src="{% static "js"%}/lib/codemirror.js"></script>
-    <script src="{% static "js"%}/mode/codemirror-compressed.js"></script>
+{% load staticfiles %}
+<script src="{% static "js"%}/lib/codemirror.js"></script>
+<script src="{% static "js"%}/mode/codemirror-compressed.js"></script>
 {% endblock %}
 {% block body %}
-	{% if user.is_authenticated %}
-		<h3>Welcome back {{ user.username }}, please post a code snippet.</h3>
-	{% else %}
-		<h3>Welcome to CodeBuzz, please post a code snippet.</h3>
-	{% endif %}
+    {% if user.is_authenticated %}
+        <h3>Welcome back {{ user.username }}, please post a code snippet.</h3>
+    {% else %}
+        <h3>Welcome to CodeBuzz, please post a code snippet.</h3>
+    {% endif %}
     {% if form %}
         <form method="post" action="/codesnippet/">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" name="submit" value="Post Snippet"/>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" name="submit" value="Post Snippet"/>
         </form>
     {% endif %}
     <script>
         var editor = document.getElementById("editor");
         var langOpts = document.getElementById("languages");
-		var myCodeMirror = CodeMirror.fromTextArea(editor, {
-			autofocus: true,
-			indentUnit: 4,
-    		lineNumbers: true,
-			lineWrapping: true,
-  		});
+        var myCodeMirror = CodeMirror.fromTextArea(editor, {
+                                                   autofocus: true,
+                                                   indentUnit: 4,
+                                                   lineNumbers: true,
+                                                   lineWrapping: true,
+                                                   });
         function selectLang() {
             var mode = langOpts.options[langOpts.selectedIndex].value;
             myCodeMirror.setOption("mode", mode);
         }
-    </script>
+        </script>
 {% endblock %}
