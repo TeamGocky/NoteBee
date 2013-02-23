@@ -3,14 +3,8 @@
 {% block body %}
     {% if userView %}
         <h3><label for="name">Profile for </label>{{ userView.username }}</h3>
-    {% elif errors %}
-        <h5>Errors:</h5>
-        <ul>
-            {% for err in errors %}
-                <li class="error">{{ err }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+        <p>Joined: {{ userView.date_joined }}</p>
+        <p>Last seen: {{ userView.last_login }}</p>
 <!-- Bookmark-related code -->
 	{% if user %}
 		{% ifequal user.username userView.username %}
@@ -38,6 +32,14 @@
         <ul>
             {% for snippet in snippets %}
                 <li><a href="/codesnippet/view/{{ snippet.id }}">{{ snippet.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% elif errors %}
+        <h5>Errors:</h5>
+        <ul>
+            {% for err in errors %}
+                <li class="error">{{ err }}</li>
             {% endfor %}
         </ul>
     {% endif %}
