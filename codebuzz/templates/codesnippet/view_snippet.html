@@ -23,7 +23,7 @@
     {% if snippet %}
 		<h3>{{ snippet.name.capitalize }} by
 		{% if snippet.user %}
-			{{ snippet.user }}
+			<a href="/accounts/view/{{ snippet.user.id }}">{{ snippet.user }}</a>
 		{% else %}
 			Anonymous
 		{% endif %}
@@ -35,6 +35,8 @@
                     <textarea id="editor">{{ snippet.body }}</textarea>
                 {% elif name == "user" and not value %}
                     Anonymous
+                {% elif name == "user" %}
+                    <a href="/accounts/view/{{ snippet.user.id }}">{{ value }}</a>
                 {% else %}
                     {{ value }}
                 {% endif %}
