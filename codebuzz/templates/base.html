@@ -1,71 +1,71 @@
 <!doctype html>
 <head>
-	{% load staticfiles %}
-	<link rel="stylesheet" href="{% static "css/template.css" %}" />
-	<link rel="stylesheet" href="{% static "js/lib/codemirror.css" %}" />
-	{% block head_includes %}
-	{% endblock %}
-	<title>{% block title %}CodeBuzz{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "css/template.css" %}" />
+    <link rel="stylesheet" href="{% static "js/lib/codemirror.css" %}" />
+    <script src="{% static "js/jquery-1.9.1.min.js" %}"></script>
+    <script src="{% static "js/jquery-ui-1.10.1.custom.min.js" %}"></script>
+    {% block head_includes %}
+    {% endblock %}
+    <title>{% block title %}CodeBuzz{% endblock %}</title>
 </head>
 <body>
-	<div class="container">
-	    <div class="header">
-			<a href="/codesnippet/"><h1>CodeBuzz</h1></a>
-			<a href="/codesnippet/"><div class="navigationButton">Post A Snippet</div></a>
-  	   		<a href="/codesnippet/top"><div class="navigationButton">Top Snippets</div></a>
-  	   		<a href="/codesnippet/random"><div class="navigationButton">Random Snippet</div></a>
-  	   		<a href="/codesnippet/browse"><div class="navigationButton">Browse Snippets</div></a>
-			<div class="login">
-                <a href="/codesnippet/advanced_search">Advanced Search</a>
-            </div>
+    <div class="container">
+        <div class="header">
+            <a href="/codesnippet/"><h1>CodeBuzz</h1></a>
+            <a href="/codesnippet/"><div class="navigationButton">Post A Snippet</div></a>
+            <a href="/codesnippet/top"><div class="navigationButton">Top Snippets</div></a>
+            <a href="/codesnippet/random"><div class="navigationButton">Random Snippet</div></a>
+            <a href="/codesnippet/browse"><div class="navigationButton">Browse Snippets</div></a>
+            <div class="login"><a href="/codesnippet/advanced_search">Advanced Search</a></div>
             <div class="login">
-			    <form method="post" action="/codesnippet/search/">
-			        {% csrf_token %}
-				    <input type="text" name="query"/>
-				    <input type="submit" value="Search"/>
-				</form>
-			</div>
-			{% if user.is_authenticated %}
-                <a href="/accounts/logout"><div class="navigationButton">Logout</div></a>
-                <a href="/accounts/view/{{ user.id }}"><div class="navigationButton">Your Profile</div></a>
-			{% else %}
-                <a href="/accounts/login"><div class="navigationButton">Login</div></a>
-                <a href="/registration"><div class="navigationButton">Sign up</div></a>
-			{% endif %}
-			<br />
-		</div>
-		<div class="section">
-			<div class="nav">
-				{% block sideBar %}
-                    <h5 class="navigation">Most Recent Snippets</h5>
-                    {% if latestSnippets %}
-                    <ol>
-                        {% for snippet in latestSnippets %}
-                            <li><a href="/codesnippet/view/{{ snippet.id }}">{{ snippet.name }}</a></li>
-                        {% endfor %}
-                    </ol>
-                    {% endif %}
-                    <h5 class="navigation">Top Snippets</h5>
-                    <ol>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
-                    </ol>
-				{% endblock %}
-			</div>
-			<div class="article">
-				{% block body %}
-				{% endblock %}
-				<br />
-			</div>
-		</div>
-		<div class="footer">
-			{% block footer %}
-                <p>Team Gocky - CodeBuzz</p>
-			{% endblock %}
-		</div>
-	</div>
+                <form method="post" action="/codesnippet/search/">
+                    {% csrf_token %}
+                    <input type="text" name="query"/>
+                    <input type="submit" value="Search"/>
+                </form>
+            </div>
+            {% if user.is_authenticated %}
+            <a href="/accounts/logout"><div class="navigationButton">Logout</div></a>
+            <a href="/accounts/view/{{ user.id }}"><div class="navigationButton">Your Profile</div></a>
+            {% else %}
+            <a href="/accounts/login"><div class="navigationButton">Login</div></a>
+            <a href="/registration"><div class="navigationButton">Sign up</div></a>
+            {% endif %}
+            <br />
+        </div>
+        <div class="section">
+            <div class="nav">
+                {% block sideBar %}
+                <h5 class="navigation">Most Recent Snippets</h5>
+                {% if latestSnippets %}
+                <ol>
+                    {% for snippet in latestSnippets %}
+                    <li><a href="/codesnippet/view/{{ snippet.id }}">{{ snippet.name }}</a></li>
+                    {% endfor %}
+                </ol>
+                {% endif %}
+                <h5 class="navigation">Top Snippets</h5>
+                <ol>
+                    <li><a href="">Snippet</a></li>
+                    <li><a href="">Snippet</a></li>
+                    <li><a href="">Snippet</a></li>
+                    <li><a href="">Snippet</a></li>
+                    <li><a href="">Snippet</a></li>
+                </ol>
+                {% endblock %}
+            </div>
+            <div class="article">
+                {% block body %}
+                {% endblock %}
+                <br />
+            </div>
+        </div>
+        <div class="footer">
+            {% block footer %}
+            <p>Team Gocky - CodeBuzz</p>
+            {% endblock %}
+        </div>
+    </div>
 </body>
 </html>
