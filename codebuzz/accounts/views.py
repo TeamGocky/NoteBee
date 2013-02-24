@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from codesnippet.models import Bookmark, Snippet
+from codesnippet.models import *
 from codesnippet.views import getLatestSnippets
 
 def user_login(request):
@@ -41,6 +41,7 @@ def user_view(request, uid):
     userView = None
     bookmarks = None
     snippets = None
+    allLanguages = Language.objects.all().order_by("name")
     try:
         userView = User.objects.get(id=uid)
     except ObjectDoesNotExist:
@@ -53,8 +54,13 @@ def user_view(request, uid):
         try:
             snippets = Snippet.objects.filter(user=userView)
         except ObjectDoesNotExist:
-            errors.append("User has no bookmarks.")
+            errors.append("User has no snippets.")
+        try:
+            languages = snippets.values_list('language').order_by('language').distinct()
+        except ObjectDoesNotExist:
+            error.append("Could not get list of languages user codes in.")
     return render_to_response("accounts/view.html",
             {"userView" : userView, "errors" : errors,
              "bookmarks" : bookmarks, "snippets" : snippets,
+             "languages" : languages,
              "latestSnippets" : getLatestSnippets()}, context)

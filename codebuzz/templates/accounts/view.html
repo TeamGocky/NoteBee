@@ -35,6 +35,19 @@
             {% endfor %}
         </ul>
     {% endif %}
+<!-- Language relataed code -->
+    {% if languages %}
+        {% if user %}
+            {% ifequal user.username userView.username %}
+                <p>Your languages</p>
+            {% else %}
+                <p>{{ userView.username }}'s languages</p>
+            {% endifequal %}
+        {% endif %}
+        {% for language in languages %}
+            <p>{{ language }}</p>
+        {% endfor %}
+    {% endif %}
     {% elif errors %}
         <h5>Errors:</h5>
         <ul>
