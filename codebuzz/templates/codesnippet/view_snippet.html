@@ -37,6 +37,8 @@
                     Anonymous
                 {% elif name == "user" %}
                     <a href="/accounts/view/{{ snippet.user.id }}">{{ value }}</a>
+                {% elif name == "language" %}
+                    <a href="/codesnippet/browse/language/{{ value }}">{{ value }}</a>
                 {% else %}
                     {{ value }}
                 {% endif %}
