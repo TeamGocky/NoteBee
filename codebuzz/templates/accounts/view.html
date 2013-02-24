@@ -44,9 +44,11 @@
                 <p>{{ userView.username }}'s languages</p>
             {% endifequal %}
         {% endif %}
+        <ul>
         {% for language in languages %}
-            <p>{{ language }}</p>
+            <li>{{ language }}</li>
         {% endfor %}
+        </ul>
     {% endif %}
     {% elif errors %}
         <h5>Errors:</h5>

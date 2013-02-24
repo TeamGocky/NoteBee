@@ -56,7 +56,8 @@ def user_view(request, uid):
         except ObjectDoesNotExist:
             errors.append("User has no snippets.")
         try:
-            languages = snippets.values_list('language').order_by('language').distinct()
+            modes = snippets.values_list('language').order_by('language').distinct()
+            languages = Language.objects.filter(mode__in=modes).order_by('name')
         except ObjectDoesNotExist:
             error.append("Could not get list of languages user codes in.")
     return render_to_response("accounts/view.html",
