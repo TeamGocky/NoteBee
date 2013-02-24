@@ -23,9 +23,9 @@
 <!-- Snippet-related code -->
 	{% if user %}
 		{% ifequal user.username userView.username %}
-            <p>Your snippets</p>
+            <p>Your most recent snippets</p>
         {% else %}
-            <p>{{ userView.username }}'s snippets</p>
+            <p>{{ userView.username }}'s most recent snippets</p>
         {% endifequal %}
     {% endif %}
     {% if snippets %}
@@ -35,7 +35,22 @@
             {% endfor %}
         </ul>
     {% endif %}
-<!-- Language relataed code -->
+<!-- Top-snippet-related code -->
+	{% if user %}
+		{% ifequal user.username userView.username %}
+            <p>Your highest rated snippets</p>
+        {% else %}
+            <p>{{ userView.username }}'s highest rated snippets</p>
+        {% endifequal %}
+    {% endif %}
+    {% if topSnippets %}
+        <ul>
+            {% for snippet in topSnippets %}
+                <li><a href="/codesnippet/view/{{ snippet.id }}">{{ snippet.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+<!-- Language related code -->
     {% if languages %}
         {% if user %}
             {% ifequal user.username userView.username %}

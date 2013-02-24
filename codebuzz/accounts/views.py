@@ -43,6 +43,7 @@ def user_view(request, uid):
     snippets = None
     modes = None
     languages = None
+    topSnippets = None
     allLanguages = Language.objects.all().order_by("name")
     try:
         userView = User.objects.get(id=uid)
@@ -54,17 +55,18 @@ def user_view(request, uid):
         except ObjectDoesNotExist:
             errors.append("User has no bookmarks.")
         try:
-            snippets = Snippet.objects.filter(user=userView)
+            snippets = Snippet.objects.filter(user=userView).order_by("-id")
         except ObjectDoesNotExist:
             errors.append("User has no snippets.")
         if snippets is not None:
             try:
                 modes = snippets.values_list('language').order_by('language').distinct()
                 languages = Language.objects.filter(mode__in=modes).order_by('name')
+                topSnippets = Snippet.objects.filter(user=userView).order_by('-snippetrating')[:5]
             except ObjectDoesNotExist:
                 error.append("Could not get list of languages user codes in.")
     return render_to_response("accounts/view.html",
             {"userView" : userView, "errors" : errors,
-             "bookmarks" : bookmarks, "snippets" : snippets,
-             "languages" : languages,
+             "bookmarks" : bookmarks, "snippets" : snippets[:5],
+             "languages" : languages, "topSnippets" : topSnippets,
              "latestSnippets" : getLatestSnippets()}, context)
