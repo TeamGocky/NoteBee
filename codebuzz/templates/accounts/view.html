@@ -5,15 +5,17 @@
         <h3><label for="name">Profile for </label>{{ userView.username }}</h3>
         <p>Joined: {{ userView.date_joined }}</p>
         <p>Last seen: {{ userView.last_login }}</p>
-<!-- Bookmark-related code -->
+<!-- General-info-related code -->
 	{% if user %}
 		{% ifequal user.username userView.username %}
-            <p>Your bookmarks</p>
+            <p>You have contributed {{snippets|length}} snippets in {{languages|length}} languages.</p>
         {% else %}
-            <p>{{ userView.username }}'s bookmarks</p>
+            <p>{{ userView.username }} has contributed {{snippets|length}} snippets in {{languages|length}} languages.</p>
         {% endifequal %}
     {% endif %}
+<!-- Bookmark-related code -->
     {% if bookmarks %}
+        <p>Bookmarks</p>
         <ul>
             {% for bookmark in bookmarks %}
                 <li>{{ bookmark.snippet.name }}</li>
@@ -21,14 +23,8 @@
         </ul>
     {% endif %}
 <!-- Snippet-related code -->
-	{% if user %}
-		{% ifequal user.username userView.username %}
-            <p>Your most recent snippets</p>
-        {% else %}
-            <p>{{ userView.username }}'s most recent snippets</p>
-        {% endifequal %}
-    {% endif %}
     {% if snippets %}
+        <p>Most Recent Snippets</p>
         <ul>
             {% for snippet in snippets %}
                 <li><a href="/codesnippet/view/{{ snippet.id }}">{{ snippet.name }}</a></li>
@@ -36,14 +32,8 @@
         </ul>
     {% endif %}
 <!-- Top-snippet-related code -->
-	{% if user %}
-		{% ifequal user.username userView.username %}
-            <p>Your highest rated snippets</p>
-        {% else %}
-            <p>{{ userView.username }}'s highest rated snippets</p>
-        {% endifequal %}
-    {% endif %}
     {% if topSnippets %}
+        <p>Highest Rated Snippets</p>
         <ul>
             {% for snippet in topSnippets %}
                 <li><a href="/codesnippet/view/{{ snippet.0.id }}">{{ snippet.0 }} - Rating: {{snippet.1}}</a></li>
@@ -52,13 +42,7 @@
     {% endif %}
 <!-- Language related code -->
     {% if languages %}
-        {% if user %}
-            {% ifequal user.username userView.username %}
-                <p>Your languages</p>
-            {% else %}
-                <p>{{ userView.username }}'s languages</p>
-            {% endifequal %}
-        {% endif %}
+        <p>Languages</p>
         <ul>
         {% for language in languages %}
             <li>{{ language }}</li>

@@ -45,6 +45,7 @@ def user_view(request, uid):
     modes = None
     languages = None
     topSnippets = None
+    numberOfSnippets = 0
     allLanguages = Language.objects.all().order_by("name")
     try:
         userView = User.objects.get(id=uid)
