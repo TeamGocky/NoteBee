@@ -6,13 +6,13 @@
 {% block body %}
 <h3>Browse Snippets by Language or Category</h3>
 <h5 class="navigation">Languages</h5>
-<ol>
-	<li><a href="">Language</a></li>
-	<li><a href="">Language</a></li>
-	<li><a href="">Language</a></li>
-	<li><a href="">Language</a></li>
-	<li><a href="">Language</a></li>
-</ol>
+{% if languages %}
+    <ol>
+        {% for language in languages %}
+            <li><a href="">{{ language}}</a></li>
+        {% endfor %}
+    </ol>
+{% endif %}
 <h5 class="navigation">Categories</h5>
 <ol>
 	<li><a href="">Category</a></li>

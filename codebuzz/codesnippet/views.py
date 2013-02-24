@@ -185,5 +185,7 @@ def view_top_snippets(request):
 def browser_snippets(request):
     """Dummy view just so I could see what my page looked like."""
     context = RequestContext(request)
+    languages = Language.objects.all().order_by("name")
     return render_to_response("codesnippet/browse_snippets.html", {
+                              "languages" : languages,
                                "latestSnippets" : getLatestSnippets()}, context)
