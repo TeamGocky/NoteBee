@@ -45,7 +45,7 @@
         <p>Languages</p>
         <ul>
         {% for language in languages %}
-            <li>{{ language }}</li>
+            <li><a href="/codesnippet/browse/language/{{language}}">{{ language }}</a></li>
         {% endfor %}
         </ul>
     {% endif %}
