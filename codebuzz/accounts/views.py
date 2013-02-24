@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from codesnippet.models import *
 from codesnippet.views import getLatestSnippets
+from operator import itemgetter
 
 def user_login(request):
     context = RequestContext(request)
@@ -62,11 +63,23 @@ def user_view(request, uid):
             try:
                 modes = snippets.values_list('language').order_by('language').distinct()
                 languages = Language.objects.filter(mode__in=modes).order_by('name')
-                topSnippets = Snippet.objects.filter(user=userView).order_by('-snippetrating')[:5]
             except ObjectDoesNotExist:
                 error.append("Could not get list of languages user codes in.")
+            try:
+                topSnippets = []
+                for snippet in list(snippets):
+                    ratings = SnippetRating.objects.filter(snippet=snippet)
+                    total_rating = 0.0
+                    if len(ratings) > 0:
+                        for r in ratings:
+                            total_rating += r.rating
+                        total_rating = total_rating / len(ratings)
+                    topSnippets += [[snippet, total_rating]]
+                topSnippets = sorted(topSnippets, key=itemgetter(1))[::-1]
+            except ObjectDoesNotExist:
+                error.append("Could not get list of ratings.")
     return render_to_response("accounts/view.html",
             {"userView" : userView, "errors" : errors,
              "bookmarks" : bookmarks, "snippets" : snippets[:5],
-             "languages" : languages, "topSnippets" : topSnippets,
+             "languages" : languages, "topSnippets" : topSnippets[:5],
              "latestSnippets" : getLatestSnippets()}, context)

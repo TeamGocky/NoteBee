@@ -46,7 +46,7 @@
     {% if topSnippets %}
         <ul>
             {% for snippet in topSnippets %}
-                <li><a href="/codesnippet/view/{{ snippet.id }}">{{ snippet.name }}</a></li>
+                <li><a href="/codesnippet/view/{{ snippet.0.id }}">{{ snippet.0 }}</a></li>
             {% endfor %}
         </ul>
     {% endif %}
