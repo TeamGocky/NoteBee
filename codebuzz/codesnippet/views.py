@@ -4,7 +4,7 @@ try:
 	twitterSuccess = True
 except:
     print 'Twitter could not be imported'
-	twitterSuccess = False
+    twitterSuccess = False
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect
