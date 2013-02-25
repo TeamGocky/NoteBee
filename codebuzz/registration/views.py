@@ -23,7 +23,7 @@ def register(request):
                     api = twitter.Api(consumer_key='0aIAx6JBFjCRsVo2I6m5VQ', consumer_secret='ezaCJZNLJtTRaIogVvv08u3thnwSTtDMHmRMMs7lyk', access_token_key='1219662349-DJfNG23p2NLME6VAQv02gGNJXLiVQ1r99upKB0k', access_token_secret='P806WM9qbwg81Q1lGsVvRZ1Xl3PACurSmL1BWqCHgg')
                     api.PostUpdate('Please welcome our new user "' + user.name + '" to our website!')
                 except:
-                    print 'Twitter posting failed.'
+                    print 'Twitter posting for new user failed.'
             msg = "Successfully registered, please login."
             return render_to_response("register.html", {"msg" : msg,
                 "latestSnippets" : getLatestSnippets()}, context)
