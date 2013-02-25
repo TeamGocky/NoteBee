@@ -31,7 +31,7 @@ def index(request):
             snippet.save()
 			if twitterSuccess:
 				try:
-            		api = twitter.Api(consumer_key='iqHwVgHK9XnCggJuWGtWw', consumer_secret='TG13tu8bLG1fm0DDFMACbx9I7tTBunIQIcDISzvCuQ', access_token_key='26289667-6j6eGE5LTNnNDRHp7FVGWJ1w3Eq7fz73GipOVlVsi', access_token_secret='5K5vYBKPcWLSbBIamDaY9YaheE0CWO8PChPJHanMt0')
+            		api = twitter.Api(consumer_key='0aIAx6JBFjCRsVo2I6m5VQ', consumer_secret='ezaCJZNLJtTRaIogVvv08u3thnwSTtDMHmRMMs7lyk', access_token_key='1219662349-DJfNG23p2NLME6VAQv02gGNJXLiVQ1r99upKB0k', access_token_secret='P806WM9qbwg81Q1lGsVvRZ1Xl3PACurSmL1BWqCHgg')
             		api.PostUpdate('A new snippet written in ' + snippet.language.name + ' called ' + snippet.name + ' has just been submitted!')
 				except:
 					print 'Twitter posting failed.'
