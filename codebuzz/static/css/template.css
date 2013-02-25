@@ -40,7 +40,7 @@ li > ol, li > ul, li > p, p > a, li > a, h3 > a, p > .navigationButton {
 }
 .container {
     margin: 2em auto;
-    min-width: 50em;
+    min-width: 55em;
     width: 95%;
     box-shadow: 0 0 20px rgba(0,0,0,.5);
 }
@@ -78,13 +78,14 @@ li > ol, li > ul, li > p, p > a, li > a, h3 > a, p > .navigationButton {
 	float:left;
 }
 .login {
-	display: inline-block;
+	display: block;
 	height: 2em;
 	padding-right:0.25em;
 	padding-left:0.25em;
 	padding-top:0.5em;
 	margin-right:0.25em;
 	margin-top:-1.5em;
+	float:right;
 }
 .navigationButton, .rightHandHeader {
 	display: inline-block;

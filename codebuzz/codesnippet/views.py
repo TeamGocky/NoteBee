@@ -1,5 +1,9 @@
 from random import randint, seed
-
+try:
+	import twitter
+	twitterSuccess = True
+except:
+	twitterSuccess = False
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect
@@ -25,6 +29,12 @@ def index(request):
             if request.user.is_authenticated():
                 snippet.user = request.user
             snippet.save()
+			if twitterSuccess:
+				try:
+            		api = twitter.Api(consumer_key='0aIAx6JBFjCRsVo2I6m5VQ', consumer_secret='ezaCJZNLJtTRaIogVvv08u3thnwSTtDMHmRMMs7lyk', access_token_key='1219662349-DJfNG23p2NLME6VAQv02gGNJXLiVQ1r99upKB0k', access_token_secret='P806WM9qbwg81Q1lGsVvRZ1Xl3PACurSmL1BWqCHgg')
+            		api.PostUpdate('A new snippet written in ' + snippet.language.name + ' called ' + snippet.name + ' has just been submitted!')
+				except:
+					print 'Twitter posting failed.'
             view = "view/{}/".format(snippet.id)
             return HttpResponseRedirect(view)
         else:
@@ -68,10 +78,12 @@ def view_snippet(request, sid, errors=[]):
         # Set selected rating to the submitted rating for this user
         initial = get_rating(request, snippet)
         if initial is None:
-            initial = 1
+            initial = 0
         rform = SnippetRatingForm(initial={"rating" : int(initial)})
         total_rating = 0.0
         if len(ratings) > 0:
+            snippet.votes = len(ratings)
+            snippet.save()
             for r in ratings:
                 total_rating += r.rating
             total_rating = total_rating / len(ratings)
