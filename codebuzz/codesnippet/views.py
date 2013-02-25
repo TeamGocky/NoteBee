@@ -72,6 +72,8 @@ def view_snippet(request, sid, errors=[]):
         rform = SnippetRatingForm(initial={"rating" : int(initial)})
         total_rating = 0.0
         if len(ratings) > 0:
+            snippet.votes = len(ratings)
+            snippet.save()
             for r in ratings:
                 total_rating += r.rating
             total_rating = total_rating / len(ratings)
