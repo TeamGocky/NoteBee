@@ -62,7 +62,7 @@
                 </p>
             {% endfor %}
         {% endif %}
-        {% if user.authenticated %}
+        {% if user.is_authenticated %}
             <p>
                 <form id="comment_form" method="post"
                       action="/codesnippet/comment/{{ snippet.id }}/">
