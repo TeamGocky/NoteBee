@@ -78,7 +78,7 @@ li > ol, li > ul, li > p, p > a, li > a, h3 > a, p > .navigationButton {
 	float:left;
 }
 .login {
-	display: inline-block;
+	display: block;
 	height: 2em;
 	padding-right:0.25em;
 	padding-left:0.25em;
