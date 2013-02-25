@@ -29,12 +29,12 @@ def index(request):
             if request.user.is_authenticated():
                 snippet.user = request.user
             snippet.save()
-			if twitterSuccess:
-				try:
-            		api = twitter.Api(consumer_key='0aIAx6JBFjCRsVo2I6m5VQ', consumer_secret='ezaCJZNLJtTRaIogVvv08u3thnwSTtDMHmRMMs7lyk', access_token_key='1219662349-DJfNG23p2NLME6VAQv02gGNJXLiVQ1r99upKB0k', access_token_secret='P806WM9qbwg81Q1lGsVvRZ1Xl3PACurSmL1BWqCHgg')
-            		api.PostUpdate('A new snippet written in ' + snippet.language.name + ' called ' + snippet.name + ' has just been submitted!')
-				except:
-					print 'Twitter posting failed.'
+            if twitterSuccess:
+                try:
+                    api = twitter.Api(consumer_key='0aIAx6JBFjCRsVo2I6m5VQ', consumer_secret='ezaCJZNLJtTRaIogVvv08u3thnwSTtDMHmRMMs7lyk', access_token_key='1219662349-DJfNG23p2NLME6VAQv02gGNJXLiVQ1r99upKB0k', access_token_secret='P806WM9qbwg81Q1lGsVvRZ1Xl3PACurSmL1BWqCHgg')
+                    api.PostUpdate('A new snippet written in ' + snippet.language.name + ' called ' + snippet.name + ' has just been submitted!')
+                except:
+                    print 'Twitter posting failed.'
             view = "view/{}/".format(snippet.id)
             return HttpResponseRedirect(view)
         else:
