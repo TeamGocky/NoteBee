@@ -30,11 +30,8 @@ def index(request):
                 snippet.user = request.user
             snippet.save()
 			if twitterSuccess:
-				try:
-            		api = twitter.Api(consumer_key='iqHwVgHK9XnCggJuWGtWw', consumer_secret='TG13tu8bLG1fm0DDFMACbx9I7tTBunIQIcDISzvCuQ', access_token_key='26289667-6j6eGE5LTNnNDRHp7FVGWJ1w3Eq7fz73GipOVlVsi', access_token_secret='5K5vYBKPcWLSbBIamDaY9YaheE0CWO8PChPJHanMt0')
-            		api.PostUpdate('A new snippet written in ' + snippet.language.name + ' called ' + snippet.name + ' has just been submitted!')
-				except:
-					print 'Twitter posting failed.'
+            	api = twitter.Api(consumer_key='iqHwVgHK9XnCggJuWGtWw', consumer_secret='TG13tu8bLG1fm0DDFMACbx9I7tTBunIQIcDISzvCuQ', access_token_key='26289667-6j6eGE5LTNnNDRHp7FVGWJ1w3Eq7fz73GipOVlVsi', access_token_secret='5K5vYBKPcWLSbBIamDaY9YaheE0CWO8PChPJHanMt0')
+            	api.PostUpdate('A new snippet written in ' + snippet.language.name + ' called ' + snippet.name + ' has just been submitted!')
             view = "view/{}/".format(snippet.id)
             return HttpResponseRedirect(view)
         else:
