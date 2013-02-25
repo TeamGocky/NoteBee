@@ -52,6 +52,28 @@
                 {{ rating_form.rating }}
             </form>
         </p>
+        {% if comments %}
+            {% for comment in comments %}
+                <p class="comment">
+                    <a href="/accounts/view/{{ comment.user.id }}">
+                        {{ comment.user }} says:
+                    </a><br/>
+                    {{ comment.comment }}
+                </p>
+            {% endfor %}
+        {% endif %}
+        {% if user.authenticated %}
+            <p>
+                <form id="comment_form" method="post"
+                      action="/codesnippet/comment/{{ snippet.id }}/">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <input type="submit" name="submit" value="Post Comment"/>
+                </form>
+            </p>
+        {% else %}
+            <p class="center"><a href="/accounts/login/">Login</a> to comment on this snippet.</p>
+        {% endif %}
         <script>
             var editor = document.getElementById("editor");
             var langOpts = document.getElementById("languages");

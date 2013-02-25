@@ -85,7 +85,6 @@ li > ol, li > ul, li > p, p > a, li > a, h3 > a, p > .navigationButton {
 	padding-top:0.5em;
 	margin-right:0.25em;
 	margin-top:-1.5em;
-	float:right;
 }
 .navigationButton, .rightHandHeader {
 	display: inline-block;
@@ -105,7 +104,10 @@ li > ol, li > ul, li > p, p > a, li > a, h3 > a, p > .navigationButton {
 .loggedIn {
 	margin-top:0.25em;
 }
-.CodeMirror {
+.comment, .CodeMirror {
 	border: 1px solid;
 	margin-right: 1.5em;
+}
+.center {
+    text-align: center;
 }

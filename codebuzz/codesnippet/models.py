@@ -50,12 +50,16 @@ class SnippetRating(models.Model):
 
 class Comment(models.Model):
     """User comments on code snippets."""
-    snippet = models.ForeignKey(Snippet)
-    user = models.ForeignKey(User)
-    message = models.TextField()
+    # Allow blank foreign keys to allow the setting of them after
+    # form submission.
+    snippet = models.ForeignKey(Snippet, blank=True, null=True,
+                                on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, blank=True, null=True,
+                             on_delete=models.SET_NULL)
+    comment = models.TextField()
     
     def __unicode__(self):
-        return self.message
+        return self.comment
 
 class Bookmark(models.Model):
     """Represents a user's bookmarking of a code snippet."""

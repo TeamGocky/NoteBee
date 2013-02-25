@@ -6,9 +6,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from codesnippet.forms import SnippetForm, SnippetRatingForm,\
-                              SnippetSearchForm
-from codesnippet.models import Category, Language, Snippet,\
+from codesnippet.forms import CommentForm, SnippetForm,\
+                              SnippetRatingForm, SnippetSearchForm
+from codesnippet.models import Category, Comment, Language, Snippet,\
                                SnippetRating
 
 def getLatestSnippets():
@@ -60,6 +60,10 @@ def view_snippet(request, sid, errors=[]):
         snippet = Snippet.objects.get(id=sid)
         snippet.hits += 1
         snippet.save()
+        
+        # Get the comments for this snippet.
+        comments = Comment.objects.filter(snippet=snippet)
+        
         ratings = SnippetRating.objects.filter(snippet=sid)
         # Set selected rating to the submitted rating for this user
         initial = get_rating(request, snippet)
@@ -71,10 +75,13 @@ def view_snippet(request, sid, errors=[]):
             for r in ratings:
                 total_rating += r.rating
             total_rating = total_rating / len(ratings)
+        cform = CommentForm()
         return render_to_response("codesnippet/view_snippet.html",
                               {"snippet" : snippet,
                                "rating" : total_rating,
                                "rating_form" : rform,
+                               "comments" : comments,
+                               "comment_form" : cform,
                                "errors" : errors,
                                "latestSnippets" : getLatestSnippets()},
                               context)
@@ -117,6 +124,26 @@ def submit_rating(request, sid):
             else:
                 errors += ["Out of range rating: {}".format(urating)]
     return view_snippet(request, sid, errors)
+
+@login_required
+def submit_comment(request, sid):
+    """Submit a rating by a user for a snippet."""
+    errors = []
+    if request.method == "POST":
+        cform = CommentForm(data = request.POST)
+        if cform.is_valid():
+            comment = cform.save(commit=False)
+            comment.user = request.user
+            try:
+                comment.snippet = Snippet.objects.get(id=sid)
+            except ObjectDoesNotExist:
+                errors += ["Snippet does not exist"]
+            else:
+                comment.save()
+        else:
+            errors += cform.errors
+        return view_snippet(request, sid, errors)
+    return HttpResponseRedirect("/codesnippet/view/" + sid)
 
 def view_random_snippet(request):
     """Select a random snippet for the database to view."""
