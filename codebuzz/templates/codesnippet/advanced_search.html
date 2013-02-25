@@ -2,11 +2,6 @@
 {% block title %}
     CodeBuzz - Advanced Search
 {% endblock %}
-{% block head_includes %}
-    {% load staticfiles %}
-    <script src="{% static "js/lib/codemirror.js" %}"></script>
-    <script src="{% static "js"%}/mode/codemirror-compressed.js"></script>
-{% endblock %}
 {% block body %}
     <h3>Advanced Search</h3>
     {% if errors %}

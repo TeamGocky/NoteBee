@@ -75,21 +75,23 @@
             <p class="center"><a href="/accounts/login/">Login</a> to comment on this snippet.</p>
         {% endif %}
         <script>
-            var editor = document.getElementById("editor");
-            var langOpts = document.getElementById("languages");
-            var myCodeMirror = CodeMirror.fromTextArea(editor, {
-                autofocus: true,
-                indentUnit: 4,
-                lineNumbers: true,
-                lineWrapping: true,
-                mode: "{{ snippet.language.mode }}",
-				readOnly: true,
+            $(document).ready(function() {
+                var editor = $("#editor")[0];
+                var langOpts = $("languages")[0];
+                var myCodeMirror = CodeMirror.fromTextArea(editor, {
+                    autofocus: true,
+                    indentUnit: 4,
+                    lineNumbers: true,
+                    lineWrapping: true,
+                    mode: "{{ snippet.language.mode }}",
+                    readOnly: true,
+                });
+                
+                // on change event for the rating posting
+                $("#id_rating").change(function() {
+                    $("#rating_form").submit();
+                });
             });
-            
-            // on change event for the rating posting
-            function submitRating() {
-                document.getElementById("rating_form").submit();
-            }
         </script>
     {% endif %}
 {% endblock %}

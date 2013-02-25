@@ -16,8 +16,7 @@ class SnippetForm(forms.ModelForm):
         }
 
 class SnippetRatingForm(forms.ModelForm):
-    rating_attrs = {"onchange" : "submitRating()"}
-    rating = forms.ChoiceField(widget=forms.Select(attrs=rating_attrs),
+    rating = forms.ChoiceField(widget=forms.Select(),
                                choices=SnippetRating.RATINGS)
     class Meta:
         model = SnippetRating
