@@ -58,6 +58,8 @@ def view_snippet(request, sid, errors=[]):
     context = RequestContext(request)
     try:
         snippet = Snippet.objects.get(id=sid)
+        snippet.hits += 1
+        snippet.save()
         ratings = SnippetRating.objects.filter(snippet=sid)
         # Set selected rating to the submitted rating for this user
         initial = get_rating(request, snippet)
