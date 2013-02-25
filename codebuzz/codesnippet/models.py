@@ -43,7 +43,7 @@ class Snippet(models.Model):
 
 class SnippetRating(models.Model):
     """Records a rating of a snippet by a user."""
-    RATINGS = [(x, x) for x in xrange(1, 6)]
+    RATINGS = [(x, x) for x in xrange(0, 6)]
     user = models.ForeignKey(User)
     snippet = models.ForeignKey(Snippet)
     rating = models.FloatField(default=0.0)

@@ -68,10 +68,12 @@ def view_snippet(request, sid, errors=[]):
         # Set selected rating to the submitted rating for this user
         initial = get_rating(request, snippet)
         if initial is None:
-            initial = 1
+            initial = 0
         rform = SnippetRatingForm(initial={"rating" : int(initial)})
         total_rating = 0.0
         if len(ratings) > 0:
+            snippet.votes = len(ratings)
+            snippet.save()
             for r in ratings:
                 total_rating += r.rating
             total_rating = total_rating / len(ratings)
