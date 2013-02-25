@@ -3,6 +3,7 @@ try:
 	import twitter
 	twitterSuccess = True
 except:
+    print 'Twitter could not be imported'
 	twitterSuccess = False
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
