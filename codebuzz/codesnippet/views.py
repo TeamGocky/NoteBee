@@ -97,12 +97,15 @@ def view_snippet(request, sid, errors=[]):
             initial = 0
         rform = SnippetRatingForm(initial={"rating" : int(initial)})
         total_rating = 0.0
+        rating_width = 0
         if len(ratings) > 0:
             snippet.votes = len(ratings)
             snippet.save()
             for r in ratings:
                 total_rating += r.rating
             total_rating = total_rating / len(ratings)
+            # Calculate percentage rating width
+            rating_width = (total_rating / 5) * 100
         cform = CommentForm()
         return render_to_response("codesnippet/view_snippet.html",
                               {"snippet" : snippet,
@@ -111,7 +114,7 @@ def view_snippet(request, sid, errors=[]):
                                "bookmarked" : bookmarked,
                                "comments" : comments,
                                "comment_form" : cform,
-                               "get_range" : xrange(int(total_rating)),
+                               "rating_width" : "{}%".format(int(rating_width)),
                                "errors" : errors,
                                "latestSnippets" : getLatestSnippets()},
                               context)

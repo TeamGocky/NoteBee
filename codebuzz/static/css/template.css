@@ -116,3 +116,15 @@ li > ol, li > ul, li > p, p > a, li > a, h3 > a, p > .navigationButton {
 	float: right;
 	margin-top: -2.2em;
 }
+.empty {
+    display: inline-block;
+    background: url(../nojoe.jpg) transparent 0 0 repeat-x;
+    height: 72px;
+    width: 250px;
+}
+.sventek {
+    display: inline-block;
+    display: block;
+    height: 72px;
+    background: url(../joeface.jpg) transparent 0 0 repeat-x;
+}
