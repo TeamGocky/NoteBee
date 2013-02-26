@@ -52,6 +52,15 @@
                 {{ rating_form.rating }}
             </form>
         </p>
+        <p>
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="checkbox" id="bookmark">Bookmark this snippet.<br/>
+                <span id="sbookmrk">
+                    Snippet has been added to your bookmarks.
+                </span>
+            </form>
+        </p>
         {% if comments %}
             {% for comment in comments %}
                 <p class="comment">
@@ -90,6 +99,24 @@
                 // on change event for the rating posting
                 $("#id_rating").change(function() {
                     $("#rating_form").submit();
+                });
+                
+                $("#sbookmrk").hide();
+                
+                // on click event for adding a bookmark of this snippet
+                // to the users account.
+                $("#bookmark").click(function() {
+                    $.ajax({
+                        url: "/codesnippet/bookmark/{{ snippet.id }}/",
+                        type: "post",
+                        data: {
+                            "bookmark" : "1",
+                            "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']")[0].value
+                        },
+                        success: function(response) {
+                            $("#sbookmrk").fadeToggle();
+                        }
+                    });
                 });
             });
         </script>

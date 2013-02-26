@@ -10,11 +10,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.views.decorators.csrf import csrf_exempt
 
 from codesnippet.forms import CommentForm, SnippetForm,\
                               SnippetRatingForm, SnippetSearchForm
-from codesnippet.models import Category, Comment, Language, Snippet,\
-                               SnippetRating
+from codesnippet.models import Bookmark, Category, Comment, Language,\
+                               Snippet, SnippetRating
 
 def getLatestSnippets():
     return Snippet.objects.all().order_by("-id")[:5]
@@ -162,6 +163,27 @@ def submit_comment(request, sid):
             errors += cform.errors
         return view_snippet(request, sid, errors)
     return HttpResponseRedirect("/codesnippet/view/" + sid)
+
+@login_required
+def bookmark_snippet(request, sid):
+    """Adds a bookmark to the logged in users account."""
+    context = RequestContext(request)
+    if request.is_ajax() and request.method == "POST":
+        bookmark = request.POST["bookmark"]
+        try:
+            snippet = Snippet.objects.get(id=sid)
+        except ObjectDoesNotExist:
+            pass
+        else:
+            if bookmark == "1":
+                try:
+                    bk = Bookmark.objects.get(snippet=snippet, user=request.user)
+                except ObjectDoesNotExist:
+                    bk = Bookmark(snippet=snippet, user=request.user)
+                    bk.save()
+                return HttpResponse("SUCCESS!")
+    else:
+        return HttpResponse("POST FAILED!")
 
 def view_random_snippet(request):
     """Select a random snippet for the database to view."""
