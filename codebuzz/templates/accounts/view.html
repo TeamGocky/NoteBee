@@ -18,7 +18,7 @@
         <p>Bookmarks</p>
         <ul>
             {% for bookmark in bookmarks %}
-                <li>{{ bookmark.snippet.name }}</li>
+                <li><a href="/codesnippet/view/{{ bookmark.snippet.id}}">{{ bookmark.snippet.name }}</a></li>
             {% endfor %}
         </ul>
     {% endif %}
