@@ -5,6 +5,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static "css/template.css" %}" />
     <link rel="stylesheet" href="{% static "js/lib/codemirror.css" %}" />
+    <script src="{% static "js/styling.js" %}"></script>
     <script src="{% static "js/jquery-1.9.1.min.js" %}"></script>
     <script src="{% static "js/jquery-ui-1.10.1.custom.min.js" %}"></script>
     {% block head_includes %}
@@ -14,11 +15,6 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="/codesnippet/"><h1>CodeBuzz</h1></a>
-            <a href="/codesnippet/"><div class="navigationButton">Post A Snippet</div></a>
-            <a href="/codesnippet/top"><div class="navigationButton">Top Snippets</div></a>
-            <a href="/codesnippet/random"><div class="navigationButton">Random Snippet</div></a>
-            <a href="/codesnippet/browse"><div class="navigationButton">Browse Snippets</div></a>
             <div class="login"><a href="/codesnippet/advanced_search">Advanced Search</a></div>
             <div class="login">
                 <form method="post" action="/codesnippet/search/">
@@ -27,6 +23,11 @@
                     <input type="submit" value="Search"/>
                 </form>
             </div>
+            <a href="/codesnippet/"><h1>CodeBuzz</h1></a>
+            <a href="/codesnippet/"><div class="navigationButton">Post A Snippet</div></a>
+            <a href="/codesnippet/top"><div class="navigationButton">Top Snippets</div></a>
+            <a href="/codesnippet/random"><div class="navigationButton">Random Snippet</div></a>
+            <a href="/codesnippet/browse"><div class="navigationButton">Browse Snippets</div></a>
             {% if user.is_authenticated %}
                 <a href="/accounts/logout"><div class="navigationButton">Logout</div></a>
                 <a href="/accounts/view/{{ user.id }}"><div class="navigationButton">Your Profile</div></a>
