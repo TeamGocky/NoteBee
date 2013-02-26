@@ -56,14 +56,13 @@
             <p>
                 <form action="" method="post">
                     {% csrf_token %}
-                    <input type="checkbox" id="bookmark"
+                    <p><input type="checkbox" id="bookmark"
                         {% if bookmarked %}
                             checked
-                        {% endif %}>Bookmark this snippet.<br/>
-                    <span id="sbookmrk">
+                        {% endif %}>Bookmark this snippet.<br />
                         {% if bookmarked %}
                             Snippet is bookmarked.
-                        {% endif %}
+                        {% endif %}</p>
                     </span>
                 </form>
             </p>
