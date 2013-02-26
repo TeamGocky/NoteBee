@@ -108,7 +108,7 @@
                     mode: "{{ snippet.language.mode }}",
                     readOnly: true,
                 });
-                
+                 $("#rating_form").hide();
                 // on change event for the rating posting
                 $("#id_rating").change(function() {
                     $("#rating_form").submit();
@@ -148,6 +148,8 @@
                 
                 $(".empty").click(function(e) {
                     var rating = ($(".sventek").width() / $(".empty").width()) * 5;
+                    $("#id_rating").val(rating);
+                    $("#rating_form").submit();
                 });
             });
         </script>
