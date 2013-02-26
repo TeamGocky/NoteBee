@@ -52,15 +52,22 @@
                 {{ rating_form.rating }}
             </form>
         </p>
-        <p>
-            <form action="" method="post">
-                {% csrf_token %}
-                <input type="checkbox" id="bookmark">Bookmark this snippet.<br/>
-                <span id="sbookmrk">
-                    Snippet has been added to your bookmarks.
-                </span>
-            </form>
-        </p>
+        {% if user.is_authenticated %}
+            <p>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="checkbox" id="bookmark"
+                        {% if bookmarked %}
+                            checked
+                        {% endif %}>Bookmark this snippet.<br/>
+                    <span id="sbookmrk">
+                        {% if bookmarked %}
+                            Snippet is bookmarked.
+                        {% endif %}
+                    </span>
+                </form>
+            </p>
+        {% endif %}
         {% if comments %}
             {% for comment in comments %}
                 <p class="comment">
@@ -101,8 +108,6 @@
                     $("#rating_form").submit();
                 });
                 
-                $("#sbookmrk").hide();
-                
                 // on click event for adding a bookmark of this snippet
                 // to the users account.
                 $("#bookmark").click(function() {
@@ -110,11 +115,11 @@
                         url: "/codesnippet/bookmark/{{ snippet.id }}/",
                         type: "post",
                         data: {
-                            "bookmark" : "1",
+                            "bookmark" : $("#bookmark").is(":checked") ? "1" : "0",
                             "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']")[0].value
                         },
                         success: function(response) {
-                            $("#sbookmrk").fadeToggle();
+                            $("#sbookmrk").html(response);
                         }
                     });
                 });

@@ -78,6 +78,15 @@ def view_snippet(request, sid, errors=[]):
         snippet.hits += 1
         snippet.save()
         
+        # Check to see if this snippet is bookmarked by this user
+        bookmarked = False
+        if request.user.is_authenticated():
+            try:
+                Bookmark.objects.get(snippet=snippet, user=request.user)
+            except ObjectDoesNotExist:
+                pass
+            else:
+                bookmarked = True
         # Get the comments for this snippet.
         comments = Comment.objects.filter(snippet=snippet)
         
@@ -99,6 +108,7 @@ def view_snippet(request, sid, errors=[]):
                               {"snippet" : snippet,
                                "rating" : total_rating,
                                "rating_form" : rform,
+                               "bookmarked" : bookmarked,
                                "comments" : comments,
                                "comment_form" : cform,
                                "errors" : errors,
@@ -181,7 +191,13 @@ def bookmark_snippet(request, sid):
                 except ObjectDoesNotExist:
                     bk = Bookmark(snippet=snippet, user=request.user)
                     bk.save()
-                return HttpResponse("SUCCESS!")
+                return HttpResponse("Snippet has been added to your bookmarks.")
+            elif bookmark == "0":
+                try:
+                    bk = Bookmark.objects.get(snippet=snippet, user=request.user).delete()
+                except ObjectDoesNotExist:
+                    return HttpResponse("Snippet was not bookmarked.")
+                return HttpResponse("Snippet has been removed from your bookmarks.")
     else:
         return HttpResponse("POST FAILED!")
 
