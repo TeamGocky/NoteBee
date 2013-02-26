@@ -141,6 +141,11 @@
                     $(".sventek").width(percentWidth + "%");
                 });
                 
+                $(".empty").mouseleave(function(e) {
+                    var percentWidth = ({{ rating }} / 5) * 100;
+                    $(".sventek").width(percentWidth + "%");
+                });
+                
                 $(".empty").click(function(e) {
                     var rating = ($(".sventek").width() / $(".empty").width()) * 5;
                 });
