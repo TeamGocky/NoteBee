@@ -129,6 +129,13 @@
                         }
                     });
                 });
+                
+                $(".empty").mousemove(function(e) {
+                    var startPos = $(".empty").offset().left;
+                    var newWidth = e.pageX - startPos;
+                    var percentWidth = (newWidth / $(".empty").width()) * 100;
+                    $(".sventek").width(percentWidth + "%");
+                });
             });
         </script>
     {% endif %}
