@@ -111,6 +111,7 @@ def view_snippet(request, sid, errors=[]):
                                "bookmarked" : bookmarked,
                                "comments" : comments,
                                "comment_form" : cform,
+                               "get_range" : xrange(int(total_rating)),
                                "errors" : errors,
                                "latestSnippets" : getLatestSnippets()},
                               context)
