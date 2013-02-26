@@ -46,6 +46,9 @@
         {% endfor %}
 	    <p>
             <label for="rating">Rating:</label>{{ rating }}
+            {% for r in get_range %}
+                <img width="50px" class="sventek" src="{{ STATIC_URL }}/joeface.jpg"/>
+            {% endfor %}
             <form id="rating_form" method="post"
                   action="/codesnippet/rating/{{ snippet.id }}/">
                 {% csrf_token %}
