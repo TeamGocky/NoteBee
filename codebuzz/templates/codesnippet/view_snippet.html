@@ -154,8 +154,6 @@
                 
                 $(".empty").click(function(e) {
                     var rating = ($(".sventek").width() / $(".empty").width()) * 5;
-                    /*$("#id_rating").val(rating);
-                    $("#rating_form").submit();*/
                     
                     $.ajax({
                         url: "/codesnippet/rating/{{ snippet.id }}/",
