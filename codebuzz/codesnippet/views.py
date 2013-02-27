@@ -11,6 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import simplejson
 
 from codesnippet.forms import CommentForm, SnippetForm,\
                               SnippetRatingForm, SnippetSearchForm
@@ -69,6 +70,21 @@ def get_rating(request, snippet):
     if initial is None:
         return None
     return initial.rating
+
+def get_total_rating(snippet):
+    """Get the total rating of the snippet."""
+    total = 0.0
+    try:
+        ratings = SnippetRating.objects.filter(snippet=snippet)
+        if len(ratings) > 0:
+            snippet.votes = len(ratings)
+            snippet.save()
+            for r in ratings:
+                total += r.rating
+            total = total / len(ratings)
+    except ObjectDoesNotExist:
+        pass
+    return total
 
 def view_snippet(request, sid, errors=[]):
     """View the snippet with id = sid argument."""
@@ -154,6 +170,11 @@ def submit_rating(request, sid):
                     else:
                         srating.rating = urating
                     srating.save()
+                    total_rating = get_total_rating(s)
+                    # Pass new total back to page.
+                    obj = simplejson.dumps({"total_rating" : "{}".format(total_rating)})
+                    return HttpResponse(obj,
+                                        content_type="application/json")
             else:
                 errors += ["Out of range rating: {}".format(urating)]
     return view_snippet(request, sid, errors)

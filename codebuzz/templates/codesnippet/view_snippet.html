@@ -45,7 +45,8 @@
             </p>
         {% endfor %}
 	    <p>
-            <label for="rating">Rating:</label>{{ rating }}
+            <label for="rating">Rating:</label>
+            <span id="total_rating">{{ rating }}</span>
             <div class="empty">
                 <div style="width: {{ rating_width }}" class="sventek"></div>
             </div>
@@ -141,15 +142,34 @@
                     $(".sventek").width(percentWidth + "%");
                 });
                 
+                var totalRating = {{ rating }};
+                
+                function getPercentWidth(rating) {
+                    return (rating / 5) * 100;
+                }
+                
                 $(".empty").mouseleave(function(e) {
-                    var percentWidth = ({{ rating }} / 5) * 100;
-                    $(".sventek").width(percentWidth + "%");
+                    $(".sventek").width(getPercentWidth(totalRating) + "%");
                 });
                 
                 $(".empty").click(function(e) {
                     var rating = ($(".sventek").width() / $(".empty").width()) * 5;
-                    $("#id_rating").val(rating);
-                    $("#rating_form").submit();
+                    /*$("#id_rating").val(rating);
+                    $("#rating_form").submit();*/
+                    
+                    $.ajax({
+                        url: "/codesnippet/rating/{{ snippet.id }}/",
+                        type: "post",
+                        data: {
+                            "rating" : rating,
+                            "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']")[0].value
+                        },
+                        success: function(response) {
+                            totalRating = response["total_rating"];
+                            $("#total_rating").html(totalRating);
+                            $(".sventek").width(getPercentWidth(totalRating) + "%");
+                        }
+                    });
                 });
             });
         </script>
