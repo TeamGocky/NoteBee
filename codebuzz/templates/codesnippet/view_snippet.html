@@ -94,7 +94,7 @@
                 </form>
             </p>
         {% else %}
-            <p class="center"><a href="/accounts/login/">Login</a> to comment on this snippet.</p>
+            <p class="center"><a href="/accounts/login/?next={{ request.path }}">Login</a> to comment on this snippet.</p>
         {% endif %}
         <script>
             $(document).ready(function() {
