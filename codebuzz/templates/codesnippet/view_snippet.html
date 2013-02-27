@@ -50,6 +50,13 @@
             <div class="empty">
                 <div style="width: {{ rating_width }}" class="sventek"></div>
             </div>
+            {% if not user.is_authenticated %}
+                <p>
+                    <a href="/accounts/login/?next={{ request.path }}">
+                        Login
+                    </a> to rate this snippet.
+                </p>
+            {% endif %}
             <form id="rating_form" method="post"
                   action="/codesnippet/rating/{{ snippet.id }}/">
                 {% csrf_token %}
@@ -131,44 +138,47 @@
                     });
                 });
                 
-                $(".empty").mousemove(function(e) {
-                    var startPos = $(".empty").offset().left;
-                    var newWidth = e.pageX - startPos;
-                    
-                    newWidth = Math.ceil(newWidth/50.0) * 50;
-                    if (newWidth > 250) newWidth = 250;
-                    
-                    var percentWidth = (newWidth / $(".empty").width()) * 100;
-                    $(".sventek").width(percentWidth + "%");
-                });
-                
                 var totalRating = {{ rating }};
                 
                 function getPercentWidth(rating) {
                     return (rating / 5) * 100;
                 }
                 
-                $(".empty").mouseleave(function(e) {
-                    $(".sventek").width(getPercentWidth(totalRating) + "%");
-                });
+                {% if user.is_authenticated %}
                 
-                $(".empty").click(function(e) {
-                    var rating = ($(".sventek").width() / $(".empty").width()) * 5;
-                    
-                    $.ajax({
-                        url: "/codesnippet/rating/{{ snippet.id }}/",
-                        type: "post",
-                        data: {
-                            "rating" : rating,
-                            "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']")[0].value
-                        },
-                        success: function(response) {
-                            totalRating = response["total_rating"];
-                            $("#total_rating").html(totalRating);
-                            $(".sventek").width(getPercentWidth(totalRating) + "%");
-                        }
+                    $(".empty").mousemove(function(e) {
+                        var startPos = $(".empty").offset().left;
+                        var newWidth = e.pageX - startPos;
+                        
+                        newWidth = Math.ceil(newWidth/50.0) * 50;
+                        if (newWidth > 250) newWidth = 250;
+                        
+                        var percentWidth = (newWidth / $(".empty").width()) * 100;
+                        $(".sventek").width(percentWidth + "%");
                     });
-                });
+                    
+                    $(".empty").click(function(e) {
+                        var rating = ($(".sventek").width() / $(".empty").width()) * 5;
+                        
+                        $.ajax({
+                            url: "/codesnippet/rating/{{ snippet.id }}/",
+                            type: "post",
+                            data: {
+                                "rating" : rating,
+                                "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']")[0].value
+                            },
+                            success: function(response) {
+                                totalRating = response["total_rating"];
+                                $("#total_rating").html(totalRating);
+                                $(".sventek").width(getPercentWidth(totalRating) + "%");
+                            }
+                        });
+                    });
+                    
+                    $(".empty").mouseleave(function(e) {
+                        $(".sventek").width(getPercentWidth(totalRating) + "%");
+                    });
+                {% endif %}
             });
         </script>
     {% endif %}
