@@ -11,6 +11,7 @@ from operator import itemgetter
 
 def user_login(request):
     context = RequestContext(request)
+    redirect = request.GET.get('next', '/codesnippet/')
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -18,7 +19,7 @@ def user_login(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect("/codesnippet/")
+                return HttpResponseRedirect(redirect)
             else:
                 msg = "Your account is disabled."
         else:
