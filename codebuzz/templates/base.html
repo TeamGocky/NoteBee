@@ -29,11 +29,11 @@
             <a href="/codesnippet/random"><div class="navigationButton">Random Snippet</div></a>
             <a href="/codesnippet/browse"><div class="navigationButton">Browse Snippets</div></a>
             {% if user.is_authenticated %}
-                <a href="/accounts/logout"><div class="navigationButton">Logout</div></a>
                 <a href="/accounts/view/{{ user.id }}"><div class="navigationButton">Your Profile</div></a>
+                <a href="/accounts/logout"><div class="navigationButton">Logout</div></a>
             {% else %}
-                <a href="/accounts/login"><div class="navigationButton">Login</div></a>
                 <a href="/registration"><div class="navigationButton">Sign up</div></a>
+                <a href="/accounts/login"><div class="navigationButton">Login</div></a>
             {% endif %}
             <br />
         </div>
