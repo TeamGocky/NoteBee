@@ -172,7 +172,8 @@ def submit_rating(request, sid):
                     srating.save()
                     total_rating = get_total_rating(s)
                     # Pass new total back to page.
-                    obj = simplejson.dumps({"total_rating" : "{}".format(total_rating)})
+                    obj = simplejson.dumps({"user_rating" : urating,
+                                            "total_rating" : "{}".format(total_rating)})
                     return HttpResponse(obj,
                                         content_type="application/json")
             else:

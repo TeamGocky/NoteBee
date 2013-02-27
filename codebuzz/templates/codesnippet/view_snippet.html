@@ -50,7 +50,14 @@
             <div class="empty">
                 <div style="width: {{ rating_width }}" class="sventek"></div>
             </div>
-            {% if not user.is_authenticated %}
+            {% if user.is_authenticated %}
+                <p>
+                    You have given this snippet 
+                        <span id="user_rating">
+                            {{ rating_form.initial.rating }}
+                        </span> Sventeks.
+                </p>
+            {% else %}
                 <p>
                     <a href="/accounts/login/?next={{ request.path }}">
                         Login
@@ -168,8 +175,10 @@
                                 "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']")[0].value
                             },
                             success: function(response) {
+                                userRating = response["user_rating"];
                                 totalRating = response["total_rating"];
                                 $("#total_rating").html(totalRating);
+                                $("#user_rating").html(userRating);
                                 $(".sventek").width(getPercentWidth(totalRating) + "%");
                             }
                         });
