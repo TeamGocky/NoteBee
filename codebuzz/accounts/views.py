@@ -76,11 +76,14 @@ def user_view(request, uid):
                             total_rating += r.rating
                         total_rating = total_rating / len(ratings)
                     topSnippets += [[snippet, total_rating]]
-                topSnippets = sorted(topSnippets, key=itemgetter(1))[::-1]
+                if topSnippets is not []:
+                    topSnippets = sorted(topSnippets, key=itemgetter(1))[::-1]
+                    topSnippets = topSnippets[:5]
             except ObjectDoesNotExist:
                 error.append("Could not get list of ratings.")
+            snippets = snippets[:5]
     return render_to_response("accounts/view.html",
             {"userView" : userView, "errors" : errors,
-             "bookmarks" : bookmarks, "snippets" : snippets[:5],
-             "languages" : languages, "topSnippets" : topSnippets[:5],
+             "bookmarks" : bookmarks, "snippets" : snippets,
+             "languages" : languages, "topSnippets" : topSnippets,
              "latestSnippets" : getLatestSnippets()}, context)
