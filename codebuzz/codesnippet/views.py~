@@ -21,25 +21,6 @@ from codesnippet.models import Bookmark, Category, Comment, Language,\
 def getLatestSnippets():
     return Snippet.objects.all().order_by("-id")[:5]
 
-def sortFiveByRating(snippets):
-    topFive = snippets
-    for x in range(4,1,-1)
-        for i in range(0,x)
-            if (get_total_rating(topFive[i]) < get_total_rating(topFive[i+1]))
-                temp = topFive[i]
-                topFive[i] = topFive[i+1]
-                topFive[i+1] = temp
-    return topFive
-
-def getTopSnippets():
-    topFive = Snippet.object.all().order_by("-id")[:5]
-    sortFiveByRating(topFive)
-    for i in range(5, len(Snippet.object.all()))
-        if get_total_rating(topFive[4]) < get_total_rating(Snippet.object.all().order_by("-id")[i])
-            topFive[4] = Snippet.object.all().order_by("-id")[i]
-            sortFiveByRating(topFive)
-    return topFive
-
 def index(request):
     """Homepage for codesnippet application."""
     context = RequestContext(request)
@@ -310,7 +291,7 @@ def view_top_snippets(request):
     """Dummy view just so I could see what my page looked like."""
     context = RequestContext(request)
     return render_to_response("codesnippet/top_snippets.html",{
-                               "latestSnippets" : getTopSnippets()}, context)
+                               "latestSnippets" : getLatestSnippets()}, context)
 
 def browse_language(request, language):
     context = RequestContext(request)
