@@ -21,22 +21,40 @@ from codesnippet.models import Bookmark, Category, Comment, Language,\
 def getLatestSnippets():
     return Snippet.objects.all().order_by("-id")[:5]
 
+def swapSnippets(snippets, x, y):
+    newSnippets = []
+    for i in range(0,len(snippets)):
+        if i == x:
+            newSnippets.append(snippets[y])
+        elif i == y:
+            newSnippets.append(snippets[x])
+        else:
+            newSnippets.append(snippets[i])
+    return newSnippets
+
+def replaceSnippet(snippets, newSnippet, position):
+    newSnippets = []
+    for i in range(0,len(snippets)):
+        if i == position:
+            newSnippets.append(newSnippet)
+        else:
+            newSnippets.append(snippets[i])
+    return newSnippets
+
 def sortFiveByRating(snippets):
     topFive = snippets
-    for x in range(4,1,-1)
-        for i in range(0,x)
-            if (get_total_rating(topFive[i]) < get_total_rating(topFive[i+1]))
-                temp = topFive[i]
-                topFive[i] = topFive[i+1]
-                topFive[i+1] = temp
+    for x in range(4,1,-1):
+        for i in range(0,x):
+            if get_total_rating(topFive[i]) < get_total_rating(topFive[i+1]):
+                topFive = swapSnippets(topFive, i, i+1)
     return topFive
 
 def getTopSnippets():
-    topFive = Snippet.object.all().order_by("-id")[:5]
+    topFive = Snippet.objects.all()[:5]
     sortFiveByRating(topFive)
-    for i in range(5, len(Snippet.object.all()))
-        if get_total_rating(topFive[4]) < get_total_rating(Snippet.object.all().order_by("-id")[i])
-            topFive[4] = Snippet.object.all().order_by("-id")[i]
+    for i in range(5, len(Snippet.objects.all())):
+        if get_total_rating(topFive[4]) < get_total_rating(Snippet.objects.all()[i]):
+            topFive = replaceSnippet(topFive, Snippet.objects.all()[i], 4)
             sortFiveByRating(topFive)
     return topFive
 
