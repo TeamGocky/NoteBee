@@ -67,6 +67,9 @@ li > ol, li > ul, li > p, p > a, li > a, h3 > a, p > .navigationButton {
 .navigation {
     margin-left: 1.65em;
 }
+.article {
+	padding-left: 1.65em;
+}
 .error {
     color: rgb(255, 0, 0);
 }
