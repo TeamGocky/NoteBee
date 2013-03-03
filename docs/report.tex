@@ -25,7 +25,9 @@
 \title{CodeBuzz}
 \author{
 \alignauthor
-AuthorNames\\
+    Craig McLaughlin\\
+    Gordon Reid\\
+    Michael Dyson\\
 	\affaddr{Team Gocky}\\
 	\affaddr{DIM3}\\
 	\affaddr{Student no.s}\\
@@ -371,9 +373,76 @@ View code hit count & \lowPrio & \lowPrio & \vLowPrio & \vLowPrio \\
 \end{table}
 
 \section{Application Architecture}
+
+\begin{itemize}
+\item	N-Teir Architecture Diagram
+
+The architecture for the application is a 3-tier architecture as shown
+in Figure~\ref{fig:ntier}.
+
+\begin{figure}
+\centering
+\includegraphics{../imgs/N-TierArchitecture.png}
+\caption{3-Tier Architecture for application}
+\label{fig:ntier}
+\end{figure}
+
+\item	i.e. data flow diagram between the interface/client, middle ware,
+and backend services/data repos
+
+
+\item	Describe the data model i.e. what data needs to be stored or
+persisted by the application?
+
+
+
+\item	What are the relationships within the data model.
+\item	i.e. use ER diagram and explain.
+
+The ER diagram for the application is shown in Figure~\ref{fig:erdiag}.
+
+\begin{figure}
+\centering
+\includegraphics{../imgs/ERDiagram.png}
+\caption{Entity-Relationship Diagram for application}
+\label{fig:erdiag}
+\end{figure}
+
+\item	Describe the backend services used (if any).
+
+Twitter integration...
+
+\item	Reflective Questions: 
+\item	How have you ensured that there is a separation of concerns?
+
+Django provides a framework that forces the developer to think in terms
+of Model-View-Template. However, this constraint is not restrictive but
+enforces a healthy separation of concerns between the components of
+the application e.g. URLs, presentation.
+
+\item	What other technology could have been used instead of django?
+
+Another web framework.
+
+\item	What are the advantages of using a Web Application Framework
+over other technology?
+
+The framework provides a lot of services common to all web applications
+``out of the box'', meaning that the developer can focus on features
+unique to their application rather than spending time implementing their
+own login and authentication system, etc.
+
+\item	And, what are the disadvantages?
+
+\end{itemize}
+
 \section{Message Parsing}
 \section{Summary and Future Work}
 \section{Acknowledgements}
+
+Thanks to Euan Freeman for being a repository of knowledge and for
+suggesting the unique rating system for the application.
+
 \section{References}
 
 \end{document}  
