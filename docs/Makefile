@@ -1,4 +1,4 @@
-PDFS=ideas.pdf presentation.pdf
+PDFS=report.pdf presentation.pdf
 BDIR=./bin
 
 all: $(PDFS)

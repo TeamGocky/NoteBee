@@ -1,25 +1,43 @@
-\documentclass[11pt,a4paper]{article}
-\usepackage{graphicx}
+\documentclass{sig-alt-release2}
+\usepackage{url}
+\usepackage{color}
+\usepackage{graphics,graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{ifthen} 
 \usepackage[parfill]{parskip}
 \usepackage[table]{xcolor}
-\usepackage{fullpage}
 \usepackage{array}
 \newcolumntype{L}{>{\centering\arraybackslash}m{0.18\textwidth}}
 \newcommand{\highPrio}{\cellcolor{green}High}
 \newcommand{\medPrio}{\cellcolor{orange}Medium}
 \newcommand{\lowPrio}{\cellcolor{yellow}Low}
 \newcommand{\vLowPrio}{\cellcolor{yellow!50}Very Low}
+\newcommand{\todo}[1]{\textcolor{red}{#1}}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+\conferenceinfo{DIM3} {2013, Glasgow, UK} 
+\CopyrightYear{2010}
+\clubpenalty=10000
+\widowpenalty = 10000
 \title{CodeBuzz}
-\author{Team Gocky \\
-    Craig McLaughlin, 1002524M \\
-    Gordon Reid, 1002536R}
+\author{
+\alignauthor
+AuthorNames\\
+	\affaddr{Team Gocky}\\
+	\affaddr{DIM3}\\
+	\affaddr{Student no.s}\\
+    \email{\{002524M,1002536R,MichaelDysonGUID\}@students.glasgow.ac.uk}
+}
 \begin{document}
 
 \maketitle
 
 \newpage
 
-\section*{Abstract}
+\begin{abstract}
 
 This report documents the specification and design of CodeBuzz,
 a web-application for posting code snippets. The aim of the application is
@@ -27,12 +45,9 @@ to facilitate programming language learning by exposing beginners to
 example programs written by industry experts and academics, and to
 aid reuse by providing a store of solutions to commonly recurring
 problems in software engineering. 
-\newpage
+\end{abstract}
 
-\tableofcontents
-\newpage
-
-\section{Introduction}
+\section{Aim of Application}
 
 CodeBuzz is a code snippet oriented application that allows users to submit code
 in a variety of programming languages. This code is categorised based on the
