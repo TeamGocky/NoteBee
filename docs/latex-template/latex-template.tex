@@ -1,0 +1,147 @@
+\documentclass{sig-alt-release2}
+\usepackage{url}
+\usepackage{color}
+\usepackage{graphics,graphicx}
+
+\usepackage{epsfig}
+\usepackage{epstopdf}
+
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{ifthen}  
+
+\begin{document}
+\newcommand{\todo}[1]{\textcolor{red}{#1}}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+\conferenceinfo{DIM3} {2010, Glasgow, UK} 
+\CopyrightYear{2010}
+\clubpenalty=10000
+\widowpenalty = 10000
+
+\title{{Report Name}}
+
+\numberofauthors{1}
+\author{
+\alignauthor
+Author Names\\
+	   \affaddr{Group Name}\\
+      \affaddr{itech/Dim3}\\
+      \affaddr{Student no.s}\\
+             \email{\{ name1, name2, name3, name4\}@students.glasgow.ac.uk }
+}
+\maketitle
+
+\begin{abstract}
+Provide a concise summary of the design of the application
+
+\end{abstract}
+
+\section{Aim of Application}
+\begin{itemize}
+\item	What is the purpose of the application?
+\item	Eg. The application is an academic search engine called AcaSe and is it is based upon the PuppyIR Framework\cite{glassey2011framework}, which has been used to construct other such services\cite{glassey2010fifi,elliot2010fifi}. The main purpose of this web application is to provide a customized interface to services such as Google Scholar and MS Academic Search. 
+\item	What are the assumptions about the aims and objectives?
+\item	Describe the design goals and objectives of the application.
+\item	What are the constraints of the project?
+\item	Functionality List: i.e. what is the required and desired functionality?
+\item	Reflective Questions: 
+\item	Is the scope of the application appropriate? 
+\item	Are the design goals realistic/achievable? 
+\item	How complex is the application? 
+\item	Is distribution across the web appropriate? 
+\end{itemize}
+
+\section{Client Interface}
+\begin{itemize}
+\item	Draw a wireframe of the user interface
+\item	this may require several wireframes depending on the complexity of the application and the interfaces
+\item	Describe the user interface.
+\item	i.e. Label key input and output components: describe them.
+\item	Provide a Walkthrough and explain the user interactions with application. 
+\item	i.e. use cases
+\item	Describe the interactions associated with the dynamic components on the user interface.
+\item	What calls are required to dynamically update the data on the client side?
+\item	How does the user interface help the user achieve their goal, or complete their task? 
+\item	Is the user interface intuitive, appealing, usable, etc?
+\item	What technologies are used on the client side? 
+\item	What are the reasons for your choices? i.e. what is the advantages and disadvantages of using this technology? 
+\item	What other options are there? 
+\end{itemize}
+
+\section{Application Architecture}
+\begin{itemize}
+\item	N-Teir Architecture Diagram
+\item	i.e. data flow diagram between the interface/client, middle ware, and backend services/data repos
+\item	Describe the data model i.e. what data needs to be stored or persisted by the application?
+\item	What are the relationships within the data model.
+\item	i.e. use ER diagram and explain.
+\item	Describe the backend services used (if any).
+\item	Reflective Questions: 
+\item	How have you ensured that there is a separation of concerns? 
+\item	What other technology could have been used instead of django? 
+\item	What are the advantages of using a Web Application Framework over other technology? 
+\item	And, what are the disadvantages?
+\end{itemize}
+
+\section{Message Parsing}
+\begin{itemize}
+
+\item	On the architecture diagram, Identify and label the main messages that will be parsed through the application.
+\item	or alternatively (and preferably) include sequence diagrams to denote the sequence of communications parse between clients and servers.
+\item	Describe the messages that are parsed back and forth through the application.
+\item	For the main transactions - describe the payload of the messages 
+\item	i.e. What are the contents of the messages? i.e. include sample XML, XHTML, JSON, etc of one or two messages.
+\item	What is the format of the messages? 
+\item	Why this format? 
+\item	What other formats could be used, what are the advantages and disadvantages of these other formats?
+\end{itemize}
+
+
+
+\section{Design Revision / Feedback}
+{\bf For the Implementation Report Only:}
+\begin{itemize}
+\item	include a summary of the feedback given (or refer to specific comments from the feedback) 
+\item	comment on how you have revised the design (if at all) according to the comments received 
+\item	how has the feedback helped, and has this process been helpful.
+\end{itemize}
+
+\section{Implementation Notes}
+{\bf For the Implementation Report Only:}
+
+\begin{itemize}
+\item Views - What are the main views that you have implemented and what do they do?
+\item URL Mapping Schema - what is your URL mapping and schema?
+\item External Services  - what external services does your application include and what handlers did you include?
+\item	Functionality Checklist (which functionality is completed)
+\item	Known Issues (what kind of works, what kind of errors to do you get)
+\item What technologies have been used and are required for the application. Include a list or table of all the technologies, standards, and protocols that will be required.
+\end{itemize}
+
+\section{Reflective Summary}
+{\bf For the Implementation Report Only:}
+\begin{itemize}
+\item	What have you learnt through the process of development? 
+\item	How did the application of frameworks help or hinder your progress? 
+\item	What problems did you encounter? 
+\item	What were your major achievements?
+\end{itemize}
+
+\section{Summary and Future Work}
+\begin{itemize}
+\item	Summary of application and its current state.
+\item	Include a list or table of all the technologies, standards, and protocols that will be required.
+\item	What are the limitations?
+\item Plans for future development
+\end{itemize}
+
+\section{Acknowledgements}
+Our thanks to the lecturers and demonstrators for their comments and suggestions. And our thanks to the peer reviewers for their feedback.
+Be sincere and be specific about how others have helped your group.
+
+\bibliographystyle{abbrv}
+\bibliography{sig-proc}
+
+\end{document}

@@ -1,0 +1,22 @@
+\begin{thebibliography}{1}
+
+\bibitem{elliot2010fifi}
+D.~Elliott, R.~Glassey, T.~Polajnar, and L.~Azzopardi.
+\newblock Finding and filtering information for children.
+\newblock In {\em Proceedings of the 33rd International ACM SIGIR conference on
+  Research and development in Information Retrieval}, page 702, 2010.
+
+\bibitem{glassey2010fifi}
+R.~Glassey, D.~Elliott, T.~Polajnar, and L.~Azzopardi.
+\newblock Interaction-based information filtering for children.
+\newblock In {\em Proceedings of the third symposium of Information Interaction
+  in Context}, pages 329--334, 2010.
+
+\bibitem{glassey2011framework}
+R.~Glassey, T.~Polajnar, and L.~Azzopardi.
+\newblock {PuppyIR Unleashed: A Framework for Building Child-Oriented
+  Information Services.}
+\newblock In {\em {PuppyIR Unleashed: A Framework for Building Child-Oriented
+  Information Services.}}, 2011.
+
+\end{thebibliography}
