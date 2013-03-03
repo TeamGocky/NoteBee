@@ -11,6 +11,7 @@
 \usepackage[parfill]{parskip}
 \usepackage[table]{xcolor}
 \usepackage{array}
+\usepackage{float}
 \newcolumntype{L}{>{\centering\arraybackslash}m{0.18\textwidth}}
 \newcommand{\highPrio}{\cellcolor{green}High}
 \newcommand{\medPrio}{\cellcolor{orange}Medium}
@@ -380,12 +381,12 @@ View code hit count & \lowPrio & \lowPrio & \vLowPrio & \vLowPrio \\
 The architecture for the application is a 3-tier architecture as shown
 in Figure~\ref{fig:ntier}.
 
-\begin{figure}
-\centering
-\includegraphics{../imgs/N-TierArchitecture.png}
-\caption{3-Tier Architecture for application}
-\label{fig:ntier}
-\end{figure}
+%\begin{figure}[H]
+%\centering
+%\includegraphics[scale=0.5]{../imgs/N-TierArchitecture.png}
+%\caption{3-Tier Architecture for application}
+%\label{fig:ntier}
+%\end{figure}
 
 \item	i.e. data flow diagram between the interface/client, middle ware,
 and backend services/data repos
@@ -401,12 +402,12 @@ persisted by the application?
 
 The ER diagram for the application is shown in Figure~\ref{fig:erdiag}.
 
-\begin{figure}
-\centering
-\includegraphics{../imgs/ERDiagram.png}
-\caption{Entity-Relationship Diagram for application}
-\label{fig:erdiag}
-\end{figure}
+%\begin{figure}[H]
+%\centering
+%\includegraphics[scale=0.5]{../imgs/ERDiagram.png}
+%\caption{Entity-Relationship Diagram for application}
+%\label{fig:erdiag}
+%\end{figure}
 
 \item	Describe the backend services used (if any).
 
