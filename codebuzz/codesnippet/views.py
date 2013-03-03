@@ -168,6 +168,7 @@ def view_snippet(request, sid, errors=[]):
                                "comments" : comments,
                                "comment_form" : cform,
                                "rating_width" : "{}%".format(int(rating_width)),
+                               "errors" : errors,
                                "latestSnippets" : getLatestSnippets()},
                               context)
     except ObjectDoesNotExist:
