@@ -30,13 +30,16 @@
 		</h3>
         {% for name, value in snippet.attrs %}
             <p>
+                {% if name != "name" %}
                 <label for="{{ name }}">{{ name.capitalize }}:</label>
+                {% endif %}
                 {% if name == "body" %}
                     <textarea id="editor">{{ snippet.body }}</textarea>
                 {% elif name == "user" and not value %}
                     Anonymous
                 {% elif name == "user" %}
                     <a href="/accounts/view/{{ snippet.user.id }}">{{ value }}</a>
+                {% elif name == "name" %}
                 {% elif name == "language" %}
                     <a href="/codesnippet/browse/language/{{ value }}">{{ value }}</a>
                 {% else %}
@@ -45,8 +48,8 @@
             </p>
         {% endfor %}
 	    <p>
-            <label for="rating">Rating:</label>
-            <span id="total_rating">{{ rating }}</span>
+            <!--<label for="rating">Rating:</label>
+            <span id="total_rating">{{ rating }}</span>-->
             <div class="empty">
                 <div style="width: {{ rating_width }}" class="sventek"></div>
             </div>
@@ -58,11 +61,6 @@
                         </span> Sventeks.
                 </p>
             {% else %}
-                <p>
-                    <a href="/accounts/login/?next={{ request.path }}">
-                        Login
-                    </a> to rate this snippet.
-                </p>
             {% endif %}
             <form id="rating_form" method="post"
                   action="/codesnippet/rating/{{ snippet.id }}/">
@@ -84,6 +82,12 @@
                         {% endif %}
                     </span></p>
                 </form>
+            </p>
+        {% endif %}
+        {% if not user.is_authenticated %}
+            <p>
+                <a href="/accounts/login/?next={{ request.path }}">Login</a>
+                to rate and comment on this snippet.
             </p>
         {% endif %}
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -108,8 +112,6 @@
                     <input type="submit" name="submit" value="Post Comment"/>
                 </form>
             </p>
-        {% else %}
-            <p class="center"><a href="/accounts/login/?next={{ request.path }}">Login</a> to comment on this snippet.</p>
         {% endif %}
         <script>
             $(document).ready(function() {
