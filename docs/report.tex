@@ -67,6 +67,7 @@ it can provide a convenient source of example code (which may or may not be
 good code, both useful in this context).
 
 \subsection{Functionality}
+\label{sec:functionality}
 
 The site will operate similar to any collaborative web-based application
 where users of the site need not be registered in order to contribute
@@ -450,13 +451,14 @@ Section~\ref{sec:walkthrough}}
 \end{figure*}
 
 \section{Message Parsing}
-\begin{itemize}
 
 Figure~\ref{fig:seqdiag} illustrates a sequence diagram for the
 walkthrough in Section~\ref{sec:walkthrough}. The responses from the
 middleware are HTML5 responses (some have client-side Ajax/jQuery/JSON
 scripts included in them).
-\item	Describe the messages that are parsed back and forth through
+
+\begin{itemize}
+\item Describe the messages that are parsed back and forth through
 the application.
 \item	For the main transactions - describe the payload of the messages 
 \item	i.e. What are the contents of the messages? i.e. include
@@ -468,13 +470,26 @@ and disadvantages of these other formats?
 \end{itemize}
 
 \section{Summary and Future Work}
+
+CodeBuzz is a code snippet oriented application that allows users to submit code
+in a variety of programming languages. Through categories and languages,
+the site provides users with the ability to search for code snippets.
+Code snippets can be rated and, if a user has registered, commented on.
+Most of the functionality specified in the
+Section~\ref{sec:functionality} has been implemented and the appearance
+of the application adheres very closely to the wireframes.
+
+Allowing languages or categories to be added by users of the site is
+currently not supported.
+Currently, the application only supports Twitter but future work could
+extend on this to support Facebook integration. A language syntax
+detection mechanism could developed.
+
 \begin{itemize}
-\item	Summary of application and its current state.
-\item	Include a list or table of all the technologies, standards,
+\item Include a list or table of all the technologies, standards,
 and protocols that will be required.
-\item	What are the limitations?
-\item Plans for future development
 \end{itemize}
+
 \section{Acknowledgements}
 
 Thanks to Euan Freeman for being a repository of knowledge and for
