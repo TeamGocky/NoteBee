@@ -1,0 +1,19 @@
+# PNG generated from this file by http://www.websequencediagrams.com/
+title Joe's Walkthrough Sequence Diagram
+
+Browser->Django Middleware: HTTP GET Request (/)
+Django Middleware->Browser: HTML Response (/index.html)
+Browser->Django Middleware: HTTP GET Request (/accounts/login)
+Django Middleware->Browser: HTML Response (/login.html)
+Browser->Django Middleware: HTTP POST Request (/accounts/login)
+Django Middleware->Database: Authenticate user
+Database->Django Middleware: Valid user details
+Django Middleware->Django Middleware: HTTP GET Request (/codesnippet)
+Django Middleware->Browser: HTML Response (/index.html)
+Browser->Browser: Javascript call to\nchange syntax\nhighlighting to C
+Browser->Django Middleware: HTTP POST Request (/codesnippet)
+Django Middleware->Database: Insert code snippet (SQL INSERT statements)
+Database->Django Middleware: codesnippet object (python-sqlite3db object)
+Django Middleware->Browser: HTML Response (/codesnippet/view/19)
+Browser->Django Middleware: HTTP GET Request (/accounts/logout)
+Django Middleware->Browser: HTML Response (/)

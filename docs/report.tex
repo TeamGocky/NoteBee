@@ -172,9 +172,11 @@ seen in the wire frames described above, the application will have a simple
 home screen both for registered and non-registered users.
 
 \subsection{A Walk through: Submit a code snippet in C}
+\label{sec:walkthrough}
 
-A simple walk through for the user Joe entering his C code snippet as
-shown in Figure~\ref{fig:joe} is given below:
+A simple walk through for the user Joe (see Section~\ref{sec:joe}
+entering his C code snippet as shown in Figure~\ref{fig:joe} is given
+below:
 
 \begin{enumerate}
 \item Joe is presented with the blank home screen and is not currently logged
@@ -193,8 +195,8 @@ button.
 \end{enumerate}
 
 Note that the walk through above is applicable to a non-registered user
-as well. They can skip straight to item 1 to 3. For restrictions on non-
-registered users see Section~\ref{sec:restrict}.
+as well. They can miss out the login/logout steps. For restrictions on
+non-registered users see Section~\ref{sec:restrict}.
 
 This walk through has highlighted a number of interactions between the
 user and the application. It is important to note the order in which
@@ -257,6 +259,7 @@ too complex/advanced for their current abilities.
 \end{itemize}
 
 \subsection{Joe: The Academic}
+\label{sec:joe}
 
 Joe is a University Professor teaching software engineering at
 one of the top universities in his country. He wishes to contribute
@@ -376,14 +379,14 @@ View code hit count & \lowPrio & \lowPrio & \vLowPrio & \vLowPrio \\
 
 \begin{figure*}
 \centering
-\includegraphics[scale=0.5]{../imgs/N-TierArchitecture.png}
+\includegraphics[scale=0.6]{../imgs/N-TierArchitecture.png}
 \caption{3-Tier Architecture for application}
 \label{fig:ntier}
 \end{figure*}
 
 \begin{figure*}
 \centering
-\includegraphics[scale=0.5]{../imgs/ERDiagram.png}
+\includegraphics[scale=0.6]{../imgs/ERDiagram.png}
 \caption{Entity-Relationship Diagram for application}
 \label{fig:erdiag}
 \end{figure*}
@@ -438,8 +441,42 @@ own login and authentication system, etc.
 
 \end{itemize}
 
+\begin{figure*}
+\centering
+\includegraphics[scale=0.6]{../imgs/walkthroughseqdiag.png}
+\caption{Sequence diagram for Joe's Walkthrough described in
+Section~\ref{sec:walkthrough}}
+\label{fig:seqdiag}
+\end{figure*}
+
 \section{Message Parsing}
+\begin{itemize}
+
+\item	On the architecture diagram, Identify and label the main
+messages that will be parsed through the application.
+\item	or alternatively (and preferably) include sequence diagrams to
+denote the sequence of communications parse between clients and servers.
+Figure~\ref{fig:seqdiag} illustrates a sequence diagram for the
+walkthrough in Section~\ref{sec:walkthrough}.
+\item	Describe the messages that are parsed back and forth through
+the application.
+\item	For the main transactions - describe the payload of the messages 
+\item	i.e. What are the contents of the messages? i.e. include
+sample XML, XHTML, JSON, etc of one or two messages.
+\item	What is the format of the messages? 
+\item	Why this format? 
+\item	What other formats could be used, what are the advantages
+and disadvantages of these other formats?
+\end{itemize}
+
 \section{Summary and Future Work}
+\begin{itemize}
+\item	Summary of application and its current state.
+\item	Include a list or table of all the technologies, standards,
+and protocols that will be required.
+\item	What are the limitations?
+\item Plans for future development
+\end{itemize}
 \section{Acknowledgements}
 
 Thanks to Euan Freeman for being a repository of knowledge and for
