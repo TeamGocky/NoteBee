@@ -129,42 +129,6 @@ of the upper bar. The upper bar would look like what was shown in Figure
 Figure \ref{fig:viewAfterSubmission} shows a user called Joe viewing a snippet
 he has just posted.
 
-\begin{figure*}
-\includegraphics[width=\textwidth]{../imgs/InitialHomepageHorz.png}
-\caption{Blank Homepage}
-\label{fig:blankPage}
-\end{figure*}
-
-\begin{figure*}
-\includegraphics[width=\textwidth]{../imgs/homepageWireFrameGRHorz.png}
-\caption{Anonymous snippet being posted.}
-\label{fig:anonsnippet}
-\end{figure*}
-
-\begin{figure*}
-\includegraphics[width=\textwidth]{../imgs/CCodeSnippetHorz.png}
-\caption{Joe's home screen with his code snippet}
-\label{fig:joe}
-\end{figure*}
-
-\begin{figure*}
-\includegraphics[width=\textwidth]{../imgs/LoggedInViewSnippetHorz.png}
-\caption{Jane viewing a posted snippet.}
-\label{fig:LoggedInViewJane}
-\end{figure*}
-
-\begin{figure*}
-\includegraphics[width=\textwidth]{../imgs/viewingCategoriesHorz.png}
-\caption{Jane looking at the categories of snippet.}
-\label{fig:viewCategories}
-\end{figure*}
-
-\begin{figure*}
-\includegraphics[width=\textwidth]{../imgs/CSnippetAfterSubmissionHorz.png}
-\caption{Joe looking at his most recent snippet after submission.}
-\label{fig:viewAfterSubmission}
-\end{figure*}
-
 \subsection{Design Goals}
 
 The number one design goal is to make the user interface minimalist
@@ -378,20 +342,6 @@ View code hit count & \lowPrio & \lowPrio & \vLowPrio & \vLowPrio \\
 
 \section{Application Architecture}
 
-\begin{figure*}
-\centering
-\includegraphics[scale=0.6]{../imgs/N-TierArchitecture.png}
-\caption{3-Tier Architecture for application}
-\label{fig:ntier}
-\end{figure*}
-
-\begin{figure*}
-\centering
-\includegraphics[scale=0.6]{../imgs/ERDiagram.png}
-\caption{Entity-Relationship Diagram for application}
-\label{fig:erdiag}
-\end{figure*}
-
 \begin{itemize}
 \item	N-Tier Architecture Diagram
 
@@ -442,14 +392,6 @@ own login and authentication system, etc.
 
 \end{itemize}
 
-\begin{figure*}
-\centering
-\includegraphics[scale=0.6]{../imgs/walkthroughseqdiag.png}
-\caption{Sequence diagram for Joe's Walkthrough described in
-Section~\ref{sec:walkthrough}}
-\label{fig:seqdiag}
-\end{figure*}
-
 \section{Message Parsing}
 
 Figure~\ref{fig:seqdiag} illustrates a sequence diagram for the
@@ -492,9 +434,78 @@ and protocols that will be required.
 
 \section{Acknowledgements}
 
+Thanks to Leif Azzopardi for his input and suggestions.
+
 Thanks to Euan Freeman for being a repository of knowledge and for
 suggesting the unique rating system for the application.
 
+Thanks to Marijn Haverbeke for developing and maintaining the excellent
+CodeMirror~\footnote{http://codemirror.net/} component that was used to
+provide the syntax highlighting of code snippets.
+
+Thanks to the jQuery~\footnote{http://jquery.com/} team for making
+JavaScript usable.
+
+Last but certainly not least, thanks must go to Django for providing
+an fantastic web application framework that was a joy to work with.
 \section{References}
+
+\begin{figure*}
+\includegraphics[width=\textwidth]{../imgs/InitialHomepageHorz.png}
+\caption{Blank Homepage}
+\label{fig:blankPage}
+\end{figure*}
+
+\begin{figure*}
+\includegraphics[width=\textwidth]{../imgs/homepageWireFrameGRHorz.png}
+\caption{Anonymous snippet being posted.}
+\label{fig:anonsnippet}
+\end{figure*}
+
+\begin{figure*}
+\includegraphics[width=\textwidth]{../imgs/CCodeSnippetHorz.png}
+\caption{Joe's home screen with his code snippet}
+\label{fig:joe}
+\end{figure*}
+
+\begin{figure*}
+\includegraphics[width=\textwidth]{../imgs/LoggedInViewSnippetHorz.png}
+\caption{Jane viewing a posted snippet.}
+\label{fig:LoggedInViewJane}
+\end{figure*}
+
+\begin{figure*}
+\includegraphics[width=\textwidth]{../imgs/viewingCategoriesHorz.png}
+\caption{Jane looking at the categories of snippet.}
+\label{fig:viewCategories}
+\end{figure*}
+
+\begin{figure*}
+\includegraphics[width=\textwidth]{../imgs/CSnippetAfterSubmissionHorz.png}
+\caption{Joe looking at his most recent snippet after submission.}
+\label{fig:viewAfterSubmission}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[scale=0.6]{../imgs/N-TierArchitecture.png}
+\caption{3-Tier Architecture for application}
+\label{fig:ntier}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[scale=0.6]{../imgs/ERDiagram.png}
+\caption{Entity-Relationship Diagram for application}
+\label{fig:erdiag}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[scale=0.6]{../imgs/walkthroughseqdiag.png}
+\caption{Sequence diagram for Joe's Walkthrough described in
+Section~\ref{sec:walkthrough}}
+\label{fig:seqdiag}
+\end{figure*}
 
 \end{document}  
