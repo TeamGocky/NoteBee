@@ -12,7 +12,7 @@ window.onresize = function () {
     } else {
         windowWidth = 800;
     }
-    if (windowWidth < 800) {
+    if (windowWidth <= 800) {
         $(".nav").css("display", "none");
 		$("#editor").css("width", "90%");
 		$(".container").css("width", "99%");
