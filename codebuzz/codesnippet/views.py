@@ -58,7 +58,6 @@ def get_rating(request, snippet):
     # rating for the snippet, if there is one.
     if request.user.is_authenticated():
         try:
-            
             initial = SnippetRating.objects.get(snippet=snippet,
                                                 user=request.user)
         except ObjectDoesNotExist:
@@ -276,10 +275,6 @@ def advanced_search(request):
     return render_to_response("codesnippet/advanced_search.html",
                               {"form" : form, "errors" : errors},
                                context)
-
-def view_top_snippets(request):
-    context = RequestContext(request)
-    return render_to_response("codesnippet/top_snippets.html",{}, context)
 
 def browse_language(request, language):
     context = RequestContext(request)
