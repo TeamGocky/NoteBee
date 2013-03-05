@@ -61,19 +61,12 @@ def getTopSnippets():
 
 def getTopRatedSnippets():
     snippets = Snippet.objects.all()
-    topSnippets = []
-    for snippet in list(snippets):
-        ratings = SnippetRating.objects.filter(snippet=snippet)
-        total_rating = 0.0
-        if len(ratings) > 0:
-            for r in ratings:
-                total_rating += r.rating
-            total_rating = total_rating / len(ratings)
-        topSnippets += [[snippet, total_rating]]
-    if topSnippets is not []:
-        topSnippets = sorted(topSnippets, key=itemgetter(1))[::-1]
-        topSnippets = topSnippets[:5]
-    return topSnippets
+    top_snippets = []
+    cmpfn = lambda x,y: -1 if y[1] < x[1] else 0 if y[1] == x[1] else 1
+    for snippet in Snippet.objects.all():
+        top_snippets.append((snippet, get_total_rating(snippet)))
+    top_snippets.sort(cmpfn)
+    return top_snippets[:5]
 
 def index(request):
     """Homepage for codesnippet application."""
