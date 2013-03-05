@@ -1,0 +1,7 @@
+{% if snippets %}
+    <ol>
+        {% for snippet in snippets %}
+            <li><a href="/codesnippet/view/{{ snippet.id }}">{{ snippet.name }}</a></li>
+        {% endfor %}
+    </ol>
+{% endif %}

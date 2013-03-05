@@ -12,15 +12,12 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
-from operator import itemgetter
+from django import template
 
 from codesnippet.forms import CommentForm, SnippetForm,\
                               SnippetRatingForm, SnippetSearchForm
 from codesnippet.models import Bookmark, Category, Comment, Language,\
                                Snippet, SnippetRating
-
-def getLatestSnippets():
-    return Snippet.objects.all().order_by("-id")[:5]
 
 def swapSnippets(snippets, x, y):
     newSnippets = []
@@ -59,15 +56,6 @@ def getTopSnippets():
             sortFiveByRating(topFive)
     return topFive
 
-def getTopRatedSnippets():
-    snippets = Snippet.objects.all()
-    top_snippets = []
-    cmpfn = lambda x,y: -1 if y[1] < x[1] else 0 if y[1] == x[1] else 1
-    for snippet in Snippet.objects.all():
-        top_snippets.append((snippet, get_total_rating(snippet)))
-    top_snippets.sort(cmpfn)
-    return top_snippets[:5]
-
 def index(request):
     """Homepage for codesnippet application."""
     context = RequestContext(request)
@@ -96,9 +84,7 @@ def index(request):
             print form.errors
     else:
         form = SnippetForm()
-    return render_to_response('index.html', {"form" : form,
-                               "latestSnippets" : getLatestSnippets(),
-                               "topSnippets" : getTopRatedSnippets()}, context)
+    return render_to_response('index.html', {"form" : form}, context)
 
 def get_rating(request, snippet):
     """Retrieve the rating of the snippet by request user.
@@ -179,16 +165,12 @@ def view_snippet(request, sid, errors=[]):
                                "comments" : comments,
                                "comment_form" : cform,
                                "rating_width" : "{}%".format(int(rating_width)),
-                               "errors" : errors,
-                               "latestSnippets" : getLatestSnippets(),
-                               "topSnippets" : getTopRatedSnippets()},
+                               "errors" : errors},
                               context)
     except ObjectDoesNotExist:
         errors += ["Snippet does not exist"]
         return render_to_response("codesnippet/view_snippet.html",
-                                  {"errors" : errors,
-                               "latestSnippets" : getLatestSnippets(),
-                               "topSnippets" : getTopRatedSnippets()},
+                                  {"errors" : errors},
                                   context)
 
 @login_required
@@ -300,10 +282,8 @@ def search_snippet(request):
         errors += ["No search term provided."]
     return render_to_response("codesnippet/search_snippet.html",
                                   {"snippets" : snippets,
-                                   "latestSnippets" : getLatestSnippets(),
                                    "query" : query,
-                                   "errors" : errors,
-                                   "topSnippets" : getTopRatedSnippets()},
+                                   "errors" : errors},
                                   context)
 def advanced_search(request):
     """Advanced searching of a snippet (by category and language)."""
@@ -326,42 +306,34 @@ def advanced_search(request):
                                               language__in=languages)
             return render_to_response("codesnippet/search_snippet.html",
                                   {"snippets" : snippets,
-                                   "latestSnippets" : getLatestSnippets(),
                                    "query" : name,
-                                   "errors" : errors,
-                                   "topSnippets" : getTopRatedSnippets()},
+                                   "errors" : errors},
                                   context)
     else:
         form = SnippetSearchForm()
     return render_to_response("codesnippet/advanced_search.html",
-                              {"form" : form,
-                               "latestSnippets" : getLatestSnippets(),
-                               "errors" : errors,
-                               "topSnippets" : getTopRatedSnippets()},                              context)
+                              {"form" : form, "errors" : errors},
+                               context)
 
 def view_top_snippets(request):
     context = RequestContext(request)
-    return render_to_response("codesnippet/top_snippets.html",{
-                               "latestSnippets" : getLatestSnippets(),
-                               "topSnippets" : getTopRatedSnippets()}, context)
+    return render_to_response("codesnippet/top_snippets.html",{}, context)
 
 def browse_language(request, language):
     context = RequestContext(request)
     chosenLanguage = Language.objects.filter(name=language)[:1]
     snippets = Snippet.objects.filter(language__in=chosenLanguage)
-    return render_to_response("codesnippet/browse_language.html", {
-                            "latestSnippets" : getLatestSnippets(),
-                            "snippets" : snippets, "language" : language,
-                            "topSnippets" : getTopRatedSnippets()}, context)
+    return render_to_response("codesnippet/browse_language.html",
+                              {"snippets" : snippets,
+                               "language" : language}, context)
 
 def browse_category(request, category):
     context = RequestContext(request)
     chosenCategory = Category.objects.filter(name=category)[:1]
     snippets = Snippet.objects.filter(category__in=chosenCategory)
-    return render_to_response("codesnippet/browse_category.html", {
-                            "latestSnippets" : getLatestSnippets(),
-                            "snippets" : snippets, "category" : category,
-                            "topSnippets" : getTopRatedSnippets()}, context)
+    return render_to_response("codesnippet/browse_category.html",
+                              {"snippets" : snippets,
+                               "category" : category}, context)
 
 def browser_snippets(request):
     context = RequestContext(request)
@@ -369,6 +341,4 @@ def browser_snippets(request):
     categories = Category.objects.all().order_by("name")
     return render_to_response("codesnippet/browse_snippets.html", {
                               "languages" : languages,
-                              "categories" : categories,
-                               "latestSnippets" : getLatestSnippets(),
-                               "topSnippets" : getTopRatedSnippets()}, context)
+                              "categories" : categories}, context)

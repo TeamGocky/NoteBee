@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from codesnippet.views import getLatestSnippets
+
 try:
 	import twitter
 	twitterSuccess = True
@@ -25,9 +25,7 @@ def register(request):
                 except:
                     print 'Twitter posting for new user failed.'
             msg = "Successfully registered, please login."
-            return render_to_response("register.html", {"msg" : msg,
-                "latestSnippets" : getLatestSnippets()}, context)
+            return render_to_response("register.html", {"msg" : msg}, context)
     else:
         form = UserCreationForm()
-    return render_to_response("register.html", {"form" : form,
-                "latestSnippets" : getLatestSnippets()}, context)
+    return render_to_response("register.html", {"form" : form}, context)

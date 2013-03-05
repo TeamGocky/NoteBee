@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     {% load staticfiles %}
+    {% load snippettags %}
     <link rel="stylesheet" href="{% static "css/template.css" %}" />
     <link rel="stylesheet" href="{% static "js/lib/codemirror.css" %}" />
     <script src="{% static "js/styling.js" %}"></script>
@@ -41,21 +42,9 @@
             <div class="nav">
                 {% block sideBar %}
                     <h5 class="navigation">Most Recent Snippets</h5>
-                    {% if latestSnippets %}
-                        <ol>
-                            {% for snippet in latestSnippets %}
-                                <li><a href="/codesnippet/view/{{ snippet.id }}">{{ snippet.name }}</a></li>
-                            {% endfor %}
-                        </ol>
-                    {% endif %}
+                        {% getLatestSnippets %}
                     <h5 class="navigation">Top Snippets</h5>
-                    {% if topSnippets %}
-                        <ol>
-                            {% for snippet in topSnippets %}
-                                <li><a href="/codesnippet/view/{{ snippet.0.id }}">{{ snippet.0.name }}</a></li>
-                            {% endfor %}
-                        </ol>
-                    {% endif %}
+                        {% getTopRatedSnippets %}
                 {% endblock %}
             </div>
             <div class="article">
