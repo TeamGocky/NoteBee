@@ -394,7 +394,8 @@ own login and authentication system, etc.
 
 \section{Message Parsing}
 
-Figure~\ref{fig:seqdiag} illustrates a sequence diagram for the
+Figures~\ref{fig:loginseqdiag} to~\ref{fig:postseqdiag} illustrate a
+sequences for login, posting a snippet and logout for the
 walkthrough in Section~\ref{sec:walkthrough}. The responses from the
 middleware are HTML5 responses (some have client-side Ajax/jQuery/JSON
 scripts included in them).
@@ -502,10 +503,26 @@ an fantastic web application framework that was a joy to work with.
 
 \begin{figure*}
 \centering
-\includegraphics[scale=0.6]{../imgs/walkthroughseqdiag.png}
-\caption{Sequence diagram for Joe's Walkthrough described in
-Section~\ref{sec:walkthrough}}
-\label{fig:seqdiag}
+\includegraphics[scale=0.6]{../imgs/walkthroughseqdiag-login.png}
+\caption{Login Sequence diagram for Joe's Walkthrough described in
+Section~\ref{sec:walkthrough} steps 1-3}
+\label{fig:loginseqdiag}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[scale=0.6]{../imgs/walkthroughseqdiag-postsnippet.png}
+\caption{Post Snippet Sequence diagram for Joe's Walkthrough described in
+Section~\ref{sec:walkthrough} steps 4-8}
+\label{fig:postseqdiag}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[scale=0.6]{../imgs/walkthroughseqdiag-logout.png}
+\caption{Logout Sequence diagram for Joe's Walkthrough described in
+Section~\ref{sec:walkthrough} step 9}
+\label{fig:logoutseqdiag}
 \end{figure*}
 
 \end{document}  
