@@ -35,7 +35,7 @@
     {% if topSnippets %}
         <p>Highest Rated Snippets</p>
         <ul>
-            {% for snippet in topSnippets %}
+            {% for snippet in topUserSnippets %}
                 <li><a href="/codesnippet/view/{{ snippet.0.id }}">{{ snippet.0 }} - Rating: {{snippet.1}}</a></li>
             {% endfor %}
         </ul>

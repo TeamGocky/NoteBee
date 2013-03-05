@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from codesnippet.models import *
-from codesnippet.views import getLatestSnippets
+from codesnippet.views import getLatestSnippets, getTopRatedSnippets
 from operator import itemgetter
 
 def user_login(request):
@@ -25,10 +25,12 @@ def user_login(request):
         else:
             msg = "Invalid username or password"
         return render_to_response("login.html", {"msg" : msg,
-                    "latestSnippets" : getLatestSnippets()}, context)
+                    "latestSnippets" : getLatestSnippets(),
+                    "topSnippets" : getTopRatedSnippets()}, context)
     else:
         return render_to_response("login.html",
-                    {"latestSnippets" : getLatestSnippets()}, context)
+                    {"latestSnippets" : getLatestSnippets(),
+                     "topSnippets" : getTopRatedSnippets()}, context)
 
 @login_required
 def user_logout(request):
@@ -45,7 +47,7 @@ def user_view(request, uid):
     snippets = None
     modes = None
     languages = None
-    topSnippets = None
+    topUserSnippets = None
     allLanguages = Language.objects.all().order_by("name")
     try:
         userView = User.objects.get(id=uid)
@@ -67,7 +69,7 @@ def user_view(request, uid):
             except ObjectDoesNotExist:
                 error.append("Could not get list of languages user codes in.")
             try:
-                topSnippets = []
+                topUserSnippets = []
                 for snippet in list(snippets):
                     ratings = SnippetRating.objects.filter(snippet=snippet)
                     total_rating = 0.0
@@ -75,15 +77,16 @@ def user_view(request, uid):
                         for r in ratings:
                             total_rating += r.rating
                         total_rating = total_rating / len(ratings)
-                    topSnippets += [[snippet, total_rating]]
-                if topSnippets is not []:
-                    topSnippets = sorted(topSnippets, key=itemgetter(1))[::-1]
-                    topSnippets = topSnippets[:5]
+                    topUserSnippets += [[snippet, total_rating]]
+                if topUserSnippets is not []:
+                    topUserSnippets = sorted(topUserSnippets, key=itemgetter(1))[::-1]
+                    topUserSnippets = topUserSnippets[:5]
             except ObjectDoesNotExist:
                 error.append("Could not get list of ratings.")
             snippets = snippets[:5]
     return render_to_response("accounts/view.html",
             {"userView" : userView, "errors" : errors,
              "bookmarks" : bookmarks, "snippets" : snippets,
-             "languages" : languages, "topSnippets" : topSnippets,
+             "languages" : languages, "topUserSnippets" : topUserSnippets,
+             "topSnippets" : getTopRatedSnippets(),
              "latestSnippets" : getLatestSnippets()}, context)

@@ -49,13 +49,13 @@
                         </ol>
                     {% endif %}
                     <h5 class="navigation">Top Snippets</h5>
-                    <ol>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
-                        <li><a href="">Snippet</a></li>
-                    </ol>
+                    {% if topSnippets %}
+                        <ol>
+                            {% for snippet in topSnippets %}
+                                <li><a href="/codesnippet/view/{{ snippet.0.id }}">{{ snippet.0.name }}</a></li>
+                            {% endfor %}
+                        </ol>
+                    {% endif %}
                 {% endblock %}
             </div>
             <div class="article">
