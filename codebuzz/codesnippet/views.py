@@ -347,7 +347,6 @@ def advanced_search(request):
                                "topSnippets" : getTopRatedSnippets()},                              context)
 
 def view_top_snippets(request):
-    """Dummy view just so I could see what my page looked like."""
     context = RequestContext(request)
     return render_to_response("codesnippet/top_snippets.html",{
                                "latestSnippets" : getLatestSnippets(),
@@ -362,11 +361,21 @@ def browse_language(request, language):
                             "snippets" : snippets, "language" : language,
                             "topSnippets" : getTopRatedSnippets()}, context)
 
+def browse_category(request, category):
+    context = RequestContext(request)
+    chosenCategory = Category.objects.filter(name=category)[:1]
+    snippets = Snippet.objects.filter(category__in=chosenCategory)
+    return render_to_response("codesnippet/browse_category.html", {
+                            "latestSnippets" : getLatestSnippets(),
+                            "snippets" : snippets, "category" : category,
+                            "topSnippets" : getTopRatedSnippets()}, context)
+
 def browser_snippets(request):
-    """Dummy view just so I could see what my page looked like."""
     context = RequestContext(request)
     languages = Language.objects.all().order_by("name")
+    categories = Category.objects.all().order_by("name")
     return render_to_response("codesnippet/browse_snippets.html", {
                               "languages" : languages,
+                              "categories" : categories,
                                "latestSnippets" : getLatestSnippets(),
                                "topSnippets" : getTopRatedSnippets()}, context)

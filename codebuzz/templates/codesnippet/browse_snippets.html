@@ -13,12 +13,12 @@
         {% endfor %}
     </ol>
 {% endif %}
-<h5 class="navigation">Categories</h5>
-<ol>
-	<li><a href="">Category</a></li>
-	<li><a href="">Category</a></li>
-	<li><a href="">Category</a></li>
-	<li><a href="">Category</a></li>
-	<li><a href="">Category</a></li>
-</ol>
+{% if categories %}
+    <h5 class="navigation">Categories</h5>
+    <ol>
+        {% for category in categories %}
+            <li><a href="category/{{category.name}}">{{category.name}}</a></li>
+        {% endfor %}
+    </ol>
+{% endif %}
 {% endblock %}
