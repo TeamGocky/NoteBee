@@ -190,6 +190,45 @@
                         $(".sventek").width(getPercentWidth(totalRating) + "%");
                     });
                 {% endif %}
+                
+                /* 
+                 * jsrotate:
+                 * Rotate Sventeks if we receive the the key sequence
+                 * "jsr".
+                 */
+                
+                var down = [];
+                var J = 74, R = 82, S = 83;
+                $(document).keydown(function(e) {
+                    switch (e.keyCode) {
+                        case J:
+                            if (!down[S] && !down[R]) {
+                                down[e.keyCode] = true;
+                            }
+                            break;
+                        case R:
+                            if (down[J] && down[S]) {
+                                down[e.keyCode] = true;
+                            }
+                            break;
+                        case S:
+                            if (down[J]) {
+                                down[e.keyCode] = true;
+                            }
+                            break;
+                    }
+                }).keyup(function(e) {
+                    if (down[J] && down[R] && down[S]) {
+                        $(".empty").css("background-image", "none");
+                        $(".empty").width("360px");
+                        $(".sventek").css("background-image",
+                                          "url({{ STATIC_URL }}jsrotate.gif)");
+                        down[J] = down[R] = down[S] = false;
+                    } else if (e.keyCode != J && e.keyCode != R &&
+                               e.keyCode != S) {
+                        down[J] = down[R] = down[S] = false;
+                    }
+                });
             });
         </script>
     {% endif %}
