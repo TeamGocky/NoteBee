@@ -31,7 +31,7 @@
         {% for name, value in snippet.attrs %}
             <p>
                 {% if name != "name" %}
-                <label for="{{ name }}">{{ name.capitalize }}:</label>
+                    <label>{{ name.capitalize }}:</label>
                 {% endif %}
                 {% if name == "body" %}
                     <textarea id="editor">{{ snippet.body }}</textarea>
@@ -47,7 +47,6 @@
                 {% endif %}
             </p>
         {% endfor %}
-	    <p>
             <!--<label for="rating">Rating:</label>
             <span id="total_rating">{{ rating }}</span>-->
             <div class="empty">
@@ -67,10 +66,8 @@
                 {% csrf_token %}
                 {{ rating_form.rating }}
             </form>
-        </p>
         {% if user.is_authenticated %}
-            <p>
-                <form action="" method="post">
+                <form action="#" method="post">
                     {% csrf_token %}
                     <p><input type="checkbox" id="bookmark"
                         {% if bookmarked %}
@@ -82,7 +79,6 @@
                         {% endif %}
                     </span></p>
                 </form>
-            </p>
         {% endif %}
         {% if not user.is_authenticated %}
             <p>
@@ -103,7 +99,6 @@
             {% endfor %}
         {% endif %}
         {% if user.is_authenticated %}
-            <p>
                 <form id="comment_form" method="post"
                       action="/codesnippet/comment/{{ snippet.id }}/">
                     {% csrf_token %}
@@ -111,7 +106,6 @@
                     {{ comment_form.comment }}<br />
                     <input type="submit" name="submit" value="Post Comment"/>
                 </form>
-            </p>
         {% endif %}
         <script>
             $(document).ready(function() {
