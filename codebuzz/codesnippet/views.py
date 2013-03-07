@@ -84,7 +84,6 @@ def get_total_rating(snippet):
 def view_snippet(request, sid, errors=[]):
     """View the snippet with id = sid argument."""
     context = RequestContext(request)
-    errors = []
     try:
         snippet = Snippet.objects.get(id=sid)
         snippet.hits += 1
