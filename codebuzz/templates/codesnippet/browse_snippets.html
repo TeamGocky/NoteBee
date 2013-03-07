@@ -9,7 +9,7 @@
 {% if languages %}
     <ol>
         {% for language in languages %}
-            <li><a href="language/{{language}}">{{ language}}</a></li>
+            <li><a href="language/{{language|urlencode}}">{{ language}}</a></li>
         {% endfor %}
     </ol>
 {% endif %}
@@ -17,7 +17,7 @@
     <h5 class="navigation">Categories</h5>
     <ol>
         {% for category in categories %}
-            <li><a href="category/{{category.name}}">{{category.name}}</a></li>
+            <li><a href="category/{{category.name|urlencode}}">{{category.name}}</a></li>
         {% endfor %}
     </ol>
 {% endif %}
