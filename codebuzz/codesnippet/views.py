@@ -24,7 +24,6 @@ def index(request):
     if request.method == "POST":
         form = SnippetForm(data = request.POST)
         if form.is_valid():
-            # Redirect to the view page for the snippet.
             snippet = form.save(commit=False)
             if request.user.is_authenticated():
                 snippet.user = request.user
@@ -40,6 +39,7 @@ def index(request):
                                     snippet.name + '" has just been submitted!')
                 except:
                     print 'Twitter posting failed.'
+            # Redirect to the view page for the snippet.
             view = "view/{}/".format(snippet.id)
             return HttpResponseRedirect(view)
         else:
@@ -81,9 +81,10 @@ def get_total_rating(snippet):
         pass
     return total
 
-def view_snippet(request, sid, errors=[]):
+def view_snippet(request, sid):
     """View the snippet with id = sid argument."""
     context = RequestContext(request)
+    errors = []
     try:
         snippet = Snippet.objects.get(id=sid)
         snippet.hits += 1
@@ -138,12 +139,11 @@ def view_snippet(request, sid, errors=[]):
 def submit_rating(request, sid):
     """Submits a user rating of a snippet."""
     context = RequestContext(request)
-    errors = []
     if request.method == "POST":
         try:
             urating = int(request.POST["rating"])
         except ValueError:
-            errors += ["Not a number"]
+            pass
         else:
             values = SnippetRating.RATINGS
             if (urating >= values[0][0] and
@@ -152,7 +152,7 @@ def submit_rating(request, sid):
                 try:
                     s = Snippet.objects.get(id=sid)
                 except ObjectDoesNotExist:
-                    errors += ["Snippet does not exist"]
+                    pass
                 else:
                     try:
                         srating = SnippetRating.objects.get(user=u,
@@ -169,14 +169,9 @@ def submit_rating(request, sid):
                                             "total_rating" : "{}".format(total_rating)})
                     return HttpResponse(obj,
                                         content_type="application/json")
-            else:
-                errors += ["Out of range rating: {}".format(urating)]
-    return view_snippet(request, sid, errors)
-
 @login_required
 def submit_comment(request, sid):
     """Submit a rating by a user for a snippet."""
-    errors = []
     if request.method == "POST":
         cform = CommentForm(data = request.POST)
         if cform.is_valid():
@@ -185,12 +180,9 @@ def submit_comment(request, sid):
             try:
                 comment.snippet = Snippet.objects.get(id=sid)
             except ObjectDoesNotExist:
-                errors += ["Snippet does not exist"]
+                pass
             else:
                 comment.save()
-        else:
-            errors += cform.errors
-        return view_snippet(request, sid, errors)
     return HttpResponseRedirect("/codesnippet/view/" + sid)
 
 @login_required
