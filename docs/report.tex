@@ -398,7 +398,9 @@ Figures~\ref{fig:loginseqdiag} to~\ref{fig:postseqdiag} illustrate a
 sequences for login, posting a snippet and logout for the
 walkthrough in Section~\ref{sec:walkthrough}. The responses from the
 middleware are HTML5 responses (some have client-side Ajax/jQuery/JSON
-scripts included in them).
+scripts included in them). All page requests require a ORM request to
+the Database to retrieve the top five most recent and highest rated
+code snippets.
 
 \begin{itemize}
 \item Describe the messages that are parsed back and forth through
@@ -435,10 +437,13 @@ and protocols that will be required.
 
 \section{Acknowledgements}
 
-Thanks to Leif Azzopardi for his input and suggestions.
+Thanks to Dr. Leif Azzopardi for his input and suggestions.
 
 Thanks to Euan Freeman for being a repository of knowledge and for
 suggesting the unique rating system for the application.
+
+Thanks to Professor Joseph Sventek for letting us use his image for the
+rating system.
 
 Thanks to Marijn Haverbeke for developing and maintaining the excellent
 CodeMirror~\footnote{http://codemirror.net/} component that was used to
