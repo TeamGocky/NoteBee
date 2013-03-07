@@ -2,7 +2,7 @@
 {% block title %}CodeBuzz - View Profile{% endblock %}
 {% block body %}
     {% if userView %}
-        <h3><label for="name">Profile for </label>{{ userView.username }}</h3>
+        <h3><label>Profile for </label>{{ userView.username }}</h3>
         <p>Joined: {{ userView.date_joined }}</p>
         <p>Last seen: {{ userView.last_login }}</p>
 <!-- General-info-related code -->
