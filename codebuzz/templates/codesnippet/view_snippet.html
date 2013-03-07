@@ -28,25 +28,17 @@
 			Anonymous
 		{% endif %}
 		</h3>
-        {% for name, value in snippet.attrs %}
-            <p>
-                {% if name != "name" %}
-                    <label>{{ name.capitalize }}:</label>
-                {% endif %}
-                {% if name == "body" %}
-                    <textarea id="editor">{{ snippet.body }}</textarea>
-                {% elif name == "user" and not value %}
-                    Anonymous
-                {% elif name == "user" %}
-                    <a href="/accounts/view/{{ snippet.user.id|urlencode }}">{{ value }}</a>
-                {% elif name == "name" %}
-                {% elif name == "language" %}
-                    <a href="/codesnippet/browse/language/{{ value|urlencode }}">{{ value }}</a>
-                {% else %}
-                    {{ value }}
-                {% endif %}
-            </p>
-        {% endfor %}
+        <p>This is {{snippet.name}} by
+            {% if snippet.user %}
+                <a href="/accounts/view/{{ snippet.user.id }}">{{ snippet.user }}</a>
+            {% else %}
+                Anonymous
+            {% endif %}.
+            It is written in
+            <a href="/codesnippet/browse/language/{{ snippet.language|urlencode }}">{{ snippet.language }}</a>
+            and is a
+            <a href="/codesnippet/browse/category/{{ snippet.category|urlencode }}">{{ snippet.category }}</a> snippet. It has been viewed {{snippet.hits}} times.</p>
+            <p><textarea id="editor">{{ snippet.body }}</textarea></p>
             <!--<label for="rating">Rating:</label>
             <span id="total_rating">{{ rating }}</span>-->
             <div class="empty">
