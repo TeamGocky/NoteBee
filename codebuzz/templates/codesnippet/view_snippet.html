@@ -30,10 +30,10 @@
 		</h3>
         <p>This is {{snippet.name}} by
             {% if snippet.user %}
-                <a href="/accounts/view/{{ snippet.user.id }}">{{ snippet.user }}</a>
+                <a href="/accounts/view/{{ snippet.user.id }}">{{ snippet.user }}</a>.
             {% else %}
-                Anonymous
-            {% endif %}.
+                Anonymous.
+            {% endif %}
             It is written in
             <a href="/codesnippet/browse/language/{{ snippet.language|urlencode }}">{{ snippet.language }}</a>
             and is a
