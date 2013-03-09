@@ -422,15 +422,76 @@ and disadvantages of these other formats?
 
 \section{Implementation Notes}
 
-	Views – what major views did you implement and what do they do?
-	URL Mapping Schema – how did you map urls to views
-	External Services  - what external services did you include and what
-handlers did you write?
-	Functionality Checklist (which functionality is completed)
-	Known Issues (what kind of works, what kind of errors to do you get)
-	What technologies have been used and are required for the application.
-Include a list or table of all the technologies, standards, and protocols
-that will be required.
+\subsection{Views}
+
+We implemented the obligatory register/login/logout views and a view called
+`user\_view' that displays some public information in a profile page such as
+the user's most recent and top rated snippets, languages, and a summary of
+activity. This is available for viewing by either clicking on a user's name
+or going to your own `Your Profile' link when logged in.
+
+We also implemented views listed below:
+
+\begin{itemize}
+\item Homepage - The homepage primarily acts as the page where content
+can be added. The user is greeted with a message asking them to post a snippet
+which a text box already in focus, waiting for input.
+
+\item View Snippet - This is the complementary view to the 
+homepage. This view displays the title, a brief summary, and the code for a 
+code snippet. This page also gives a logged in user the ability to rate,
+comment, or tweet the snippet.
+
+\item Search  -These two views are our
+two search mechanisms. The first allows a standard keyword search on snippet
+names. The latter allows for keyword, category, and language specific searching.
+
+\item Browse -
+These snippets allow the user to search all snippets that fall under a certain
+language or category.
+\end{itemize}
+
+\subsection{URL Mapping}
+
+Our application is comprised of three apps: accounts, registration, and
+codesnippet. 
+
+Registration has a single URL `/registration/' that handles the
+simple form required to become a member of the website.
+
+Accounts handles the login, logout, and profile view via the URLs:
+`/accounts/login', `/accounts/logout', and `/accounts/view/<user id>'
+respectively.
+
+The Codesnippet app's URL mappings are equally as readable. All URLs, again,
+begin with `/codesnippet/' (not required to get to homepage). Postfixes for
+search and advanced search are `search/' and `advanced\_search/' respectively.
+This is similar for browse (by language/category) with
+ `/browse/language|category/<language>|<category>/'. Also, to view a snippet
+the URL the postfix is `view/<snippetID>/'.
+
+\subsection{External Service}
+
+Our sole external service is with the Twitter API. A Python package
+python-twitter is available that prevents the developers wishing to use the
+API from having to write any handler code.
+
+\subsection{Functionality implemented and known issues}
+
+All primary functionality stated earlier in the report has been implemented and
+there are no known issues at time of writing.
+
+\subsection{Technologies Used}
+
+\begin{itemize}
+\item HTML (HTML5 backwards compatible with HTML4)
+\item CSS (Mostly CSS2 with some non-essential CSS3 such as border-radius)
+\item Javascript/jQuery - Required to work CodeMirror's syntax highlighting,
+for detecting a low resolution display and changing the CSS, and for the JSON
+rating system.
+\item Python + Django
+\item SQLite (although should be replaced by MySQL or similar)
+\end{itemize}
 
 \section{Reflective Summary}
 
