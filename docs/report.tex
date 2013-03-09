@@ -400,25 +400,50 @@ own login and authentication system, etc.
 
 \section{Message Parsing}
 
-Figures~\ref{fig:loginseqdiag} to~\ref{fig:postseqdiag} illustrate a
-sequences for login, posting a snippet and logout for the
-walkthrough in Section~\ref{sec:walkthrough}. The responses from the
-middleware are HTML5 responses (some have client-side Ajax/jQuery/JSON
-scripts included in them). All page requests require a ORM request to
-the Database to retrieve the top five most recent and highest rated
-code snippets.
+Figures~\ref{fig:loginseqdiag} and~\ref{fig:postseqdiag} illustrate
+sequence diagrams for login and posting a snippet, respectively,
+for the walkthrough described in Section~\ref{sec:walkthrough}.
+The sequence of requests for logout are similar to that of login so are
+not shown. The responses from the middleware are HTML5 responses
+(some have client-side Ajax/jQuery/JSON scripts included in them).
+All page requests require an ORM request to
+the Database to retrieve the top five most recent, and highest rated
+code snippets. In addition to these requests, the
+``view snippet'' view requests numerous items from the database for
+the snippet, to be displayed, and the current user. In this
+case, Joe is logged in so a request is made to retrieve his
+rating of the viewed snippet, which is zero at the moment since the
+snippet was just posted.
 
-\begin{itemize}
-\item Describe the messages that are parsed back and forth through
-the application.
-\item	For the main transactions - describe the payload of the messages 
-\item	i.e. What are the contents of the messages? i.e. include
-sample XML, XHTML, JSON, etc of one or two messages.
-\item	What is the format of the messages? 
-\item	Why this format? 
-\item	What other formats could be used, what are the advantages
-and disadvantages of these other formats?
-\end{itemize}
+To rate a snippet, a logged in user uses the unique rating system for
+the application shown in Figure~\ref{fig:joerating}. The display shows
+the number of ``Sventeks'' the snippet has been given as an average of
+the user ratings. Below the ``Sventeks'' is a description of the current
+user's rating of the snippet. A user can change their rating at any time.
+
+The sequence diagram for submitting a rating for snippet with id 19 is
+shown in Figure~\ref{fig:ratingseqdiag}. The particular sequence is for
+a user that is updating their previous rating of the snippet but the
+sequence of requests would be similar for a user rating the snippet
+for the first time.
+
+Javascript (and the jQuery library), JSON, and Ajax are the
+technologies used to dynamically update the rating display when a user
+changes their own rating of the snippet. This requires sending the
+current user's updated rating of the snippet (after validation) and the
+new total rating in a JSON object from the middleware to the client.
+
+In Python, the JSON object looks as follows:
+
+\begin{verbatim}
+
+{"user_rating" : urating,
+ "total_rating" : "{}".format(total_rating)}
+
+\end{verbatim}
+
+where \texttt{urating} and \texttt{total\_rating} are the updated user
+and total rating respectively.
 
 \section{Implementation Notes}
 
@@ -603,10 +628,16 @@ Section~\ref{sec:walkthrough} steps 4-8}
 
 \begin{figure*}
 \centering
-\includegraphics[scale=0.6]{../imgs/walkthroughseqdiag-logout.png}
-\caption{Logout Sequence diagram for Joe's Walkthrough described in
-Section~\ref{sec:walkthrough} step 9}
-\label{fig:logoutseqdiag}
+\includegraphics[scale=0.7]{../imgs/joerating.png}
+\caption{The Sventek rating system (relevant parts surrounded by red border)}
+\label{fig:joerating}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[scale=0.6]{../imgs/submitratingseqdiag.png}
+\caption{Updating a user's rating of a code snippet}
+\label{fig:ratingseqdiag}
 \end{figure*}
 
 \end{document}  
