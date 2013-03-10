@@ -1,0 +1,5 @@
+# Dump
+echo '.dump' | sqlite3 sqlite3.db | gzip -c > sqlite3.dump.gz
+# Restore
+zcat sqlite3.dump.gz | sqlite3 sqlite3.db
+
