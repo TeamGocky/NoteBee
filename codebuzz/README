@@ -1,0 +1,33 @@
+Team Gocky - CodeBuzz
+
+Required Python Packages
+- Django
+- python-twitter (and dependencies listed on below URL)
+  https://code.google.com/p/python-twitter/
+  In the event that dependencies cannot be satisfied the
+  web app will still run (import in try/except), just
+  without the automated twitter posting of new users and
+  snippets. This was the case during the Demo in BO720.
+
+Configuration details
+N/A
+
+Github Link
+https://github.com/TeamGocky/NoteBee
+
+Running instructions:
+Executing
+$ python manage.py runserver
+is sufficient.
+
+Restoring the database:
+$ zcat sqlite3.dump.gz | sqlite3 sqlite3.db
+If zcat is not available please decompress the gz and run
+$ cat sqlite3.dump | sqlite3 sqlite3.db
+This will re-add as many entries as possible. It is also
+able to completely recreate the database to the version
+specified in the dump in the event of an accidental rm or
+corruption.
+For the purposes of completeness, a backup dump can be created
+by running
+$ echo '.dump' | sqlite3 sqlite3.db | gzip -c > sqlite3.dump.gz

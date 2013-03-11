@@ -1,0 +1,1365 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE "auth_permission" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "name" varchar(50) NOT NULL,
+    "content_type_id" integer NOT NULL,
+    "codename" varchar(100) NOT NULL,
+    UNIQUE ("content_type_id", "codename")
+);
+INSERT INTO "auth_permission" VALUES(1,'Can add permission',1,'add_permission');
+INSERT INTO "auth_permission" VALUES(2,'Can change permission',1,'change_permission');
+INSERT INTO "auth_permission" VALUES(3,'Can delete permission',1,'delete_permission');
+INSERT INTO "auth_permission" VALUES(4,'Can add group',2,'add_group');
+INSERT INTO "auth_permission" VALUES(5,'Can change group',2,'change_group');
+INSERT INTO "auth_permission" VALUES(6,'Can delete group',2,'delete_group');
+INSERT INTO "auth_permission" VALUES(7,'Can add user',3,'add_user');
+INSERT INTO "auth_permission" VALUES(8,'Can change user',3,'change_user');
+INSERT INTO "auth_permission" VALUES(9,'Can delete user',3,'delete_user');
+INSERT INTO "auth_permission" VALUES(10,'Can add content type',4,'add_contenttype');
+INSERT INTO "auth_permission" VALUES(11,'Can change content type',4,'change_contenttype');
+INSERT INTO "auth_permission" VALUES(12,'Can delete content type',4,'delete_contenttype');
+INSERT INTO "auth_permission" VALUES(13,'Can add session',5,'add_session');
+INSERT INTO "auth_permission" VALUES(14,'Can change session',5,'change_session');
+INSERT INTO "auth_permission" VALUES(15,'Can delete session',5,'delete_session');
+INSERT INTO "auth_permission" VALUES(16,'Can add site',6,'add_site');
+INSERT INTO "auth_permission" VALUES(17,'Can change site',6,'change_site');
+INSERT INTO "auth_permission" VALUES(18,'Can delete site',6,'delete_site');
+INSERT INTO "auth_permission" VALUES(19,'Can add log entry',7,'add_logentry');
+INSERT INTO "auth_permission" VALUES(20,'Can change log entry',7,'change_logentry');
+INSERT INTO "auth_permission" VALUES(21,'Can delete log entry',7,'delete_logentry');
+INSERT INTO "auth_permission" VALUES(22,'Can add category',8,'add_category');
+INSERT INTO "auth_permission" VALUES(23,'Can change category',8,'change_category');
+INSERT INTO "auth_permission" VALUES(24,'Can delete category',8,'delete_category');
+INSERT INTO "auth_permission" VALUES(25,'Can add language',9,'add_language');
+INSERT INTO "auth_permission" VALUES(26,'Can change language',9,'change_language');
+INSERT INTO "auth_permission" VALUES(27,'Can delete language',9,'delete_language');
+INSERT INTO "auth_permission" VALUES(28,'Can add snippet',10,'add_snippet');
+INSERT INTO "auth_permission" VALUES(29,'Can change snippet',10,'change_snippet');
+INSERT INTO "auth_permission" VALUES(30,'Can delete snippet',10,'delete_snippet');
+INSERT INTO "auth_permission" VALUES(31,'Can add comment',11,'add_comment');
+INSERT INTO "auth_permission" VALUES(32,'Can change comment',11,'change_comment');
+INSERT INTO "auth_permission" VALUES(33,'Can delete comment',11,'delete_comment');
+INSERT INTO "auth_permission" VALUES(34,'Can add snippet rating',12,'add_snippetrating');
+INSERT INTO "auth_permission" VALUES(35,'Can change snippet rating',12,'change_snippetrating');
+INSERT INTO "auth_permission" VALUES(36,'Can delete snippet rating',12,'delete_snippetrating');
+INSERT INTO "auth_permission" VALUES(37,'Can add bookmark',13,'add_bookmark');
+INSERT INTO "auth_permission" VALUES(38,'Can change bookmark',13,'change_bookmark');
+INSERT INTO "auth_permission" VALUES(39,'Can delete bookmark',13,'delete_bookmark');
+CREATE TABLE "auth_group_permissions" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "group_id" integer NOT NULL,
+    "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id"),
+    UNIQUE ("group_id", "permission_id")
+);
+CREATE TABLE "auth_group" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "name" varchar(80) NOT NULL UNIQUE
+);
+CREATE TABLE "auth_user_user_permissions" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "user_id" integer NOT NULL,
+    "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id"),
+    UNIQUE ("user_id", "permission_id")
+);
+CREATE TABLE "auth_user_groups" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "user_id" integer NOT NULL,
+    "group_id" integer NOT NULL REFERENCES "auth_group" ("id"),
+    UNIQUE ("user_id", "group_id")
+);
+CREATE TABLE "auth_user" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "username" varchar(30) NOT NULL UNIQUE,
+    "first_name" varchar(30) NOT NULL,
+    "last_name" varchar(30) NOT NULL,
+    "email" varchar(75) NOT NULL,
+    "password" varchar(128) NOT NULL,
+    "is_staff" bool NOT NULL,
+    "is_active" bool NOT NULL,
+    "is_superuser" bool NOT NULL,
+    "last_login" datetime NOT NULL,
+    "date_joined" datetime NOT NULL
+);
+INSERT INTO "auth_user" VALUES(1,'1002524m','','','1002524m@student.dcs.gla.ac.uk','pbkdf2_sha256$10000$TUC4BA9VrVW2$nw2KAoLB5ecpcUfggjknolGco/tFSXaGnXOm+hxSN9s=',1,1,1,'2013-03-09 16:05:57.935000','2013-02-14 22:38:57.444382');
+INSERT INTO "auth_user" VALUES(2,'gordonreid','','','','pbkdf2_sha256$10000$VmvuWrJrmIAX$mHY0u+oaklstLjZCdf6XASDhFr+yxRj1q30XxFuSVjI=',1,1,1,'2013-03-02 11:31:50.613814','2013-02-19 11:31:40');
+INSERT INTO "auth_user" VALUES(3,'Test','','','','pbkdf2_sha256$10000$mGGTMmVWx1tq$joDRwOomRbTnVgHCV7l46W1M0sDLrlcXG3vH06UtLOo=',0,1,0,'2013-02-28 09:53:17.334834','2013-02-28 09:52:53.546590');
+INSERT INTO "auth_user" VALUES(4,'XP105','','','','pbkdf2_sha256$10000$IZmc3CoTEGq7$hbCb2Ymqs52GQaaFgcjRrgVNSJ6liL3q+quVidTvHIY=',0,1,0,'2013-03-01 12:18:55.972663','2013-03-01 12:18:32.636504');
+CREATE TABLE "django_content_type" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "name" varchar(100) NOT NULL,
+    "app_label" varchar(100) NOT NULL,
+    "model" varchar(100) NOT NULL,
+    UNIQUE ("app_label", "model")
+);
+INSERT INTO "django_content_type" VALUES(1,'permission','auth','permission');
+INSERT INTO "django_content_type" VALUES(2,'group','auth','group');
+INSERT INTO "django_content_type" VALUES(3,'user','auth','user');
+INSERT INTO "django_content_type" VALUES(4,'content type','contenttypes','contenttype');
+INSERT INTO "django_content_type" VALUES(5,'session','sessions','session');
+INSERT INTO "django_content_type" VALUES(6,'site','sites','site');
+INSERT INTO "django_content_type" VALUES(7,'log entry','admin','logentry');
+INSERT INTO "django_content_type" VALUES(8,'category','codesnippet','category');
+INSERT INTO "django_content_type" VALUES(9,'language','codesnippet','language');
+INSERT INTO "django_content_type" VALUES(10,'snippet','codesnippet','snippet');
+INSERT INTO "django_content_type" VALUES(11,'comment','codesnippet','comment');
+INSERT INTO "django_content_type" VALUES(12,'snippet rating','codesnippet','snippetrating');
+INSERT INTO "django_content_type" VALUES(13,'bookmark','codesnippet','bookmark');
+CREATE TABLE "django_session" (
+    "session_key" varchar(40) NOT NULL PRIMARY KEY,
+    "session_data" text NOT NULL,
+    "expire_date" datetime NOT NULL
+);
+INSERT INTO "django_session" VALUES('84537cd44a26658bfd03dfd98cb92cf8','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-01 09:46:39.803425');
+INSERT INTO "django_session" VALUES('8bb7796e0dbcc15505c34be1bb230d9d','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-01 11:36:04.093481');
+INSERT INTO "django_session" VALUES('ab3c84a9a9774bfe6e2c2d2ae3a908a9','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-01 19:23:07.510306');
+INSERT INTO "django_session" VALUES('732d23fe877d595d2c2d73c799839738','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-04 20:18:44.188665');
+INSERT INTO "django_session" VALUES('f9d79b9ba4aa498879b8fd9dace1efd1','MTc3MDQ2ZDgyN2UxOTZiMWViYTI3ZDYzNjA1ZjZmZDhmZTkyNGYyNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAnUu
+','2013-03-05 11:31:49.711891');
+INSERT INTO "django_session" VALUES('70afc276106879f1b8114a73ee7ea4fd','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-05 13:20:45.812569');
+INSERT INTO "django_session" VALUES('f5794db52195d92b1cc8dc3804bf77c5','NjQyNDUwYzU4MTMxNTRiZjczNmUyNTg2NGU1MTFiNTU2ZWYzZTc2MjqAAn1xAS4=
+','2013-03-05 14:49:11.633822');
+INSERT INTO "django_session" VALUES('43fabc452eaa5c5f569c3d41848f8259','NjQyNDUwYzU4MTMxNTRiZjczNmUyNTg2NGU1MTFiNTU2ZWYzZTc2MjqAAn1xAS4=
+','2013-03-05 14:49:12.380740');
+INSERT INTO "django_session" VALUES('f657d14e6a889e9775355409cce73bb9','MTc3MDQ2ZDgyN2UxOTZiMWViYTI3ZDYzNjA1ZjZmZDhmZTkyNGYyNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAnUu
+','2013-03-05 14:49:21.067914');
+INSERT INTO "django_session" VALUES('5fab043a4a7a0ac7cfceb0815327da4a','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-05 17:07:44.865990');
+INSERT INTO "django_session" VALUES('c14785fac9126573dcba2a3cc8fc294e','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-05 19:26:14.561098');
+INSERT INTO "django_session" VALUES('be71ca55ffb122ff089d16059223c989','MTc3MDQ2ZDgyN2UxOTZiMWViYTI3ZDYzNjA1ZjZmZDhmZTkyNGYyNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAnUu
+','2013-03-08 17:58:33.626743');
+INSERT INTO "django_session" VALUES('a5a105de68abb4f9e4704beee754505c','MTc3MDQ2ZDgyN2UxOTZiMWViYTI3ZDYzNjA1ZjZmZDhmZTkyNGYyNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAnUu
+','2013-03-09 14:10:07.782632');
+INSERT INTO "django_session" VALUES('4994f9c0e53ef93d9dc057e68998dfa4','MTc3MDQ2ZDgyN2UxOTZiMWViYTI3ZDYzNjA1ZjZmZDhmZTkyNGYyNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAnUu
+','2013-03-10 11:57:13.297588');
+INSERT INTO "django_session" VALUES('c36ebbe9c96670a69a9e7e35e38da87d','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-10 15:46:32.258525');
+INSERT INTO "django_session" VALUES('f0ed0cef70909fd235c25dcbfc1398b4','MTc3MDQ2ZDgyN2UxOTZiMWViYTI3ZDYzNjA1ZjZmZDhmZTkyNGYyNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAnUu
+','2013-03-10 16:49:07.308478');
+INSERT INTO "django_session" VALUES('0d781f9647013e0dc4b945dbece9fd4e','MTc3MDQ2ZDgyN2UxOTZiMWViYTI3ZDYzNjA1ZjZmZDhmZTkyNGYyNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAnUu
+','2013-03-10 19:22:10.748516');
+INSERT INTO "django_session" VALUES('1c17d817220018acb931c78a3c1c6cf2','NjQyNDUwYzU4MTMxNTRiZjczNmUyNTg2NGU1MTFiNTU2ZWYzZTc2MjqAAn1xAS4=
+','2013-03-11 10:32:16.603351');
+INSERT INTO "django_session" VALUES('fc1996bcf1fe0e5e45b0473a12930213','NjQyNDUwYzU4MTMxNTRiZjczNmUyNTg2NGU1MTFiNTU2ZWYzZTc2MjqAAn1xAS4=
+','2013-03-11 20:25:19.923721');
+INSERT INTO "django_session" VALUES('b081794db587724946bb61c565d9cb4c','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-12 10:19:44.908009');
+INSERT INTO "django_session" VALUES('1a48b8b8c8868fad1f715d17d1811eec','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-12 13:31:42.919224');
+INSERT INTO "django_session" VALUES('c18bcf3f2237781bc165a3428d36b121','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-12 15:29:23.582188');
+INSERT INTO "django_session" VALUES('85fa3f250f3e7f9a4daae2ec8b935a5f','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-12 19:13:06.906611');
+INSERT INTO "django_session" VALUES('9134a15b3fad55d8c240a831c0057645','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-12 22:59:13.574589');
+INSERT INTO "django_session" VALUES('5a5ba28373b8ddaf8876fe266698153d','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-12 23:15:20.766185');
+INSERT INTO "django_session" VALUES('a831536f26eb9c0b3ba0e48aca1c0f9b','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-13 09:14:49.015719');
+INSERT INTO "django_session" VALUES('c10c6ab442e8b5d10acfc2f2a8468c20','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-13 14:03:55.420633');
+INSERT INTO "django_session" VALUES('2f9f5a81d969d42f6abfeae8ff2a3d20','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-13 16:03:15.948343');
+INSERT INTO "django_session" VALUES('f445a4320457fead197e9a1da8c0c995','NjQyNDUwYzU4MTMxNTRiZjczNmUyNTg2NGU1MTFiNTU2ZWYzZTc2MjqAAn1xAS4=
+','2013-03-14 09:53:23.097090');
+INSERT INTO "django_session" VALUES('8690e9b8b14d309b0c6cac81d3cbb17b','MzA2MzkwZWExZWNhZGEyZTAwMTVjMWRjODA2YmQ5YzUyNWZiODJjMjqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLBHUu
+','2013-03-15 12:18:56.154544');
+INSERT INTO "django_session" VALUES('b5322241fa3d9bb6a37768c5bd751fc9','MTc3MDQ2ZDgyN2UxOTZiMWViYTI3ZDYzNjA1ZjZmZDhmZTkyNGYyNTqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAnUu
+','2013-03-16 11:31:51.156155');
+INSERT INTO "django_session" VALUES('4454696a9bbfb39fd89db192b9b56940','MGZkMDI1Y2VhNWNmNjUyYTdkMjJkOTA2MzRlNDM4OGRmMjg0YzUyOTqAAn1xAShVDV9hdXRoX3Vz
+ZXJfaWRLAVUSX2F1dGhfdXNlcl9iYWNrZW5kVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRz
+Lk1vZGVsQmFja2VuZHECdS4=
+','2013-03-18 22:48:55.008148');
+INSERT INTO "django_session" VALUES('1fc4d577fe8a7203e744ae7105f3ac85','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-19 15:12:06.812417');
+INSERT INTO "django_session" VALUES('929e0ccf9b12e5957f13e00f088837fe','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-21 21:55:06.119819');
+INSERT INTO "django_session" VALUES('e0e4cf6449a572d40047c82f33cefdd5','MGZiZmM4YWQ5YjcwMDVmYmE2ZjFmZmUyYjQ5ZjVhNGY5YzI0ODFhYzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu
+','2013-03-23 16:05:57.997000');
+CREATE TABLE "django_site" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "domain" varchar(100) NOT NULL,
+    "name" varchar(50) NOT NULL
+);
+INSERT INTO "django_site" VALUES(1,'example.com','example.com');
+CREATE TABLE "django_admin_log" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "action_time" datetime NOT NULL,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id"),
+    "content_type_id" integer REFERENCES "django_content_type" ("id"),
+    "object_id" text,
+    "object_repr" varchar(200) NOT NULL,
+    "action_flag" smallint unsigned NOT NULL,
+    "change_message" text NOT NULL
+);
+INSERT INTO "django_admin_log" VALUES(1,'2013-02-15 11:21:55.705091',1,8,'1','Sorting Algorithms',1,'');
+INSERT INTO "django_admin_log" VALUES(2,'2013-02-15 11:22:21.755581',1,8,'2','Binary Trees',1,'');
+INSERT INTO "django_admin_log" VALUES(3,'2013-02-15 11:22:34.985209',1,8,'3','Hash functions',1,'');
+INSERT INTO "django_admin_log" VALUES(4,'2013-02-15 11:22:47.080440',1,9,'1','C',1,'');
+INSERT INTO "django_admin_log" VALUES(5,'2013-02-15 11:22:50.756917',1,9,'2','Java',1,'');
+INSERT INTO "django_admin_log" VALUES(6,'2013-02-15 11:22:55.298108',1,9,'3','Python',1,'');
+INSERT INTO "django_admin_log" VALUES(7,'2013-02-15 11:23:02.449281',1,9,'4','Haskell',1,'');
+INSERT INTO "django_admin_log" VALUES(8,'2013-02-15 11:23:05.902441',1,9,'5','C++',1,'');
+INSERT INTO "django_admin_log" VALUES(9,'2013-02-15 11:23:12.281393',1,9,'6','Javascript',1,'');
+INSERT INTO "django_admin_log" VALUES(10,'2013-02-15 11:24:34.700908',1,9,'7','C#',1,'');
+INSERT INTO "django_admin_log" VALUES(11,'2013-02-18 20:18:58.792942',1,9,'text/x-csrc','C',1,'');
+INSERT INTO "django_admin_log" VALUES(12,'2013-02-18 20:19:12.727879',1,8,'1','Hello, World',1,'');
+INSERT INTO "django_admin_log" VALUES(13,'2013-02-18 20:25:30.360695',1,10,'1','Errorenous Hello',3,'');
+INSERT INTO "django_admin_log" VALUES(14,'2013-02-19 14:32:21.838107',1,3,'2','gordonreid',2,'Changed password, is_staff and is_superuser.');
+INSERT INTO "django_admin_log" VALUES(15,'2013-02-19 14:36:20.739431',2,8,'2','Miscellaneous',1,'');
+INSERT INTO "django_admin_log" VALUES(16,'2013-02-19 14:36:54.989784',2,8,'2','Miscellaneous',3,'');
+INSERT INTO "django_admin_log" VALUES(17,'2013-02-19 14:37:31.891188',2,8,'2','Miscellaneous',1,'');
+INSERT INTO "django_admin_log" VALUES(18,'2013-02-19 14:39:02.730612',2,10,'5','Blah',3,'');
+INSERT INTO "django_admin_log" VALUES(19,'2013-02-19 14:39:03.957993',2,10,'4','Test',3,'');
+INSERT INTO "django_admin_log" VALUES(20,'2013-02-19 14:39:09.257533',2,10,'6','another test',3,'');
+INSERT INTO "django_admin_log" VALUES(21,'2013-02-19 14:39:10.576171',2,10,'7','asdas',3,'');
+INSERT INTO "django_admin_log" VALUES(22,'2013-02-19 14:39:23.890828',2,10,'2','Character Count',2,'Changed category.');
+INSERT INTO "django_admin_log" VALUES(23,'2013-02-19 14:39:32.475015',2,10,'3','Character Count',3,'');
+INSERT INTO "django_admin_log" VALUES(24,'2013-02-19 19:35:14.779234',1,12,'1','SnippetRating object',3,'');
+INSERT INTO "django_admin_log" VALUES(25,'2013-02-19 19:35:42.819323',1,12,'2','SnippetRating object',3,'');
+INSERT INTO "django_admin_log" VALUES(26,'2013-02-19 19:35:47.850359',1,12,'3','SnippetRating object',3,'');
+INSERT INTO "django_admin_log" VALUES(27,'2013-02-19 19:36:39.512021',1,12,'1','SnippetRating object',3,'');
+INSERT INTO "django_admin_log" VALUES(28,'2013-02-19 19:45:03.703138',1,12,'2','SnippetRating object',3,'');
+INSERT INTO "django_admin_log" VALUES(29,'2013-02-19 19:47:25.465228',1,12,'2','SnippetRating object',3,'');
+INSERT INTO "django_admin_log" VALUES(30,'2013-02-19 19:49:02.580575',1,12,'1','SnippetRating object',3,'');
+INSERT INTO "django_admin_log" VALUES(31,'2013-02-19 19:49:43.904869',1,12,'2','SnippetRating object',3,'');
+INSERT INTO "django_admin_log" VALUES(32,'2013-02-22 17:58:45.692647',2,9,'javascript','JavaScript',1,'');
+INSERT INTO "django_admin_log" VALUES(33,'2013-02-22 18:00:07.574600',2,9,'clike','C++',1,'');
+INSERT INTO "django_admin_log" VALUES(34,'2013-02-22 18:00:42.051587',2,9,'clike','Java',2,'Changed name and mode.');
+INSERT INTO "django_admin_log" VALUES(35,'2013-02-22 18:00:55.966541',2,9,'clike','C++',2,'Changed name and mode.');
+INSERT INTO "django_admin_log" VALUES(36,'2013-02-22 18:01:19.221653',2,9,'clike','Java',2,'Changed name and mode.');
+INSERT INTO "django_admin_log" VALUES(37,'2013-02-22 18:01:54.777719',2,9,'javascript','JavaScript',3,'');
+INSERT INTO "django_admin_log" VALUES(38,'2013-02-22 18:01:54.779083',2,9,'clike','Java',3,'');
+INSERT INTO "django_admin_log" VALUES(39,'2013-02-22 18:02:04.229791',2,9,'text/x-csrc','C',2,'No fields changed.');
+INSERT INTO "django_admin_log" VALUES(40,'2013-02-22 18:02:12.953346',2,9,'text/s-c++src','C++',1,'');
+INSERT INTO "django_admin_log" VALUES(41,'2013-02-22 18:02:20.005101',2,9,'text/x-java','Java',1,'');
+INSERT INTO "django_admin_log" VALUES(42,'2013-02-22 18:02:32.807208',2,9,'text/x-csharp','C#',1,'');
+INSERT INTO "django_admin_log" VALUES(43,'2013-02-22 18:03:00.690335',2,9,'text/javascript','JavaScript',1,'');
+INSERT INTO "django_admin_log" VALUES(44,'2013-02-22 18:03:07.868079',2,9,'application/json','JSON',1,'');
+INSERT INTO "django_admin_log" VALUES(45,'2013-02-22 18:03:14.396134',2,9,'text/typescript','TypeScript',1,'');
+INSERT INTO "django_admin_log" VALUES(46,'2013-02-22 18:03:44.986722',2,9,'text/typescript','TypeScript',3,'');
+INSERT INTO "django_admin_log" VALUES(47,'2013-02-22 18:03:44.988054',2,9,'application/json','JSON',3,'');
+INSERT INTO "django_admin_log" VALUES(48,'2013-02-22 18:18:59.459332',2,9,'text/x-python ','Python 2',1,'');
+INSERT INTO "django_admin_log" VALUES(49,'2013-02-22 18:20:09.077400',2,9,'text/x-python ','Python',2,'Changed name.');
+INSERT INTO "django_admin_log" VALUES(50,'2013-02-22 18:21:45.768068',2,9,'text/x-scala','Scala',2,'Changed name and mode.');
+INSERT INTO "django_admin_log" VALUES(51,'2013-02-22 18:23:15.382423',2,9,'text/x-python','Python',2,'Changed mode.');
+INSERT INTO "django_admin_log" VALUES(52,'2013-02-22 18:23:46.740593',2,9,'text/x-python ','Python',3,'');
+INSERT INTO "django_admin_log" VALUES(53,'2013-02-22 18:24:11.085230',2,8,'3','Data Structure',1,'');
+INSERT INTO "django_admin_log" VALUES(54,'2013-02-22 18:24:16.647245',2,8,'4','User Interface',1,'');
+INSERT INTO "django_admin_log" VALUES(55,'2013-02-22 18:24:19.722661',2,8,'5','Search algorithm',1,'');
+INSERT INTO "django_admin_log" VALUES(56,'2013-02-22 18:24:23.324917',2,8,'6','Sorting Algorithm',1,'');
+INSERT INTO "django_admin_log" VALUES(57,'2013-02-22 18:24:31.049951',2,8,'5','Search Algorithm',2,'Changed name.');
+INSERT INTO "django_admin_log" VALUES(58,'2013-02-24 15:49:04.983875',1,9,'text/x-c++src','C++',2,'Changed mode.');
+INSERT INTO "django_admin_log" VALUES(59,'2013-02-24 19:43:51.103481',2,10,'6','*',3,'');
+INSERT INTO "django_admin_log" VALUES(60,'2013-02-24 19:43:51.104837',2,10,'5','big big lol',3,'');
+INSERT INTO "django_admin_log" VALUES(61,'2013-02-24 19:43:51.105954',2,10,'4','big lol',3,'');
+INSERT INTO "django_admin_log" VALUES(62,'2013-02-24 19:44:06.039058',2,9,'text/s-c++src','C++',3,'');
+INSERT INTO "django_admin_log" VALUES(63,'2013-02-24 20:01:39.683861',2,9,'text/x-csharp','C Sharp',2,'Changed name.');
+INSERT INTO "django_admin_log" VALUES(64,'2013-02-26 10:42:20.382663',1,13,'2','Imma post on the web server',3,'');
+INSERT INTO "django_admin_log" VALUES(65,'2013-02-26 21:18:29.316949',1,12,'13','SnippetRating object',1,'');
+INSERT INTO "django_admin_log" VALUES(66,'2013-03-02 11:41:23.698439',2,10,'14','++ is also weird...',3,'');
+INSERT INTO "django_admin_log" VALUES(67,'2013-03-02 11:41:25.263715',2,10,'17','Imma post on the web server',3,'');
+INSERT INTO "django_admin_log" VALUES(68,'2013-03-02 11:41:26.169065',2,10,'13','Test C Sharp',3,'');
+INSERT INTO "django_admin_log" VALUES(69,'2013-03-02 11:41:26.542921',2,10,'16','Test Web',3,'');
+INSERT INTO "django_admin_log" VALUES(70,'2013-03-02 11:41:27.109330',2,10,'15','Test Web Server Twitter',3,'');
+INSERT INTO "django_admin_log" VALUES(71,'2013-03-02 11:41:27.526728',2,10,'7','latest test',3,'');
+INSERT INTO "django_admin_log" VALUES(72,'2013-03-02 11:41:27.758537',2,10,'3','lol',3,'');
+INSERT INTO "django_admin_log" VALUES(73,'2013-03-02 11:41:27.883455',2,10,'8','no bug test',3,'');
+INSERT INTO "django_admin_log" VALUES(74,'2013-03-02 11:41:47.667847',2,10,'10','Simple text parser',2,'Changed name.');
+INSERT INTO "django_admin_log" VALUES(75,'2013-03-02 11:41:57.419647',2,10,'12','Hello, world',2,'Changed name.');
+INSERT INTO "django_admin_log" VALUES(76,'2013-03-02 11:42:06.716170',2,10,'1','Erroneous Hello',2,'Changed name.');
+INSERT INTO "django_admin_log" VALUES(77,'2013-03-02 11:42:14.643794',2,10,'11','CTest',2,'No fields changed.');
+CREATE TABLE "codesnippet_category" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "name" varchar(50) NOT NULL
+);
+INSERT INTO "codesnippet_category" VALUES(1,'Hello, World');
+INSERT INTO "codesnippet_category" VALUES(2,'Miscellaneous');
+INSERT INTO "codesnippet_category" VALUES(3,'Data Structure');
+INSERT INTO "codesnippet_category" VALUES(4,'User Interface');
+INSERT INTO "codesnippet_category" VALUES(5,'Search Algorithm');
+INSERT INTO "codesnippet_category" VALUES(6,'Sorting Algorithm');
+CREATE TABLE "codesnippet_language" (
+    "name" varchar(20) NOT NULL,
+    "mode" varchar(40) NOT NULL PRIMARY KEY
+);
+INSERT INTO "codesnippet_language" VALUES('C','text/x-csrc');
+INSERT INTO "codesnippet_language" VALUES('Java','text/x-java');
+INSERT INTO "codesnippet_language" VALUES('C Sharp','text/x-csharp');
+INSERT INTO "codesnippet_language" VALUES('JavaScript','text/javascript');
+INSERT INTO "codesnippet_language" VALUES('Scala','text/x-scala');
+INSERT INTO "codesnippet_language" VALUES('Python','text/x-python');
+INSERT INTO "codesnippet_language" VALUES('C++','text/x-c++src');
+CREATE TABLE "codesnippet_snippet" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "name" varchar(200) NOT NULL,
+    "category_id" integer NOT NULL REFERENCES "codesnippet_category" ("id"),
+    "language_id" varchar(40) NOT NULL REFERENCES "codesnippet_language" ("mode"),
+    "user_id" integer REFERENCES "auth_user" ("id"),
+    "votes" integer NOT NULL,
+    "hits" integer NOT NULL,
+    "body" text NOT NULL
+);
+INSERT INTO "codesnippet_snippet" VALUES(1,'Erroneous Hello',1,'text/x-csrc',1,3,51,'int main(void)
+{
+    printf("Hello, World!/n");
+}');
+INSERT INTO "codesnippet_snippet" VALUES(2,'Character Count',2,'text/x-csrc',2,2,74,'#include <stdio.h>
+
+/* count characters in input */
+int main() {
+    long long nchars;
+
+    for(nchars=0; getchar() != EOF; ++nchars)
+        ;
+
+    printf("%lld\n",nchars);
+    return 0;
+}
+');
+INSERT INTO "codesnippet_snippet" VALUES(9,'Hello, World',1,'text/x-csrc',NULL,0,6,'#include <stdio.h>
+
+int main(void) {
+    puts("Hello, World!");
+	return 0;
+}');
+INSERT INTO "codesnippet_snippet" VALUES(10,'Simple text parser',2,'text/x-java',2,0,6,'package uk.ac.gla.dcs.tp3.w.parser;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.Scanner;
+
+import uk.ac.gla.dcs.tp3.w.league.*;
+
+public class Parser {
+
+	private boolean verbose = false;
+	private Date current = new Date();
+	private HashMap<String, Division> divisions = new HashMap<String, Division>();
+	private final InputStream defaultFile = getClass().getResourceAsStream(
+			"/uk/ac/gla/dcs/tp3/w/parser/baseballSource.txt");
+
+	public Parser() {
+	}
+	
+	public void generateStandardDivisionInfo(){
+		this.init();
+	}
+
+	public boolean parse(String fileName) {
+		Scanner fs;
+		String[] line;
+		if (fileName.equals("")) {
+			fs = new Scanner(defaultFile);
+		} else {
+			try {
+				fs = new Scanner(new File(fileName));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		init();
+		while (fs.hasNextLine()) {
+			line = fs.nextLine().split(" ");
+			if (verbose) {
+				printLine(line);
+			}
+			if (line.length > 1) {
+				if (line.length == 3) {
+					newDate(line);
+				} else {
+					newMatch(line);
+				}
+			}
+		}
+		fs.close();
+		return true;
+	}
+
+	private void initDivision(String[] teams, String divisionName) {
+		Division d = new Division(divisionName);
+		divisions.put(divisionName, d);
+		for (String s : teams) {
+			d.addTeam(new Team(s, divisionName));
+		}
+	}
+
+	private void init() {
+		divisions = new HashMap<String, Division>();
+		String[] aETeams = { "Baltimore Orioles", "Boston Red Sox",
+				"New York Yankees", "Tampa Bay Rays", "Toronto Blue Jays" };
+		initDivision(aETeams, "American East");
+
+		String[] aCTeams = { "Chicago White Sox", "Cleveland Indians",
+				"Detroit Tigers", "Kansas City Royals", "Minnesota Twins" };
+		initDivision(aCTeams, "American Central");
+
+		String[] aWTeams = { "Seattle Mariners", "Texas Rangers",
+				"Los Angeles Angels", "Oakland Athletics" };
+		initDivision(aWTeams, "American West");
+
+		String[] nETeams = { "Atlanta Braves", "Miami Marlins",
+				"New York Mets", "Philadelphia Phillies",
+				"Washington Nationals" };
+		initDivision(nETeams, "National East");
+
+		String[] nCTeams = { "Chicago Cubs", "Cincinnati Reds",
+				"Milwaukee Brewers", "Pittsburgh Pirates", "Houston Astros",
+				"St.Louis Cardinals" };
+		initDivision(nCTeams, "National Central");
+
+		String[] nWTeams = { "Arizona Diamondbacks", "Colorado Rockies",
+				"San Francisco Giants", "Los Angeles Dodgers",
+				"San Diego Padres" };
+		initDivision(nWTeams, "National West");
+	}
+
+	private void newDate(String[] line) {
+		int day = Integer.parseInt(line[0]);
+		int year = Integer.parseInt(line[2]);
+		current = new Date(day, line[1], year);
+		if (verbose) {
+			System.out.println("NEW DATE: " + current);
+		}
+	}
+
+	private void newMatch(String[] line) {
+		String[] time = line[0].split(":");
+		DateTime matchDate = new DateTime(current, Integer.parseInt(time[0]),
+				Integer.parseInt(time[1]));
+		int homeScore = -1;
+		int awayScore = -1;
+		String[] score = line[line.length - 1].split(":");
+		boolean played = false;
+		if (score.length == 2) {
+			homeScore = Integer.parseInt(score[0]);
+			awayScore = Integer.parseInt(score[1]);
+			played = true;
+		}
+		String firstTeam = "";
+		String secondTeam = "";
+		int i = 1;
+		for (i = 1; !line[i].equals("-"); i++) {
+			firstTeam += line[i] + " ";
+		}
+		firstTeam = firstTeam.trim();
+		for (i++; i < line.length - 1; i++) {
+			secondTeam += line[i] + " ";
+		}
+		secondTeam = secondTeam.trim();
+		if (verbose) {
+			System.out.println("MATCH:");
+			System.out.println("\t" + firstTeam + " plays " + secondTeam);
+			System.out.println("\t\ton: " + matchDate);
+			System.out.println("\t\tresult: " + homeScore + ":" + awayScore);
+			System.out.println("\t\tplayed: " + played);
+		}
+		Team homeTeam = getTeam(firstTeam);
+		Team awayTeam = getTeam(secondTeam);
+		if (homeScore == -1 || awayScore == -1) {
+			warning("match has no score", line);
+			return;
+		}
+		if (homeTeam == null) {
+			error("cannot find home team", line);
+			return;
+		}
+		if (awayTeam == null) {
+			error("cannot find away team", line);
+			return;
+		}
+		Division d = divisions.get(homeTeam.getDivisionName());
+		if (d == null) {
+			error("cannot find division", line);
+			return;
+		}
+		Match m = new Match(homeTeam, awayTeam, homeScore, awayScore,
+				matchDate, false);
+		homeTeam.addUpcomingMatch(m);
+		awayTeam.addUpcomingMatch(m);
+		d.addFixture(m);
+		if (played) {
+			m.playMatch();
+		}
+	}
+
+	private void warning(String string, String[] line) {
+		if (verbose) {
+			System.err.println("Warning: " + string);
+			printLine(line);
+		}
+	}
+
+	private void error(String string, String[] line) {
+		System.err.println("Error: " + string);
+		printLine(line);
+	}
+
+	private static void printLine(String[] line) {
+		System.err.print("[");
+		for (String s : line) {
+			System.err.print(s + ", ");
+		}
+		System.err.println("]: Length = " + line.length);
+	}
+
+	private Team getTeam(String s) {
+		for (Division d : divisions.values()) {
+			for (Team t : d.getTeams()) {
+				if (t.getName().equalsIgnoreCase(s)) {
+					return t;
+				}
+			}
+		}
+		return null;
+	}
+
+	public void setVerbose() {
+		verbose = true;
+	}
+
+	public HashMap<String, Division> getDivisions() {
+		return divisions;
+	}
+}
+');
+INSERT INTO "codesnippet_snippet" VALUES(11,'CTest',2,'text/x-c++src',1,2,46,'namespace someclasses
+{
+
+public class CTest {
+	int v
+public:
+	CTest(int n) : v(n) {}
+    ~CTest() {}
+    
+    int value() { return v; }
+};
+
+}');
+INSERT INTO "codesnippet_snippet" VALUES(12,'Hello, world',1,'text/x-python',2,1,7,'print "Hello, World!" ');
+INSERT INTO "codesnippet_snippet" VALUES(18,'Quicksort',6,'text/x-python',2,0,1,'#!/usr/bin/env python
+
+# Written by Magnus Lie Hetland 
+
+"Everybody''s favourite sorting algorithm... :)"
+
+def partition(list, start, end):
+    pivot = list[end]                          # Partition around the last value
+    bottom = start-1                           # Start outside the area to be partitioned
+    top = end                                  # Ditto
+
+    done = 0
+    while not done:                            # Until all elements are partitioned...
+
+        while not done:                        # Until we find an out of place element...
+            bottom = bottom+1                  # ... move the bottom up.
+
+            if bottom == top:                  # If we hit the top...
+                done = 1                       # ... we are done.
+                break
+
+            if list[bottom] > pivot:           # Is the bottom out of place?
+                list[top] = list[bottom]       # Then put it at the top...
+                break                          # ... and start searching from the top.
+
+        while not done:                        # Until we find an out of place element...
+            top = top-1                        # ... move the top down.
+            
+            if top == bottom:                  # If we hit the bottom...
+                done = 1                       # ... we are done.
+                break
+
+            if list[top] < pivot:              # Is the top out of place?
+                list[bottom] = list[top]       # Then put it at the bottom...
+                break                          # ...and start searching from the bottom.
+
+    list[top] = pivot                          # Put the pivot in its place.
+    return top                                 # Return the split point
+
+
+def quicksort(list, start, end):
+    if start < end:                            # If there are two or more elements...
+        split = partition(list, start, end)    # ... partition the sublist...
+        quicksort(list, start, split-1)        # ... and sort both halves.
+        quicksort(list, split+1, end)
+    else:
+        return
+
+    
+if __name__=="__main__":                       # If this script is run as a program:
+    import sys
+    list = map(int,sys.argv[1:])               # Get all the arguments
+    start = 0
+    end = len(list)-1
+    quicksort(list,start,end)                  # Sort the entire list of arguments
+    import string
+    print string.join(map(str,list))           # Print out the sorted list');
+INSERT INTO "codesnippet_snippet" VALUES(19,'Mergesort',6,'text/x-python',2,0,1,'# Copyright (c) 2013 the authors listed at the following URL, and/or
+# the authors of referenced articles or incorporated external code:
+# http://en.literateprograms.org/Merge_sort_(Python)?action=history&offset=20121103201114
+# 
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+# 
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+# CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+# 
+# Retrieved from: http://en.literateprograms.org/Merge_sort_(Python)?oldid=18716
+
+def merge(left, right):
+    result = []
+    i ,j = 0, 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    result += left[i:]
+    result += right[j:]
+    return result@ text
+
+
+def mergesort(lst):
+    if len(lst) <= 1:
+        return lst
+    middle = int( len(lst) / 2 )
+    left = mergesort(lst[:middle])
+    right = mergesort(lst[middle:])
+    return merge(left, right)@ text
+
+
+if __name__ == "__main__":
+    print mergesort([3, 4, 8, 0, 6, 7, 4, 2, 1, 9, 4, 5])
+');
+INSERT INTO "codesnippet_snippet" VALUES(20,'Mergesort',6,'text/x-csrc',2,0,1,'/* Copyright (c) 2013 the authors listed at the following URL, and/or
+the authors of referenced articles or incorporated external code:
+http://en.literateprograms.org/Merge_sort_(C)?action=history&offset=20110810210421
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Retrieved from: http://en.literateprograms.org/Merge_sort_(C)?oldid=17235
+*/
+
+#include <string.h>
+#include <time.h>    /* time() */
+#include <stdlib.h>  /* rand() */
+#include <stdio.h>   /* puts() */
+
+#define MIN_MERGESORT_LIST_SIZE    32
+
+
+void mergesort_array(int a[], int size, int temp[]) {
+    int i1, i2, tempi;
+    if (size < MIN_MERGESORT_LIST_SIZE) {
+        /* Use insertion sort */
+        int i;
+        for (i=0; i < size; i++) {
+            int j, v = a[i];
+            for (j = i - 1; j >= 0; j--) {
+               if (a[j] <= v) break;
+                a[j + 1] = a[j];
+            }
+            a[j + 1] = v;
+        }
+        return;
+    }
+    mergesort_array(a, size/2, temp);
+    mergesort_array(a + size/2, size - size/2, temp);
+    i1 = 0;
+    i2 = size/2;
+    tempi = 0;
+    while (i1 < size/2 && i2 < size) {
+        if (a[i1] <= a[i2]) {
+            temp[tempi] = a[i1];
+            i1++;
+        } else {
+            temp[tempi] = a[i2];
+            i2++;
+        }
+        tempi++;
+    }
+    while (i1 < size/2) {
+        temp[tempi] = a[i1];
+        i1++;
+        tempi++;
+    }
+    while (i2 < size) {
+        temp[tempi] = a[i2];
+        i2++;
+        tempi++;
+    }
+    memcpy(a, temp, size*sizeof(int));
+}
+
+int main(int argc, char* argv[]) {
+    int size = atoi(argv[1]);
+    int* a    = malloc(sizeof(int)*size);
+    int* temp = malloc(sizeof(int)*size);
+    int i;
+    srand(time(NULL));
+    for(i=0; i<size; i++) {
+        a[i] = rand() % size;
+    }
+    mergesort_array(a, size, temp);
+    for(i=1; i<size; i++) {
+        if (!(a[i-1] <= a[i])) {
+            puts("ERROR");
+            return -1;
+        }
+    }
+    puts("SUCCESS");
+    return 0;
+}
+');
+INSERT INTO "codesnippet_snippet" VALUES(21,'Mergesort',6,'text/x-c++src',2,0,1,'/* Copyright (c) 2013 the authors listed at the following URL, and/or
+the authors of referenced articles or incorporated external code:
+http://en.literateprograms.org/Merge_sort_(C_Plus_Plus)?action=history&offset=20110413054436
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Retrieved from: http://en.literateprograms.org/Merge_sort_(C_Plus_Plus)?oldid=17108
+*/
+
+
+// This implementation is originally based on a public domain D program by
+// David Medlock (http://www.digitalmars.com/drn-bin/wwwnews?digitalmars.D/32113).
+
+#include<vector>
+#include<string>
+#include<algorithm>
+#include<iostream>
+
+
+
+template<typename IT, typename VT> void insert(IT begin, IT end, const VT &v)
+{
+	using ::std::swap;
+	while (begin+1!=end && *(begin+1)<v) {
+		swap(*begin, *(begin+1));
+		++begin;
+	}
+	swap(*begin, v);
+}
+
+
+template<typename IT> void merge(IT begin, IT begin_right, IT end)
+{
+	for(;begin<begin_right; ++begin) {
+		if(*begin_right < *begin) {
+			typename std::iterator_traits<IT>::value_type v;
+			using ::std::swap;
+			swap(v, *begin);
+			swap(*begin, *begin_right);
+			insert(begin_right, end, v);
+		}
+	}
+}
+
+template<typename IT> void mergesort(IT begin, IT end)
+{
+	size_t size(end-begin);
+	if(size<2) return;
+
+	IT begin_right=begin+size/2;
+
+	mergesort(begin, begin_right);
+	mergesort(begin_right, end);
+	merge(begin, begin_right, end);
+}
+
+
+template<typename T> void print(const T &data)
+{
+	std::cout<<" "<<data;
+}
+
+
+int main()
+{
+	std::vector<std::string> v(10);
+	v[0]="Paris";
+	v[1]="London";
+	v[2]="Stockholm";
+	v[3]="Berlin";
+	v[4]="Oslo";
+	v[5]="Rome";
+	v[6]="Madrid";
+	v[7]="Tallinn";
+	v[8]="Amsterdam";
+	v[9]="Dublin";
+
+	std::cout<<"v before qsort: ";
+	std::for_each(v.begin(), v.end(), print<std::string>);
+	std::cout<<''\n'';
+
+	mergesort(v.begin(), v.end());
+
+	std::cout<<"v after mergesort: ";
+	std::for_each(v.begin(), v.end(), print<std::string>);
+	std::cout<<''\n'';
+
+	int a[]={3,8,0,6,7,4,2,1,9,3,1,8,3,9,2,0,9};
+	int *a_end=a+sizeof a/sizeof(int);
+	
+
+	std::cout<<"a before mergesort: ";
+	std::for_each(a, a_end, print<int>);
+	std::cout<<''\n'';
+
+	mergesort(a, a_end);
+
+	std::cout<<"a after mergesort: ";
+	std::for_each(a, a_end, print<int>);
+	std::cout<<''\n'';
+
+	return 0;
+}
+
+');
+INSERT INTO "codesnippet_snippet" VALUES(22,'Bubblesort',6,'text/x-java',2,0,3,'public class BSort {
+
+	// Standard swap method.
+	private static void swap(int i, int j, int[] A) {
+		int temp = A[i];
+		A[i] = A[j];
+		A[j] = temp;
+	}
+
+	private static void bsort(int n, int[] A) {
+		// If no swaps are made inside a while loop data is already sorted.
+		boolean swapped = true;
+		int i = 0;
+		while (swapped) {
+			swapped = false;
+			i = i + 1;
+			// After each iteration the ith last element is in correct position.
+			for (int j = 0; j < A.length - i; j++) {
+				// If j and j+1 are out of order, swap them.
+				if (A[j] > A[j + 1]) {
+					swap(j, j + 1, A);
+					swapped = true;
+				}
+			}
+		}
+	}
+
+	//
+	// bubble sort array A
+	//
+
+	public static void main(String[] args) {
+		int n = Integer.parseInt(args[0]);
+		int m = Integer.parseInt(args[1]);
+		int[] A = new int[n];
+		for (int i = 0; i < n; i++)
+			A[i] = (int) (Math.random() * m);
+		long startTimeMs = System.currentTimeMillis();
+		bsort(n, A);
+		long elapsedTimeMs = System.currentTimeMillis() - startTimeMs;
+		System.out.println("Range of " + m + " with " + n + " elements takes "
+				+ elapsedTimeMs + " ms");
+	}
+}
+//
+// gets n and m from command line (useful and simple)
+// generate n random integers in the range 0 to m-1
+// output in milliseconds the time to sort using bubble sort
+//
+');
+INSERT INTO "codesnippet_snippet" VALUES(23,'Javasort',6,'text/x-java',2,0,2,'import java.util.*;
+
+public class JSort {
+
+	public static void main(String[] args) {
+		int n = Integer.parseInt(args[0]);
+		int m = Integer.parseInt(args[1]);
+		int[] A = new int[n];
+		for (int i = 0; i < n; i++)
+			A[i] = (int) (Math.random() * m);
+		long startTimeMs = System.currentTimeMillis();
+		Arrays.sort(A);
+		long elapsedTimeMs = System.currentTimeMillis() - startTimeMs;
+		System.out.println("Range of " + m + " with " + n + " elements takes "
+				+ elapsedTimeMs + " ms");
+		System.gc();
+	}
+}
+//
+// gets n and m from command line (useful and simple)
+// generate n random integers in the range 0 to m-1
+// output in milliseconds the time to sort using java''s Arrays.sort
+//
+');
+INSERT INTO "codesnippet_snippet" VALUES(24,'Radixsort',6,'text/x-java',2,0,12,'import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class RSort {
+
+	public static boolean trace;
+
+	private static int getNthDigit(int x, int n) {
+		if (n > 0) {
+			return (x / ((int) Math.pow(10, n))) % 10;
+		} else {
+			return x % 10;
+		}
+	}
+
+	//
+	// given an integer x deliver the nth digit in x
+	// getNthDigitIn(12345678,0) delivers 8
+	// getNthDigitIn(12345678,3) delivers 5
+	// getNthDigitIn(12345678,9) delivers 0
+	//
+
+	private static int numberOfDigitsIn(int x) {
+		if (x < 100000) {
+			// 5 or less
+			if (x < 100) {
+				// 1 or 2
+				if (x < 10)
+					return 1;
+				else
+					return 2;
+			} else {
+				// 3 or 4 or 5
+				if (x < 1000)
+					return 3;
+				else {
+					// 4 or 5
+					if (x < 10000)
+						return 4;
+					else
+						return 5;
+				}
+			}
+		} else {
+			// 6 or more
+			if (x < 10000000) {
+				// 6 or 7
+				if (x < 1000000)
+					return 6;
+				else
+					return 7;
+			} else {
+				// 8 to 10
+				if (x < 100000000)
+					return 8;
+				else {
+					// 9 or 10
+					if (x < 1000000000)
+						return 9;
+					else
+						return 10;
+				}
+			}
+		}
+
+	}
+
+	//
+	// numberOfDigitsIn(100000) delivers 6
+	// numberOfDigitsIn(1007521) delivers 7
+	//
+
+	private static void rsort(int n, int[] A) {
+		// If empty list, nothing to sort.
+		if (A.length == 0) {
+			return;
+		}
+
+		// Get maximum value in list.
+		int max = A[0];
+		for (int i = 0; i < A.length; i++) {
+			if (A[i] > max) {
+				max = A[i];
+			}
+		}
+
+		// Number of times to iterate = length of largest value.
+		int iterations = numberOfDigitsIn(max);
+
+		for (int i = 0; i <= iterations; i++) {
+			// Create ten buckets.
+			List<LinkedList<Integer>> buckets = new ArrayList<LinkedList<Integer>>();
+			for (int j = 0; j < 10; j++) {
+				buckets.add(new LinkedList<Integer>());
+			}
+
+			// Add each value of A into appropriate bucket.
+			for (int j = 0; j < A.length; j++) {
+				int b = getNthDigit(A[j], i);
+				buckets.get(b).add(A[j]);
+			}
+
+			// Go through each bucket in turn and add them into an A.
+			/**
+			 * If we were passed in an linked list instead of an array this
+			 * while loop could be simplified. Instead we could have nulled A
+			 * then appended each bucket in turn to the end of A. This would
+			 * also speed up sorting.
+			 */
+			int k = 0;
+			for (int j = 0; j < 10; j++) {
+				LinkedList<Integer> q = buckets.get(j);
+				while (!q.isEmpty()) {
+					A[k] = q.remove();
+					k = k + 1;
+				}
+			}
+		}
+	}
+
+	//
+	// radix sort array A
+	//
+
+	public static void main(String[] args) {
+		int n = Integer.parseInt(args[0]);
+		int m = Integer.parseInt(args[1]);
+
+		n = 1000;
+		m = 1000000000;
+		while (n <= 1000000) {
+
+			trace = args.length > 2;
+			int[] A = new int[n];
+			for (int i = 0; i < n; i++)
+				A[i] = (int) (Math.random() * m);
+			if (trace) {
+				for (int x : A)
+					System.out.print(x + " ");
+				System.out.println();
+			}
+			long startTimeMs = System.currentTimeMillis();
+			rsort(n, A);
+			long elapsedTimeMs = System.currentTimeMillis() - startTimeMs;
+			System.out.println("Range of " + m + " with " + n
+					+ " elements takes " + elapsedTimeMs + " ms");
+			if (trace) {
+				for (int x : A)
+					System.out.print(x + " ");
+				System.out.println();
+			}
+			if (n < 10000) {
+				n = n + 1000;
+			} else if (n < 100000) {
+				n = n + 10000;
+			} else {
+				n = n + 100000;
+			}
+			System.gc();
+		}
+	}
+}
+//
+// gets n and m from command line (useful and simple)
+// generate n random integers in the range 0 to m-1
+// radix sort the data and printout runtime in milliseconds
+// if we have 3d argument on the command line turn trace on
+// and get the data printed before and after sort
+//');
+INSERT INTO "codesnippet_snippet" VALUES(25,'Pure List',3,'text/x-java',2,0,3,'public class List {
+	int head;
+	List tail;
+
+	public List(int i, List tail) {
+		head = i;
+		this.tail = tail;
+	}
+
+	public static int head(List l) {
+		return l.head;
+	}
+
+	public static List tail(List l) {
+		return l.tail;
+	}
+
+	public static int length(List l) {
+		if (l == null)
+			return 0;
+		else
+			return 1 + length(tail(l));
+	}
+
+	public static int sum(List l) {
+		if (l == null)
+			return 0;
+		else
+			return head(l) + sum(tail(l));
+	}
+
+	public static boolean exists(int e, List l) {
+		return l != null && (head(l) == e || exists(e, tail(l)));
+	}
+
+	public static List reverse(List l) {
+		if (l == null)
+			return null;
+		else
+			return reverse(l, null);
+	}
+
+	private static List reverse(List l1, List l2) {
+		if (l1 == null)
+			return l2;
+		else
+			return reverse(tail(l1), new List(head(l1), l2));
+	}
+
+	public static List delete(int e, List l) {
+		if (l == null)
+			return null;
+		else if (e == head(l))
+			return delete(e, tail(l));
+		else
+			return new List(head(l), delete(e, tail(l)));
+	}
+
+	public static int count(int e, List l) {
+		if (l == null) {
+			return 0;
+		} else if (head(l) == e) {
+			return 1 + count(e, tail(l));
+		} else {
+			return 0 + count(e, tail(l));
+		}
+	}
+
+	public static boolean equal(List l1, List l2) {
+		return l1 == null && l2 == null ||
+				(l1 != null && l2 != null
+				&& head(l1) == head(l2) && equal(tail(l1), tail(l2)));
+	}
+
+	public static int nth(int n, List l) throws ListException {
+		if (n > length(l) || l == null) {
+			throw new ListException("Element can''t exist, list is too small.");
+		} else if (n == 0) {
+			return head(l);
+		} else {
+			return nth(n - 1, tail(l));
+		}
+	}
+
+	public static List insert(int e, List l) {
+		if (l == null) {
+			return new List(e, null);
+		} else if (e <= head(l)) {
+			return new List(e, insert(head(l), tail(l)));
+		} else {
+			return new List(head(l), insert(e, tail(l)));
+		}
+	}
+
+	public static List sort(List l) {
+		if (l == null) {
+			return l;
+		} else {
+			return insert(head(l), sort(tail(l)));
+		}
+	}
+
+	public static List append(List l1, List l2) {
+		if (tail(l1) == null) {
+			l1.tail = l2;
+		} else {
+			l1.tail = append(tail(l1), l2);
+		}
+		return l1;
+	}
+
+	public static int max(List l) throws ListException {
+		if (l == null) {
+			throw new ListException("Empty list");
+		} else if (tail(l) == null) {
+			return head(l);
+		} else
+			return Math.max(head(l), max(tail(l)));
+	}
+
+	public String toString() {
+		return "(" + toString(this) + ")";
+	}
+
+	private String toString(List l) {
+		if (l == null)
+			return "";
+		else if (tail(l) == null)
+			return "" + head(l);
+		else
+			return head(l) + "," + toString(tail(l));
+	}
+}
+');
+INSERT INTO "codesnippet_snippet" VALUES(26,'dcdc',2,'text/x-csrc',1,1,54,'cdcdc');
+CREATE TABLE "codesnippet_snippetrating" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id"),
+    "snippet_id" integer NOT NULL REFERENCES "codesnippet_snippet" ("id"),
+    "rating" real NOT NULL
+);
+INSERT INTO "codesnippet_snippetrating" VALUES(3,1,1,3.0);
+INSERT INTO "codesnippet_snippetrating" VALUES(4,1,11,5.0);
+INSERT INTO "codesnippet_snippetrating" VALUES(5,2,2,5.0);
+INSERT INTO "codesnippet_snippetrating" VALUES(9,2,11,1.0);
+INSERT INTO "codesnippet_snippetrating" VALUES(10,2,1,5.0);
+INSERT INTO "codesnippet_snippetrating" VALUES(11,2,12,5.0);
+INSERT INTO "codesnippet_snippetrating" VALUES(12,1,2,1.0);
+INSERT INTO "codesnippet_snippetrating" VALUES(14,4,1,1.0);
+INSERT INTO "codesnippet_snippetrating" VALUES(15,1,26,2.0);
+CREATE TABLE "codesnippet_bookmark" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "user_id" integer NOT NULL REFERENCES "auth_user" ("id"),
+    "snippet_id" integer NOT NULL REFERENCES "codesnippet_snippet" ("id")
+);
+CREATE TABLE "codesnippet_comment" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "snippet_id" integer REFERENCES "codesnippet_snippet" ("id"),
+    "user_id" integer REFERENCES "auth_user" ("id"),
+    "comment" text NOT NULL
+);
+INSERT INTO "codesnippet_comment" VALUES(1,NULL,1,'This isn''t even C#, brah.');
+INSERT INTO "codesnippet_comment" VALUES(2,11,1,'This isn''t the best C++ in the world. This is just a tribute.');
+INSERT INTO "codesnippet_comment" VALUES(3,NULL,1,'Just going to spam you now!!!');
+INSERT INTO "codesnippet_comment" VALUES(4,NULL,1,'Look at all these mad comments!');
+INSERT INTO "codesnippet_comment" VALUES(5,NULL,1,'We need an upload bit; I can haz cheezburgerz');
+INSERT INTO "codesnippet_comment" VALUES(6,2,1,'Hello, World');
+INSERT INTO "codesnippet_comment" VALUES(7,26,1,'Hello');
+CREATE INDEX "auth_permission_1bb8f392" ON "auth_permission" ("content_type_id");
+CREATE INDEX "auth_group_permissions_425ae3c4" ON "auth_group_permissions" ("group_id");
+CREATE INDEX "auth_group_permissions_1e014c8f" ON "auth_group_permissions" ("permission_id");
+CREATE INDEX "auth_user_user_permissions_403f60f" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX "auth_user_user_permissions_1e014c8f" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX "auth_user_groups_403f60f" ON "auth_user_groups" ("user_id");
+CREATE INDEX "auth_user_groups_425ae3c4" ON "auth_user_groups" ("group_id");
+CREATE INDEX "django_session_3da3d3d8" ON "django_session" ("expire_date");
+CREATE INDEX "django_admin_log_403f60f" ON "django_admin_log" ("user_id");
+CREATE INDEX "django_admin_log_1bb8f392" ON "django_admin_log" ("content_type_id");
+CREATE INDEX "codesnippet_snippet_42dc49bc" ON "codesnippet_snippet" ("category_id");
+CREATE INDEX "codesnippet_snippet_7ab48146" ON "codesnippet_snippet" ("language_id");
+CREATE INDEX "codesnippet_snippet_403f60f" ON "codesnippet_snippet" ("user_id");
+CREATE INDEX "codesnippet_snippetrating_403f60f" ON "codesnippet_snippetrating" ("user_id");
+CREATE INDEX "codesnippet_snippetrating_37e31bc4" ON "codesnippet_snippetrating" ("snippet_id");
+CREATE INDEX "codesnippet_bookmark_403f60f" ON "codesnippet_bookmark" ("user_id");
+CREATE INDEX "codesnippet_bookmark_37e31bc4" ON "codesnippet_bookmark" ("snippet_id");
+CREATE INDEX "codesnippet_comment_37e31bc4" ON "codesnippet_comment" ("snippet_id");
+CREATE INDEX "codesnippet_comment_403f60f" ON "codesnippet_comment" ("user_id");
+COMMIT;
