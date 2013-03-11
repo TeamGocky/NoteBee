@@ -400,45 +400,123 @@ own login and authentication system, etc.
 
 \section{Message Parsing}
 
-Figures~\ref{fig:loginseqdiag} to~\ref{fig:postseqdiag} illustrate a
-sequences for login, posting a snippet and logout for the
-walkthrough in Section~\ref{sec:walkthrough}. The responses from the
-middleware are HTML5 responses (some have client-side Ajax/jQuery/JSON
-scripts included in them). All page requests require a ORM request to
-the Database to retrieve the top five most recent and highest rated
-code snippets.
+Figures~\ref{fig:loginseqdiag} and~\ref{fig:postseqdiag} illustrate
+sequence diagrams for login and posting a snippet, respectively,
+for the walkthrough described in Section~\ref{sec:walkthrough}.
+The sequence of requests for logout are similar to that of login so are
+not shown. The responses from the middleware are HTML5 responses
+(some have client-side Ajax/jQuery/JSON scripts included in them).
+All page requests require an ORM request to
+the Database to retrieve the top five most recent, and highest rated
+code snippets. In addition to these requests, the
+``view snippet'' view requests numerous items from the database for
+the snippet, to be displayed, and the current user. In this
+case, Joe is logged in so a request is made to retrieve his
+rating of the viewed snippet, which is zero at the moment since the
+snippet was just posted.
 
-\begin{itemize}
-\item Describe the messages that are parsed back and forth through
-the application.
-\item	For the main transactions - describe the payload of the messages 
-\item	i.e. What are the contents of the messages? i.e. include
-sample XML, XHTML, JSON, etc of one or two messages.
-\item	What is the format of the messages? 
-\item	Why this format? 
-\item	What other formats could be used, what are the advantages
-and disadvantages of these other formats?
-\end{itemize}
+To rate a snippet, a logged in user uses the unique rating system for
+the application shown in Figure~\ref{fig:joerating}. The display shows
+the number of ``Sventeks'' the snippet has been given as an average of
+the user ratings. Below the ``Sventeks'' is a description of the current
+user's rating of the snippet. A user can change their rating at any time.
+
+The sequence diagram for submitting a rating for snippet with id 19 is
+shown in Figure~\ref{fig:ratingseqdiag}. The particular sequence is for
+a user that is updating their previous rating of the snippet but the
+sequence of requests would be similar for a user rating the snippet
+for the first time.
+
+Javascript (and the jQuery library), JSON, and Ajax are the
+technologies used to dynamically update the rating display when a user
+changes their own rating of the snippet. This requires sending the
+current user's updated rating of the snippet (after validation) and the
+new total rating in a JSON object from the middleware to the client.
+
+In Python, the JSON object looks as follows:
+
+\begin{verbatim}
+
+{"user_rating" : urating,
+ "total_rating" : "{}".format(total_rating)}
+
+\end{verbatim}
+
+where \texttt{urating} and \texttt{total\_rating} are the updated user
+and total rating respectively.
 
 \section{Implementation Notes}
 
-	Views – what major views did you implement and what do they do?
-	URL Mapping Schema – how did you map urls to views
-	External Services  - what external services did you include and what
-handlers did you write?
-	Functionality Checklist (which functionality is completed)
-	Known Issues (what kind of works, what kind of errors to do you get)
-	What technologies have been used and are required for the application.
-Include a list or table of all the technologies, standards, and protocols
-that will be required.
+\subsection{Views}
 
-\section{Reflective Summary}
+We implemented the obligatory register/login/logout views and a view called
+`user\_view' that displays some public information in a profile page such as
+the user's most recent and top rated snippets, languages, and a summary of
+activity. This is available for viewing by either clicking on a user's name
+or going to your own `Your Profile' link when logged in.
 
-	What have you learnt through the process of development? 
-	How did the application of frameworks help or hinder your progress? 
-	What problems did you encounter? 
-	What were your major achievements?
+We also implemented views listed below:
 
+\begin{itemize}
+\item Homepage - The homepage primarily acts as the page where content
+can be added. The user is greeted with a message asking them to post a snippet
+which a text box already in focus, waiting for input.
+
+\item View Snippet - This is the complementary view to the 
+homepage. This view displays the title, a brief summary, and the code for a 
+code snippet. This page also gives a logged in user the ability to rate,
+comment, or tweet the snippet.
+
+\item Search  -These two views are our
+two search mechanisms. The first allows a standard keyword search on snippet
+names. The latter allows for keyword, category, and language specific searching.
+
+\item Browse -
+These snippets allow the user to search all snippets that fall under a certain
+language or category.
+\end{itemize}
+
+\subsection{URL Mapping}
+
+Our application is comprised of three apps: accounts, registration, and
+codesnippet. 
+
+Registration has a single URL `/registration/' that handles the
+simple form required to become a member of the website.
+
+Accounts handles the login, logout, and profile view via the URLs:
+`/accounts/login', `/accounts/logout', and `/accounts/view/<user id>'
+respectively.
+
+The Codesnippet app's URL mappings are equally as readable. All URLs, again,
+begin with `/codesnippet/' (not required to get to homepage). Postfixes for
+search and advanced search are `search/' and `advanced\_search/' respectively.
+This is similar for browse (by language/category) with
+ `/browse/language|category/<language>|<category>/'. Also, to view a snippet
+the URL the postfix is `view/<snippetID>/'.
+
+\subsection{External Service}
+
+Our sole external service is with the Twitter API. A Python package
+python-twitter is available that prevents the developers wishing to use the
+API from having to write any handler code.
+
+\subsection{Functionality implemented and known issues}
+
+All primary functionality stated earlier in the report has been implemented and
+there are no known issues at time of writing.
+
+\subsection{Technologies Used}
+
+\begin{itemize}
+\item HTML (HTML5 backwards compatible with HTML4)
+\item CSS (Mostly CSS2 with some non-essential CSS3 such as border-radius)
+\item Javascript/jQuery - Required to work CodeMirror's syntax highlighting,
+for detecting a low resolution display and changing the CSS, and for the JSON
+rating system.
+\item Python + Django
+\item SQLite (although should be replaced by MySQL or similar)
+\end{itemize}
 
 \section{Summary and Future Work}
 
@@ -550,10 +628,16 @@ Section~\ref{sec:walkthrough} steps 4-8}
 
 \begin{figure*}
 \centering
-\includegraphics[scale=0.6]{../imgs/walkthroughseqdiag-logout.png}
-\caption{Logout Sequence diagram for Joe's Walkthrough described in
-Section~\ref{sec:walkthrough} step 9}
-\label{fig:logoutseqdiag}
+\includegraphics[scale=0.7]{../imgs/joerating.png}
+\caption{The Sventek rating system (relevant parts surrounded by red border)}
+\label{fig:joerating}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[scale=0.6]{../imgs/submitratingseqdiag.png}
+\caption{Updating a user's rating of a code snippet}
+\label{fig:ratingseqdiag}
 \end{figure*}
 
 \end{document}  
