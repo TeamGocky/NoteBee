@@ -348,27 +348,11 @@ View code hit count & \lowPrio & \lowPrio & \vLowPrio & \vLowPrio \\
 
 \section{Application Architecture}
 
-\begin{itemize}
-\item	N-Tier Architecture Diagram
-
 The architecture for the application is a 3-tier architecture as shown
 in Figure~\ref{fig:ntier}.
-
-\item	i.e. data flow diagram between the interface/client, middle ware,
-and backend services/data repos
-
-The database provides the data for the middleware, Django, to work with.
-Django submits data back to the database if any of the data has been
-changed. The browser sends HTML requests to the middleware. If it is
-a GET request, the middleware accesses the database, reads in the relevant
-data, and reponds with HTML and JavaScript to the browser. If it is a
-POST request, the Middleware accesses the database, alters/adds/removes
-the request changes to data, and responds with a relevent HTML and
-JavaScript response.
-
-\item	Describe the data model i.e. what data needs to be stored or
-persisted by the application?
-
+The client (browser) sends HTTP requests to the Django Middleware.
+The database and the middleware communicate using Object-relational
+mapping (ORM).
 The data to be stored includes user details, such as their username,
 password and which snippets they have bookmarked; snippet details, such
 as its content, the user who created it, the language it was written in,
@@ -377,11 +361,7 @@ which snippet they rated, and what rating they gave the snippet; and
 data on the comments, such as who posted the comment (or anonymous),
 which snippet they commented on, and what the comment contained.
 
-\item	What are the relationships within the data model.
-\item	i.e. use ER diagram and explain.
-
 The ER diagram for the application is shown in Figure~\ref{fig:erdiag}.
-
 It shows the links between the persistant data within the database.
 Snippets are central to all the data, and all of the data is linked
 to the snippets. A snippet has a language, a category and the user
@@ -390,17 +370,14 @@ rating is linked with the snippet, and the user is linked with the
 rating. If a user posts a comment, that comment is linked with the
 snippet and user who posted it.
 
-\item	Describe the backend services used (if any).
-
 The system is integrated with the Twitter API, allowing a user to
 tweet about a snippet they have posted. It will tweet in the format
 ``A new snippet written in LANGUAGE called NAME has just been submitted!''
 Where LANGUAGE is replace by the language it was written in, and NAME
 is replaced by the name the user gave to the snippet.
 
-\item	Reflective Questions: 
-\item	How have you ensured that there is a separation of concerns?
-
+Separation of concerns was imposed in part by the web application
+framework used.
 Django provides a framework that forces the developer to think in terms
 of Model-View-Template. However, this constraint is not restrictive but
 enforces a healthy separation of concerns between the components of
@@ -408,46 +385,35 @@ the application e.g. URLs, presentation.
 
 In our templates themselves, the JavaScript and CSS stylesheets are
 stored in separate files. This means that even within the separate concern
-of a template, the concerns revolving around a template are also
-separated.
+of a template, the concerns revolving around a template (presentation and
+dynamic behaviour in this case) are also separated.
+Another web framework such as Symfony for PHP could of been used instead,
+however it isn't regarded as being nearly as user friendly as Django.
 
-\item	What other technology could have been used instead of django?
+Some advantages of using a web application are:
+\begin{itemize}
+\item The framework provides a lot of services common to all web
+applications, ``out of the box'', meaning that the developer can focus
+on features unique to their application rather than spending time
+implementing their own login and authentication system, for example.
+\item A popular web application framework, like Django, with many
+users will have been tested thoroughly so is a better solution than
+trying to ``reinvent the wheel'' which would be more likely to
+introduce bugs into the web application.
+\item It is also the case that the framework will do a lot of setup work
+for the developer, reducing ``boilerplate'' code.
+\end{itemize}
 
-Another web framework such as Symfony for PHP however it isn't regarded
-as being nearly as user friendly as Django.
+Some disadvantages of using a web application framework are:
 
-\item	What are the advantages of using a Web Application Framework
-over other technology?
-
-The framework provides a lot of services common to all web applications
-``out of the box'', meaning that the developer can focus on features
-unique to their application rather than spending time implementing their
-own login and authentication system, etc.
-
-With a web application framework being used by many people for many different
-kinds of projects there is a greater chance of bug not only being found, but
-with a significant user base the developers are more likely to fix bugs. Also
-if the framework is open source the users themselves may be able to contribute
-and help the framework grow.
-
-Technically (although not universally true), the documentation for a framework
-will be extensive and up to date. This can be developer or community driven.
-
-A popular framework will catch the eye of third party developers who may wish
-to create extensions to further improve what can be done with the framework.
-
-\item	And, what are the disadvantages?
-
-The documentation and community may be lacking resulting in a framework which
-is confusing to use with nobody to turn to for assistance.
-
-If a framework is hugely popular the aims of the framework can be forgotten
-and replaced with bureaucratic decisions that ruin the project.
-
-A popular framework will also catch the eye with malicious users who will
-attempt to find and exploit bugs. If a bug is found in the framework then a 
-large number of projects can be vulnerable to the attack.
-
+\begin{itemize}
+\item The framework will constrain the application to use a particular
+development model. For example, Model-View-Template in Django.
+\item The documentation and community may be lacking resulting in a
+framework making it difficult to learn.
+\item There is a trade-off in the time taken to learn the framework
+and the benefit of using it. There may be a steep learning curve
+involved.
 \end{itemize}
 
 \section{Message Parsing}
@@ -585,11 +551,6 @@ currently not supported.
 Currently, the application only supports Twitter but future work could
 extend on this to support Facebook integration. A language syntax
 detection mechanism could developed.
-
-\begin{itemize}
-\item Include a list or table of all the technologies, standards,
-and protocols that will be required.
-\end{itemize}
 
 \section{Contributions}
 
