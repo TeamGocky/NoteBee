@@ -1,5 +1,14 @@
 Team Gocky - CodeBuzz
 
+Twitter
+http://twitter.com/Code_Buzz
+
+Remote server
+There is a running instance available online via
+http://gordonrenfrewshire.com:8000
+This will allow you to test the Twitter functionality that
+is only available with certain packages such as python-twitter.
+
 Required Python Packages
 - Django
 - python-twitter (and dependencies listed on below URL)
